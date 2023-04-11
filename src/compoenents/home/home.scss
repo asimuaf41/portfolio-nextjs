@@ -1,0 +1,251 @@
+$colors: (
+  purple: #241379,
+  medium-blue: #2185bf,
+  light-blue: #1fbce1,
+
+  red: #b62f56,
+  orange: #d5764c,
+  yellow: #ffd53e,
+
+  cyan: #78ffba,
+  light-green: #98fd85,
+  lime: #befb46,
+
+  magenta: #6c046c,
+  lightish-red: #f04c81,
+  pink: #ff4293,
+  mycolor:#1036fc,
+
+  magenta1: #6c046c,
+  lightish-red1: #f04c81,
+  pink1: #ff4293,
+  mycolor1:#1036fc
+);
+
+.home-page {
+  background: radial-gradient(circle,#10121B, #06051f);
+  //isolation: isolate;
+  overflow: hidden;
+  position: relative;
+height: 100%;
+  
+  &:active {
+    texture,
+    texture::before,
+    texture::after { 
+      // Commented out for performance
+      //mix-blend-mode: color-dodge;
+      padding: 40px;
+    }
+  }
+}
+.home-page{
+texture,
+texture::before,
+texture::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.9;
+  transform-origin: top;
+  transition: all 5s linear 0s;
+}
+}
+
+
+@function random-num($min, $max) {
+  @return floor(random() * ($max - $min) + $min);
+}
+
+@function random-calc($number) {
+  $max: 100 - $number;
+  $min: $number * -1;
+  @return random-num($min, $max);
+}
+
+@each $color-name, $color-hex in $colors {
+  // Initial top and left positions
+  $random1: random(100);
+  $random2: random(100);
+
+  // Animated top and left positions
+  $random3: random(100);
+  $random4: random(100);
+  
+  // Animated top and left end positions
+  $random5: random(100);
+  $random6: random(100);
+
+  .#{$color-name} {
+    $size: random-num(2,20) + px;
+    animation: #{$color-name} linear 30s alternate infinite;
+    border: 2px solid #{$color-hex};
+    border-radius: 100%;
+    width: $size;
+    height: $size;
+    transform: translate3d(
+      $random1 + vw,
+      $random2 + vh,
+      0);
+    z-index: random(12);
+  }
+
+  .#{$color-name}::before {
+    animation: #{$color-name}-pseudo linear 15s alternate infinite;
+    background: #{$color-hex};
+    border: 2px solid #{$color-hex};
+    width: random-num(2,10) + px;
+    height: random-num(2,10) + px;
+    transform:
+      translate3d(
+        random-calc($random1) + vw,
+        random-calc($random2) + vh,
+        0)
+      rotate((random(360)) + deg);
+  }
+
+  .#{$color-name}::after{
+    animation: #{$color-name}-pseudo linear 20s alternate infinite;
+    border: 2px solid #{$color-hex};
+    width: random-num(2,10) + px;
+    height: random-num(2,10) + px;
+    transform:
+      translate3d(
+        random-calc($random1) + vw,
+        random-calc($random2) + vh,
+        0)
+      rotate((random(360)) + deg);
+  }
+
+  @keyframes #{$color-name} {
+    50% {
+      transform: translate3d(
+        $random3 + vw,
+        $random4 + vh,
+        0);
+    }
+    100% {
+      transform: translate3d(
+        $random5 + vw,
+        $random6 + vh,
+        0);
+    }
+  }
+
+  @keyframes #{$color-name}-pseudo {
+    33% {
+      transform:
+        translate3d(
+          random-calc($random3) + vw,
+          random-calc($random4) + vh,
+          0)
+        rotate((random(360)) + deg);
+    }
+    100% {
+      transform:
+        translate3d(
+          random-calc($random5) + vw,
+          random-calc($random6) + vh,
+          0)
+        rotate((random(360)) + deg);
+    }
+  }
+}
+.home-page{
+    span{
+        h1{
+          font-size: calc(24px + 2vmin);
+    line-height: 4rem;
+    font-family: Nunito,sans-serif !important;
+    text-align: center;
+    z-index: 10000;
+    color: white;
+    font-weight: 600;
+        }
+        p{
+            color:#9CA4BA;  
+            text-align: center;
+            font-family: Nunito,sans-serif;
+            font-weight: 550;
+            max-width: 80ch;
+            z-index: 10000;
+        }
+        .social-media-list{
+          display: flex;
+          justify-content: center;
+          margin-top: 10px;
+          ul{
+            list-style: none;
+            li{
+              display: inline;
+              padding: 10px;
+            
+              a{
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                border: 1px solid white;
+                display: inline-flex;
+                z-index: 10000;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                font-size: 20px;
+                &:hover{
+                        text-decoration: none;
+                        color: #037fff;
+                        border: 2px solid  #037fff;
+                }
+              }
+            }
+          }
+        }
+    }
+}
+.sidebar-button-area{
+  position: relative;
+  @media (max-width:991px){
+    .sidebar-button{
+        position: absolute;
+        top: 30px;
+        left: 0px; 
+        color: white;
+        z-index: 8000;
+       font-size: 22px;
+       cursor: pointer;
+       border: 1px solid white;
+       padding: 0px 6px;
+       background-color: #191D2B;
+       color: #9BA3BF;
+       border-radius: 4px;
+    }
+    .sidebar-area{
+      z-index: 80000;
+      position: absolute;
+      top: 0px;
+      left: -285px; 
+      transition: all .7s linear;
+      .close-button-side-bar{
+        position: absolute;
+        top: 10px;
+        right: 15px; 
+        color: white;
+        cursor: pointer;
+        font-size: 22px;
+        &:hover{
+          color: #037fff;
+  }
+      }
+    } 
+  }
+  @media (min-width:991px){
+    .sidebar-button{
+display: none;
+    }
+    .sidebar-area{
+      display: none;
+    }
+  }
+ 
+}
