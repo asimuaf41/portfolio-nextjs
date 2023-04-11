@@ -54,7 +54,7 @@ export default function Contact() {
                   </a>
                   <br />
                   <a style={{ color: "#a4acc4" }} href="tel:0563866059">
-                    056 3866059
+                    056 3866094
                   </a>
                   <br />
                 </div>

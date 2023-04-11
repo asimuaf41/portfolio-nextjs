@@ -32,7 +32,7 @@ export default function About() {
                   src="./card.png"
                 />
                 </div> */}
-                <img draggable={false} style={{ width: "100%" }} src="./asimg.png" />
+                <img draggable={false} style={{ width: "100%" }} src="./asimg.jpeg" />
                 {/* <div className="border-frame-top-left"></div>
                 <div className="border-frame-bottom-left"></div>
                 <div className="border-frame-bottom-right"></div>

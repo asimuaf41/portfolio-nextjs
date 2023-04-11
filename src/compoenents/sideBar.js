@@ -15,7 +15,7 @@ import { Link,useLocation,withRouter } from "react-router-dom";
                  <li onClick={()=>{props.history.push('/about');props.handleCloseSideBar()}} className={location.pathname==='/about'?"active":""}><Link exact to="/about">About</Link></li>
                  <li onClick={()=>{props.history.push('/resume');props.handleCloseSideBar()}} className={location.pathname==='/resume'?"active":""}><Link exact to="/resume">Resume</Link></li>
                  <li onClick={()=>{props.history.push('/contact');props.handleCloseSideBar()}} className={location.pathname==='/contact'?"active":""}><Link exact to="/contact">Contact</Link></li>
-                
+                 <li onClick={()=>{props.history.push('/gallery');props.handleCloseSideBar()}} className={location.pathname==='/gallery'?"active":""}><Link exact to="/gallery">Gallery</Link></li>
              </ul>
             </div>
             <div className="sideBar-bottom">

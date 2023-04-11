@@ -6,13 +6,9 @@ import About from "./compoenents/about";
 import history from "./history";
 import Contact from "./compoenents/contact";
 import Resume from "./compoenents/resume";
+import Gallery from "./compoenents/gallery";
 import ScrollToTop from "./scroll";
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import { MenuOutlined, CloseCircleOutlined } from "@ant-design/icons";
 function App(props) {
   const handleOpenSideBar = () => {
@@ -26,10 +22,7 @@ function App(props) {
       <Router history={history}>
         <div class="container-fluid">
           <div class="row">
-            <div
-              class="col-lg-3 col-xl-3 d-none d-lg-block"
-              style={{ paddingLeft: "0px", paddingRight: "30px" }}
-            >
+            <div class="col-lg-3 col-xl-3 d-none d-lg-block" style={{ paddingLeft: "0px", paddingRight: "30px" }}>
               <SideBar handleCloseSideBar={handleCloseSideBar} {...props} />
             </div>
             <div
@@ -47,22 +40,16 @@ function App(props) {
                     <MenuOutlined />
                   </div>
                   <div className="sidebar-area">
-                    <div
-                      onClick={handleCloseSideBar}
-                      className="close-button-side-bar"
-                    >
+                    <div onClick={handleCloseSideBar} className="close-button-side-bar">
                       <CloseCircleOutlined />
                     </div>
-                    <SideBar
-                      handleCloseSideBar={handleCloseSideBar}
-                      {...props}
-                    />
+                    <SideBar handleCloseSideBar={handleCloseSideBar} {...props} />
                   </div>
                 </div>
                 <ScrollToTop>
                   <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/about" component={About} />
+                    <Route exact path="/about" component={About} /> <Route exact path="/gallery" component={Gallery} />
                     <Route exact path="/resume" component={Resume} />
                     <Route exact path="/contact" component={Contact} />
                     <Route exact path="/contact/:id" component={Contact} />
