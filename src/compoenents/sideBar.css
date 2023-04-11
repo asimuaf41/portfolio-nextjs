@@ -37,6 +37,7 @@ body{
 width: 180px;
 height: 180px;
 border-radius: 50%;
+object-fit: cover;
 border:8px solid #2E344E;
 }
 .sideBar-links-area{

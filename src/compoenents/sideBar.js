@@ -7,7 +7,7 @@ import { Link,useLocation,withRouter } from "react-router-dom";
     return (
         <div className="sidebararea">
             <div className="sideBar-profile">
-                <img draggable={false} src={'./mypic.jpg'} />
+                <img draggable={false} src={'./profile.jpg'} />
             </div>
             <div className="sideBar-links-area">
              <ul>

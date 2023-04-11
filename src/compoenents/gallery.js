@@ -28,6 +28,10 @@ const images = [
     original: "./asim5.jpeg",
     thumbnail: "./asim5.jpeg",
   },
+  {
+    original: "./asim6.jpeg",
+    thumbnail: "./asim6.jpeg",
+  },
 ];
 
 export default function Gallery() {
