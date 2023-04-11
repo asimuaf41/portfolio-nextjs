@@ -24,7 +24,7 @@ export const socialProfiles = [
       icon: "linkedin",
     },
     {
-      link: "https://github.com/kashiffff",
+      link: "https://github.com/asimuaf41",
       icon: "github",
     },
   ];
