@@ -24,6 +24,7 @@ body{
         color: white;
         border-right: 1px solid #2E344E;
         align-items: center;
+        width: 100%;
     
     }  
 }

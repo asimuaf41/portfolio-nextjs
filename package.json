@@ -8,7 +8,7 @@
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
     "antd": "^4.12.0",
-    "node-sass": "^4.14.1",
+"sass": "^1.69.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
@@ -16,8 +16,8 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+"start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider &&  react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

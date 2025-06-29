@@ -1,11 +1,15 @@
 import React from "react";
 import "./about.scss";
-import { AboutOutlined, SettingFilled, SmileOutlined, SyncOutlined, LoadingOutlined, LinkedinFilled } from "@ant-design/icons";
-import { createFromIconfontCN, MobileOutlined, SafetyOutlined, FileDoneOutlined, FundProjectionScreenOutlined } from "@ant-design/icons";
+import {
+  createFromIconfontCN,
+  MobileOutlined,
+  FileDoneOutlined,
+  FundProjectionScreenOutlined,
+} from "@ant-design/icons";
 
-const startExperienceDateReactJs = new Date("2017-09-25");
+const startExperienceDateReactJs = new Date("2019-09-25");
 const startExperienceYeaReact = startExperienceDateReactJs.getFullYear();
-const startExperienceDateNode = new Date("2020-09-25");
+const startExperienceDateNode = new Date("2021-09-25");
 const startExperienceYeaNode = startExperienceDateNode.getFullYear();
 const currentYear = new Date().getFullYear();
 
@@ -32,7 +36,11 @@ export default function About() {
                   src="./card.png"
                 />
                 </div> */}
-                <img draggable={false} style={{ width: "100%" }} src="./asimg.jpeg" />
+                <img
+                  draggable={false}
+                  style={{ width: "100%" }}
+                  src="./asim-working.jpg"
+                />
                 {/* <div className="border-frame-top-left"></div>
                 <div className="border-frame-bottom-left"></div>
                 <div className="border-frame-bottom-right"></div>
@@ -47,9 +55,22 @@ export default function About() {
                 </h1>
                 <p>
                   {" "}
-                  I am experianced MERN stack technology software engineer. I have {currentYear - startExperienceYeaReact} years experience in ReactJS
-                  and {currentYear - startExperienceYeaNode} years experience in NodeJS. I have completed many projects in this technology separately
-                  and also with the teams. I also have basic experience in React Native for Mobile application development.
+                  I’m an experienced Full-Stack JavaScript Engineer with{" "}
+                  {currentYear - startExperienceYeaReact}+ years in React.js and{" "}
+                  {currentYear - startExperienceYeaNode}+ years in Node.js,
+                  specializing in building high-performance, scalable web
+                  applications. I leverage Next.js for fast, SEO-friendly
+                  frontends and NestJS (alongside Express & Fastify) for robust,
+                  maintainable backends, using MongoDB and Prisma for structured
+                  data management. For state management, I utilize Zustand and
+                  Redux to build clean, scalable frontends with shadcn/ui and
+                  Tailwind CSS for modern, accessible UI. I’ve delivered a wide
+                  range of projects—dashboards, SaaS platforms, CRMs, and
+                  real-time applications—both independently and within agile
+                  teams, ensuring quality, maintainability, and user-focused
+                  performance. Additionally, I have experience in React Native
+                  for mobile development, enabling me to contribute to
+                  full-stack and mobile-first solutions as needed.
                 </p>
                 <div className="me-detail-personal">
                   <div class="row">
@@ -122,7 +143,10 @@ export default function About() {
         </div>
         <div className="services-area">
           <div class="row">
-            <div class="col-12 col-md-4 col-lg-4" style={{ margin: "10px 0px" }}>
+            <div
+              class="col-12 col-md-4 col-lg-4"
+              style={{ margin: "10px 0px" }}
+            >
               <div className="services-area-item">
                 <div className="icon-top">
                   <FundProjectionScreenOutlined />
@@ -130,11 +154,18 @@ export default function About() {
                 <div className="Servcie-item-heading">Web Development</div>
                 <div className="Servcie-item-heading-border"></div>
                 <div className="Servcie-item-content">
-                  I am Experienced web developer with the techonlogy of ReactJS and NodeJs. I am single page application developer with ReactJs.
+                  I am an experienced web developer specializing in React.js and
+                  Node.js. I build fast, scalable single-page applications
+                  (SPAs) with React, and robust backend APIs using Node.js
+                  (Express & Fastify), ensuring seamless performance and
+                  maintainability.
                 </div>
               </div>
             </div>
-            <div class="col-12 col-md-4 col-lg-4" style={{ margin: "10px 0px" }}>
+            <div
+              class="col-12 col-md-4 col-lg-4"
+              style={{ margin: "10px 0px" }}
+            >
               <div className="services-area-item">
                 <div className="icon-top">
                   <MobileOutlined />
@@ -142,20 +173,29 @@ export default function About() {
                 <div className="Servcie-item-heading">Mobile Application</div>
                 <div className="Servcie-item-heading-border"></div>
                 <div className="Servcie-item-content">
-                  I have basci level experience in mobile application development in React Native. I have completed few projects in React Native.
+                  have foundational experience in mobile app development using
+                  React Native. I’ve successfully delivered several projects,
+                  focusing on cross-platform solutions that provide smooth and
+                  responsive user experiences.
                 </div>
               </div>
             </div>
-            <div class="col-12 col-md-4 col-lg-4" style={{ margin: "10px 0px" }}>
+            <div
+              class="col-12 col-md-4 col-lg-4"
+              style={{ margin: "10px 0px" }}
+            >
               <div className="services-area-item">
                 <div className="icon-top">
                   <FileDoneOutlined />
                 </div>
-                <div className="Servcie-item-heading">SQA Engineer</div>
+                <div className="Servcie-item-heading">QA Engineering</div>
                 <div className="Servcie-item-heading-border"></div>
                 <div className="Servcie-item-content">
-                  I monitor, analyze and test software during development in order to ensure quality. I architecting new automated test strategies and
-                  frameworks.
+                  I actively monitor, analyze, and test software during
+                  development to ensure top-notch quality. I design and
+                  implement automated testing strategies and frameworks,
+                  improving reliability and reducing bugs for a seamless user
+                  experience.
                 </div>
               </div>
             </div>
