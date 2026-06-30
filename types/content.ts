@@ -11,6 +11,7 @@ export type Project = {
   image: string;
   demoUrl: string;
   codeUrl: string;
+  secondaryCodeUrl?: string;
 };
 
 export type BlogAccent =

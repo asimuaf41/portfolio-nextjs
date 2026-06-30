@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { blogPosts } from "@/data/blog";
 import { projects } from "@/data/site-content";
 
+export const dynamic = "force-static";
+
 const baseUrl = "https://asimportfolio-6fd1d.web.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {

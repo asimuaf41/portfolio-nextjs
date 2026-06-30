@@ -1,7 +1,7 @@
 export const personalInfo = {
   name: "Asim Ali",
   detail:
-    "MERN, React Native & AI Engineer building fast, scalable web and mobile applications.\n\nI specialize in React, React Native, Next.js, and Node.js to create high-performance dashboards, admin panels, and automation systems.\n\nI leverage modern AI tools like Cursor and Claude to speed up development and improve code quality, delivering cleaner code, faster development, and reliable results—whether it’s building from scratch or fixing underperforming systems.\n\nTrusted by clients to build and scale real-world applications.",
+    "MERN, React Native & AI Engineer building fast, scalable web and mobile applications. I specialize in React, React Native, Next.js, and Node.js, along with custom AI agent systems — multi-agent orchestration, RAG, and tool-calling automation using Claude API. I leverage AI-assisted tools like Cursor and Claude Code to deliver cleaner code, faster development, and reliable results. Trusted by clients to build and scale real-world applications.",
 };
 
 export const socialProfiles = [

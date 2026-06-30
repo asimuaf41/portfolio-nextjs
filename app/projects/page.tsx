@@ -16,14 +16,16 @@ import { projects } from "@/data/site-content";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "Recent software projects with stack details, demos, and source links.",
+  description:
+    "Recent software projects with stack details, demos, and source links.",
   alternates: { canonical: "/projects" },
 };
 
 export default function ProjectsPage() {
   const [featured, ...rest] = projects;
   const totalProjects = projects.length;
-  const totalStacks = new Set(projects.flatMap((project) => project.stack)).size;
+  const totalStacks = new Set(projects.flatMap((project) => project.stack))
+    .size;
 
   return (
     <main className="project-page relative">
@@ -89,19 +91,40 @@ export default function ProjectsPage() {
             ))}
           </div>
           <div className="project-featured-actions">
-            <a href={featured.demoUrl} target="_blank" rel="noopener noreferrer">
+            <a
+              href={featured.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <ExternalLink size={14} />
               Live Demo
             </a>
-            <a href={featured.codeUrl} target="_blank" rel="noopener noreferrer">
+            <a
+              href={featured.codeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Github size={14} />
               View Code
             </a>
+            {featured.secondaryCodeUrl ? (
+              <a
+                href={featured.secondaryCodeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github size={14} />
+                Node API
+              </a>
+            ) : null}
           </div>
         </div>
       </article>
 
-      <section className="project-grid-v2" aria-label="Recent completed projects">
+      <section
+        className="project-grid-v2"
+        aria-label="Recent completed projects"
+      >
         {rest.map((project) => (
           <article key={project.slug} className="project-card-v2">
             <div className="project-card-v2-media">
@@ -113,21 +136,39 @@ export default function ProjectsPage() {
                 className="h-full w-full object-cover"
               />
               <div className="project-card-v2-overlay">
-                <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <ExternalLink size={13} />
                   Live
                 </a>
-                <a href={project.codeUrl} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={project.codeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Github size={13} />
                   Code
                 </a>
+                {project.secondaryCodeUrl ? (
+                  <a
+                    href={project.secondaryCodeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Github size={13} />
+                    API
+                  </a>
+                ) : null}
               </div>
             </div>
             <div className="project-card-v2-content">
               <h3>{project.title}</h3>
               <p>{project.summary}</p>
               <div className="project-card-v2-tags">
-                {project.stack.slice(0, 6).map((item) => (
+                {project.stack.slice(0, 5).map((item) => (
                   <span key={item} className="blog-card-tag">
                     {item}
                   </span>

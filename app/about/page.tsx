@@ -1,9 +1,26 @@
 import type { Metadata } from "next";
-import { BriefcaseBusiness, ShieldCheck, Smartphone } from "lucide-react";
+import {
+  BriefcaseBusiness,
+  Sparkles,
+  Bot,
+  Smartphone,
+  ServerCog,
+  ShieldCheck,
+} from "lucide-react";
 import Image from "next/image";
 import { BackgroundTexture } from "@/components/background-texture";
 import { SectionTitle } from "@/components/section-title";
 import { aboutFacts, aboutIntro, services } from "@/data/site-content";
+
+// Map service index/title to matching icon for visual context and keep icons stable if order shifts.
+const serviceIcons: { [key: string]: React.ReactNode } = {
+  "MERN/Next.js Web Engineering & Rescue": <BriefcaseBusiness size={36} />,
+  "AI & Automation Integration": <Sparkles size={36} />,
+  "AI Agent Development (OpenClaw, n8n & More)": <Bot size={36} />,
+  "Mobile Applications (React Native)": <Smartphone size={36} />,
+  "API Development & Optimization": <ServerCog size={36} />,
+  "Quality Assurance & Testing Automation": <ShieldCheck size={36} />,
+};
 
 export const metadata: Metadata = {
   title: "About",
@@ -41,12 +58,10 @@ export default function AboutPage() {
       </div>
       <SectionTitle title="Services" />
       <div className="service-grid">
-        {services.map((item, idx) => (
+        {services.map((item) => (
           <article key={item.title} className="service-card">
             <div className="service-icon">
-              {idx === 0 ? <BriefcaseBusiness size={36} /> : null}
-              {idx === 1 ? <Smartphone size={36} /> : null}
-              {idx === 2 ? <ShieldCheck size={36} /> : null}
+              {serviceIcons[item.title] || null}
             </div>
             <h3>{item.title}</h3>
             <p>{item.description}</p>

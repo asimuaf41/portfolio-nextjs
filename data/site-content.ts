@@ -6,11 +6,31 @@ export const navItems: NavItem[] = [
   { href: "/resume", label: "Resume" },
   { href: "/projects", label: "Projects" },
   { href: "/contact", label: "Contact" },
-  { href: "/gallery", label: "Gallery" },
+  // { href: "/gallery", label: "Gallery" },
   { href: "/blog", label: "Blog" },
 ];
 
 export const projects: Project[] = [
+  {
+    slug: "ai-agent-platform",
+    title: "AI Agent Platform — Multi-Agent Orchestration, RAG & Tool-Calling System",
+    summary:
+      "Built a full-stack AI agent platform demonstrating four core agentic AI patterns using Claude API, React/Next.js, and Node.js: a Web Search Agent for autonomous research and structured reports; a Tool-Calling Agent for live data vs. knowledge decisions; RAG with long-term memory via Supabase pgvector for document Q&A and user preferences; and Multi-Agent Orchestration where an orchestrator coordinates specialist sub-agents in parallel for complex automated workflows.",
+    stack: [
+      "Next.js",
+      "React",
+      "Node.js",
+      "Claude API",
+      "Supabase",
+      "pgvector",
+      "RAG",
+      "Tool Calling",
+    ],
+    image: "/ai-agent.png",
+    demoUrl: "https://ai-agent-platform-nextjs.vercel.app/multi-agent",
+    codeUrl: "https://github.com/asimuaf41/real-estate-ai-agent-chat-nextjs",
+    secondaryCodeUrl: "https://github.com/asimuaf41/AI-agent-streaming-NodeJs",
+  },
   {
     slug: "carolina-real-estate",
     title: "Carolina Real Estate site",
@@ -186,21 +206,38 @@ export const aboutFacts = [
 
 export const services = [
   {
-    title: "Web Development",
+    title: "MERN/Next.js Web Engineering & Rescue",
     description:
-      "I am an experienced web developer specializing in React.js and Node.js. I build fast, scalable single-page applications (SPAs) with React, and robust backend APIs using Node.js (Express & Fastify), ensuring seamless performance and maintainability.",
+      "Full-stack web development: Fast, scalable web apps and admin panels using React.js, Next.js, Node.js, and TypeScript. Specialized in reviving buggy, abandoned, or legacy codebases—implementing clean, modular architecture, performance-tuned, SEO-optimized, and ready for business growth.",
   },
   {
-    title: "Mobile Application",
+    title: "AI & Automation Integration",
     description:
-      "I have foundational experience in mobile app development using React Native. I have successfully delivered several projects, focusing on cross-platform solutions that provide smooth and responsive user experiences.",
+      "Supercharge your product with AI. I integrate OpenAI, ChatGPT, Claude, and agent workflows for automation, AI chatbots, LLM-powered features, and smart dashboards. I leverage AI coding tools (Cursor, Claude) to speed up dev, debugging, and optimize architecture—delivering more in less time with fewer bugs.",
   },
   {
-    title: "QA Engineering",
+    title: "AI Agent Development (OpenClaw, n8n & More)",
     description:
-      "I actively monitor, analyze, and test software during development to ensure top-notch quality. I design and implement automated testing strategies and frameworks, improving reliability and reducing bugs for a seamless user experience.",
+      "Specialized development of custom AI agents using OpenClaw, n8n, and other modern agent platforms. Build robust, automated workflows and intelligent agents that can connect APIs, trigger logic, interact with users, or run autonomous operations across cloud or on-premise infrastructure. Ideal for businesses looking to deploy no-code/low-code AI process automations, smart integrations, or enhance digital workflows with cutting-edge autonomous agents.",
+  },
+  {
+    title: "Mobile Applications (React Native)",
+    description:
+      "Cross-platform mobile app development using React Native for iOS/Android. Clean, responsive interfaces and seamless integration with cloud APIs, analytics, and AI. Perfect for prototyping or productizing alongside your web platform.",
+  },
+  {
+    title: "API Development & Optimization",
+    description:
+      "Design and develop efficient RESTful APIs, GraphQL, and microservices using Node.js, Express, and NestJS. Specialized in API aggregation, optimization, caching, authentication (JWT), and third-party data integrations for real-time experiences.",
+  },
+  {
+    title: "Quality Assurance & Testing Automation",
+    description:
+      "In-depth QA engineering with automated and manual testing during development. Implementation of robust testing strategies eliminates bugs and ensures reliability, leveraging AI tools for code review, validation, and continuous integration pipelines.",
   },
 ];
+
+// Enhanced and expanded services to reflect the breadth and specialties highlighted in aboutIntro above.
 
 export const aboutIntro = `
 MERN & AI Engineer | React, Next.js, Node | OpenAI, Cursor, Claude. I build AI-powered dashboards, admin panels, and automation systems using React, Node.js, and modern AI coding tools like Cursor and Claude.<br><br>

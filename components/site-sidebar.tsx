@@ -14,7 +14,7 @@ export function SiteSidebar({ onNavigate }: { onNavigate?: () => void }) {
       <div className="sidebar-profile-wrap">
         <div className="sidebar-profile-ring">
           <Image
-            src="/meProfile.png"
+            src="/asim-30-june-profile.png"
             alt="Portrait of Asim Ali"
             fill
             sizes="210px"

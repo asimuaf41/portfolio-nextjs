@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://asimportfolio-6fd1d.web.app/sitemap.xml
