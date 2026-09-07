@@ -20,6 +20,11 @@ import {
   formatBlogDateLong,
   slugifyHeading,
 } from "@/lib/blog-icons";
+import {
+  articleJsonLd,
+  breadcrumbJsonLd,
+  createPageMetadata,
+} from "@/lib/seo";
 import type { BlogCallout } from "@/types/content";
 
 type Params = { slug: string };
@@ -44,19 +49,28 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = blogPosts.find((item) => item.slug === slug);
-  if (!post) return { title: "Post Not Found" };
-  return {
+  if (!post) {
+    return createPageMetadata({
+      title: "Post Not Found",
+      description: "The requested blog post could not be found.",
+      path: `/blog/${slug}`,
+      noIndex: true,
+    });
+  }
+
+  return createPageMetadata({
     title: post.title,
     description: post.excerpt,
-    alternates: { canonical: `/blog/${post.slug}` },
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      type: "article",
-      publishedTime: post.publishedAt,
-      tags: post.tags,
-    },
-  };
+    path: `/blog/${post.slug}`,
+    type: "article",
+    keywords: post.tags,
+    tags: post.tags,
+    section: post.category,
+    publishedTime: post.publishedAt,
+    modifiedTime: post.publishedAt,
+    image: `/blog/${post.slug}/opengraph-image.png`,
+    imageAlt: post.title,
+  });
 }
 
 export default async function BlogDetailPage({
@@ -65,15 +79,18 @@ export default async function BlogDetailPage({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  const post = blogPosts.find((item) => item.slug === slug);
+  const posts = [...blogPosts].sort((a, b) =>
+    b.publishedAt.localeCompare(a.publishedAt),
+  );
+  const post = posts.find((item) => item.slug === slug);
   if (!post) notFound();
 
   const Icon = blogIconMap[post.icon];
-  const currentIndex = blogPosts.findIndex((item) => item.slug === slug);
-  const prevPost = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
+  const currentIndex = posts.findIndex((item) => item.slug === slug);
+  const prevPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
   const nextPost =
-    currentIndex >= 0 && currentIndex < blogPosts.length - 1
-      ? blogPosts[currentIndex + 1]
+    currentIndex >= 0 && currentIndex < posts.length - 1
+      ? posts[currentIndex + 1]
       : null;
 
   const sectionsWithIds = post.sections.map((section) => ({
@@ -84,15 +101,20 @@ export default async function BlogDetailPage({
   return (
     <main className={`blog-article accent-${post.accent}`}>
       <SeoJsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "Article",
-          headline: post.title,
+        data={articleJsonLd({
+          title: post.title,
           description: post.excerpt,
-          datePublished: post.publishedAt,
-          author: { "@type": "Person", name: "Asim Ali" },
-          keywords: post.tags.join(", "),
-        }}
+          path: `/blog/${post.slug}`,
+          publishedAt: post.publishedAt,
+          tags: post.tags,
+        })}
+      />
+      <SeoJsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog" },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ])}
       />
 
       <Link href="/blog" className="blog-article-back">
@@ -100,7 +122,7 @@ export default async function BlogDetailPage({
         Back to all articles
       </Link>
 
-      <header className="blog-article-hero">
+      <header className="blog-article-hero blog-reveal">
         <div className="blog-article-hero-glow" aria-hidden="true" />
         <span className="blog-article-icon" aria-hidden="true">
           <Icon size={36} strokeWidth={1.7} />

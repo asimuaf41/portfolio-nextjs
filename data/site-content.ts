@@ -16,6 +16,7 @@ export const projects: Project[] = [
     title: "AI Agent Platform — Multi-Agent Orchestration, RAG & Tool-Calling System",
     summary:
       "Built a full-stack AI agent platform demonstrating four core agentic AI patterns using Claude API, React/Next.js, and Node.js: a Web Search Agent for autonomous research and structured reports; a Tool-Calling Agent for live data vs. knowledge decisions; RAG with long-term memory via Supabase pgvector for document Q&A and user preferences; and Multi-Agent Orchestration where an orchestrator coordinates specialist sub-agents in parallel for complex automated workflows.",
+    category: "AI Agents",
     stack: [
       "Next.js",
       "React",
@@ -36,6 +37,7 @@ export const projects: Project[] = [
     title: "Carolina Real Estate site",
     summary:
       "This real estate site allows users to search properties using advanced filters and view locations on an interactive map. Each listing includes complete details along with a built-in payment calculator.",
+    category: "Real Estate",
     stack: [
       "Nextjs",
       "Tailwind CSS",
@@ -55,6 +57,7 @@ export const projects: Project[] = [
     title: "E-Signature Platform Inspired by DocuSign",
     summary:
       "This platform functions as a comprehensive document management system. Users can upload PDF documents, add interactive fields such as signature, date, and name, and send them as envelopes to recipients for digital signing. Recipients can easily open the envelope, sign the document, and submit it securely.",
+    category: "SaaS",
     stack: [
       "NextJS",
       "ShadCN-UI",
@@ -75,6 +78,7 @@ export const projects: Project[] = [
     title: "Method Admin Dashboard",
     summary:
       "This real estate admin dashboard offers all-in-one management with data charts, real-time chat (WebSockets), document handling, user and agent workflows, and detailed reports.",
+    category: "Dashboards",
     stack: [
       "React",
       "JSS",
@@ -94,6 +98,7 @@ export const projects: Project[] = [
     title: "Method Atlanta",
     summary:
       "This real estate site allows users to search properties using advanced filters and view locations on an interactive map. Each listing includes complete details along with a built-in payment calculator.",
+    category: "Real Estate",
     stack: ["Nextjs", "NodeJs", "Material UI", "Google maps", "css"],
     image: "/methodAtlanta.png",
     demoUrl: "https://methodatlanta.com/",
@@ -104,6 +109,7 @@ export const projects: Project[] = [
     title: "Tun Admin Dashboard",
     summary:
       "This is the TUN University Network Dashboard designed to manage all social features of the platform. It handles university posts, likes, shares, comments, and group management, centralizing all user interaction data in one place.",
+    category: "Education",
     stack: [
       "React",
       "Node.js",
@@ -124,6 +130,7 @@ export const projects: Project[] = [
     title: "Tun University Network",
     summary:
       "This platform supports student social and academic activities with features like notes, lectures, attendance, real-time chat, posts, groups, and event sharing, making learning more interactive and connected.",
+    category: "Education",
     stack: [
       "React",
       "Node.js",
@@ -144,6 +151,7 @@ export const projects: Project[] = [
     title: "Legal Emirates - Top Lawyers and Law Firms in Dubai",
     summary:
       "Legal Emirates is a premier legal platform designed to connect users with the best lawyers and law firms in Dubai. With over 27 years of trusted legal service, Bader Hamad Al Zaabi has established Legal Emirates as one of the UAE's leading law firms, known for its integrity, expertise, and client-first approach.",
+    category: "Legal",
     stack: [
       "React",
       "Node.js",
@@ -164,6 +172,7 @@ export const projects: Project[] = [
     title: "Mortgage, Refinance & DTI Calculator",
     summary:
       "Estimate mortgage payments with taxes, insurance, and HOA; compare refinance options; and calculate debt-to-income ratio for mortgage eligibility through a practical real-estate calculator experience.",
+    category: "Real Estate",
     stack: ["Nextjs", "NodeJs", "Material UI", "css"],
     image: "/agentMortageCalculator.png",
     demoUrl: "https://align.ourmethod.com/gloria",
@@ -174,12 +183,29 @@ export const projects: Project[] = [
     title: "Software Company Website",
     summary:
       "Developed a dynamic website for a software company showcasing its projects, team members, services, and latest updates. The platform features a clean, responsive UI with employee profiles, project highlights, company news, and a professional online presence.",
+    category: "Marketing",
     stack: ["HTML", "CSS", "Javascript", "J query", "Bootstrap"],
     image: "/btSoft.png",
     demoUrl: "https://btsoftwarehouse.com/",
     codeUrl: "https://github.com/asimuaf41",
   },
 ];
+
+export const projectsPage = {
+  eyebrow: "Selected work",
+  headline: "Production platforms built for real business outcomes.",
+  intro:
+    "Full-stack products across AI agents, real estate, legal, education, and SaaS — focused on scalable architecture, clean UX, and shipping work that holds up in production.",
+  domains: [
+    { label: "AI Agents", blurb: "RAG, tool-calling, multi-agent flows" },
+    { label: "Real Estate", blurb: "Listings, maps, admin ops" },
+    { label: "SaaS & Docs", blurb: "E-sign, workflows, dashboards" },
+    { label: "Education", blurb: "Social + academic platforms" },
+    { label: "Legal", blurb: "Firm sites & lead platforms" },
+  ],
+  closing:
+    "Need something in this lane — or a rescue on an existing React/Next.js app? Let's talk scope and ship a clear plan.",
+};
 
 export const socialLinks = [
   {
@@ -198,139 +224,280 @@ export const socialLinks = [
 
 export const aboutFacts = [
   { key: "Full Name", value: "Asim Ali" },
-  { key: "Age", value: `${new Date().getFullYear() - 1998} years old` },
+  { key: "Age", value: `${new Date().getFullYear() - 1998} Years` },
   { key: "Nationality", value: "Pakistan" },
-  { key: "Languages", value: "English, Urdu and Punjabi" },
-  { key: "Address", value: "Shahkot, Pakistan" },
+  { key: "Languages", value: "English, Urdu, Punjabi" },
+  { key: "Location", value: "Shahkot, Pakistan" },
+  { key: "Availability", value: "Open for hire" },
 ];
+
+const aboutYearsExperience = Math.max(
+  1,
+  new Date().getFullYear() - 2019,
+);
+
+export const aboutStats = [
+  { label: "Years Experience", value: `${aboutYearsExperience}+` },
+  { label: "Job Success", value: "100%" },
+  { label: "Upwork Hours", value: "6,200+" },
+  { label: "Projects Shipped", value: "70+" },
+];
+
+export const UPWORK_PROFILE_URL =
+  "https://www.upwork.com/freelancers/asimali170";
+
+export const WHATSAPP_NUMBER = "+923026046119";
+export const WHATSAPP_HREF = "https://wa.me/923026046119";
+
+export const contactInfo = {
+  eyebrow: "Let's build something",
+  headline: "Tell me what you're building — I'll tell you if I'm the right fit.",
+  intro:
+    "Prefer WhatsApp for a fast reply, Upwork for a formal hire, or email for detailed briefs. Pick the channel that fits how you work.",
+  phones: [
+    { label: "Primary", value: "+92 302 6046119", href: "tel:+923026046119" },
+    { label: "Secondary", value: "+92 349 6006162", href: "tel:+923496006162" },
+  ],
+  emails: [
+    {
+      label: "Primary",
+      value: "asimuaf41@gmail.com",
+      href: "mailto:asimuaf41@gmail.com",
+    },
+    {
+      label: "Projects",
+      value: "asimsoftwaredeveloper02@gmail.com",
+      href: "mailto:asimsoftwaredeveloper02@gmail.com",
+    },
+  ],
+  address: {
+    line: "Marrar chak 41/R.B, Tehsil Sangla Hill, District Nankana Sahib, Pakistan",
+    short: "Sangla Hill · Nankana Sahib · Pakistan",
+  },
+  mapEmbedUrl:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d729936.4516613283!2d73.11367429737892!3d31.803112744720796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39220b72936edc15%3A0x42e2ed6919ade7e!2sAli%20Abdullah%20General%20store!5e0!3m2!1sen!2s!4v1612544292757!5m2!1sen!2s",
+  responseNote: "Typical reply time: within a few hours on WhatsApp · same day on email",
+};
+
+export const messagingChannels = [
+  {
+    id: "whatsapp",
+    name: "WhatsApp",
+    description: "Fastest reply — share a short brief and I'll respond quickly.",
+    href: WHATSAPP_HREF,
+    cta: "Chat on WhatsApp",
+    accent: "whatsapp",
+  },
+  {
+    id: "upwork",
+    name: "Upwork",
+    description: "Best for contracts, milestones, and Top Rated Plus hiring.",
+    href: UPWORK_PROFILE_URL,
+    cta: "Open Upwork profile",
+    accent: "upwork",
+  },
+  {
+    id: "linkedin",
+    name: "LinkedIn",
+    description: "Connect professionally — ideal for intros and longer-term work.",
+    href: "https://www.linkedin.com/in/asim-ali-857a4113b/",
+    cta: "View LinkedIn",
+    accent: "linkedin",
+  },
+  {
+    id: "email",
+    name: "Email",
+    description: "Send specs, Figma links, or longer project details.",
+    href: "mailto:asimuaf41@gmail.com?subject=Project%20inquiry%20-%20Asim%20Ali",
+    cta: "Send an email",
+    accent: "email",
+  },
+];
+
+export const freelancePlatforms = [
+  {
+    name: "Upwork",
+    href: UPWORK_PROFILE_URL,
+    blurb: "Top Rated Plus · primary freelance profile",
+  },
+  {
+    name: "Contra",
+    href: "https://contra.com/asim_ali_t3a13smn",
+    blurb: "Independent marketplace profile",
+  },
+  {
+    name: "Freelancer",
+    href: "https://www.freelancer.com/u/Asim5534",
+    blurb: "React / Next.js & Node.js profile",
+  },
+  {
+    name: "Fiverr",
+    href: "https://www.fiverr.com/mianasimg",
+    blurb: "Gig-based project collaboration",
+  },
+  {
+    name: "Arc.dev",
+    href: "https://arc.dev",
+    blurb: "Remote full-time developer network",
+  },
+];
+
+export const aboutProfile = {
+  eyebrow: "React / Next.js & AI Agent Developer",
+  headline: "I ship production systems — not demos that die in staging.",
+  hook: "Most clients come to me in one of two situations: their React or Next.js app is buggy, slow, or needs features a previous developer couldn't deliver — or they need a SaaS product, internal tool, or AI-powered application built from scratch, properly and fast.",
+  credibility: `Over ${aboutYearsExperience}+ years of full-stack development — full-time on Upwork since 2021 — I've completed 13 long-term projects with a 100% Job Success Score, 6,200+ hours logged, and Top Rated Plus status. Every project I've taken on has been delivered.`,
+  focus:
+    "I build AI-powered web applications and custom AI agent systems using React, Next.js, Node.js, and the Claude API — delivering fast, scalable, production-ready solutions for startups and growing businesses.",
+  featured: {
+    label: "Recently launched",
+    title: "AI Agent Studio",
+    summary:
+      "A live multi-agent platform with RAG, long-term memory (Supabase pgvector), real-time tool-calling, and orchestrated specialists running in parallel.",
+    demoUrl: "https://ai-agent-platform-nextjs.vercel.app/multi-agent",
+  },
+  agentCapabilities: [
+    "Custom AI agents with Claude API and OpenAI API",
+    "RAG systems that answer from your business documents",
+    "Multi-agent orchestration for complex workflows",
+    "LLM features embedded into existing React/Next.js apps",
+    "Vector database design (Supabase pgvector, Pinecone)",
+    "Streaming AI responses with live tool-calling",
+    "Automation pipelines with n8n and custom Node.js",
+  ],
+  result:
+    "If you need an AI assistant inside your SaaS, an internal agent that can query your database and take actions, document intelligence for operations, or an LLM-powered automation workflow — I build the full stack as one integrated system, not a patchwork of vendors.",
+  fullstack:
+    "My core stack is React, Next.js, Node.js, and Express, with TypeScript, Redux, Zustand, and Tailwind on the frontend. On the backend I work with Supabase, PostgreSQL, MongoDB, MySQL, Stripe billing APIs, and REST/GraphQL. I deploy to AWS, Vercel, and Docker — equally comfortable starting from a blank repo or rescuing a messy codebase.",
+  saas:
+    "For SaaS platforms I build multi-tenant architectures, admin dashboards, real-time features, reporting systems, and subscription billing with Stripe — Checkout, Customer Portal, and webhook-driven plan updates. I've delivered large-scale real estate platforms, operations tooling, and data-heavy dashboards that stay fast under real load.",
+  helpWith: [
+    { icon: "LayoutDashboard", label: "React / Next.js SaaS & web apps" },
+    { icon: "ServerCog", label: "Node.js / Express / NestJS APIs" },
+    { icon: "Database", label: "Supabase, PostgreSQL & pgvector" },
+    { icon: "Bot", label: "Claude / OpenAI agent development" },
+    { icon: "Brain", label: "RAG & document intelligence" },
+    { icon: "Workflow", label: "Multi-agent orchestration" },
+    { icon: "Zap", label: "Streaming chat UIs" },
+    { icon: "Activity", label: "Stripe billing & subscriptions" },
+    { icon: "Radio", label: "Real-time chat & notifications" },
+    { icon: "Gauge", label: "Performance & codebase rescue" },
+    { icon: "Smartphone", label: "React Native iOS / Android" },
+    { icon: "Figma", label: "Figma → pixel-perfect Next.js" },
+  ],
+  closing:
+    "Whether you're launching a SaaS product, adding AI to an existing platform, rescuing a broken codebase, or integrating LLM features into React/Next.js — send a message with what you're building. I'll tell you honestly if I'm the right fit.",
+};
 
 export const services = [
   {
-    title: "MERN/Next.js Web Engineering & Rescue",
+    title: "AI Agent Development",
     description:
-      "Full-stack web development: Fast, scalable web apps and admin panels using React.js, Next.js, Node.js, and TypeScript. Specialized in reviving buggy, abandoned, or legacy codebases—implementing clean, modular architecture, performance-tuned, SEO-optimized, and ready for business growth.",
+      "Custom agents with Claude and OpenAI — tool-calling, streaming responses, multi-agent orchestration, and automation pipelines that complete real business workflows end to end.",
   },
   {
-    title: "AI & Automation Integration",
+    title: "RAG & Document Intelligence",
     description:
-      "Supercharge your product with AI. I integrate OpenAI, ChatGPT, Claude, and agent workflows for automation, AI chatbots, LLM-powered features, and smart dashboards. I leverage AI coding tools (Cursor, Claude) to speed up dev, debugging, and optimize architecture—delivering more in less time with fewer bugs.",
+      "Production RAG with Supabase pgvector or Pinecone: ingest PDFs and knowledge bases, retrieve with citations, and keep long-term user preferences across sessions.",
   },
   {
-    title: "AI Agent Development (OpenClaw, n8n & More)",
+    title: "React / Next.js SaaS & Rescue",
     description:
-      "Specialized development of custom AI agents using OpenClaw, n8n, and other modern agent platforms. Build robust, automated workflows and intelligent agents that can connect APIs, trigger logic, interact with users, or run autonomous operations across cloud or on-premise infrastructure. Ideal for businesses looking to deploy no-code/low-code AI process automations, smart integrations, or enhance digital workflows with cutting-edge autonomous agents.",
+      "Build scalable SaaS apps from scratch or revive buggy React/Next.js codebases — clean architecture, performance, SEO, Stripe subscriptions, and features previous teams couldn't ship.",
   },
   {
-    title: "Mobile Applications (React Native)",
+    title: "Supabase & Stripe Integrations",
     description:
-      "Cross-platform mobile app development using React Native for iOS/Android. Clean, responsive interfaces and seamless integration with cloud APIs, analytics, and AI. Perfect for prototyping or productizing alongside your web platform.",
+      "Supabase Auth, Postgres, Realtime, Storage, and pgvector — plus Stripe Checkout, billing portals, and webhook-safe subscription flows wired into Next.js. AI-assisted delivery keeps setup fast without cutting corners on security.",
   },
   {
-    title: "API Development & Optimization",
+    title: "APIs, Data & Real-time Systems",
     description:
-      "Design and develop efficient RESTful APIs, GraphQL, and microservices using Node.js, Express, and NestJS. Specialized in API aggregation, optimization, caching, authentication (JWT), and third-party data integrations for real-time experiences.",
+      "Node.js / Express / NestJS APIs, SQL design, caching, auth, and real-time features — chat, live tracking, notifications, and dashboards that hold up under load.",
   },
   {
-    title: "Quality Assurance & Testing Automation",
+    title: "Admin Dashboards & Internal Tools",
     description:
-      "In-depth QA engineering with automated and manual testing during development. Implementation of robust testing strategies eliminates bugs and ensures reliability, leveraging AI tools for code review, validation, and continuous integration pipelines.",
+      "Operations panels, reporting, multi-tenant admin suites, and AI-assisted workflows your team actually uses daily — designed for clarity, speed, and maintainability.",
   },
 ];
 
-// Enhanced and expanded services to reflect the breadth and specialties highlighted in aboutIntro above.
+export const aboutIntro = aboutProfile.hook;
 
-export const aboutIntro = `
-MERN & AI Engineer | React, Next.js, Node | OpenAI, Cursor, Claude. I build AI-powered dashboards, admin panels, and automation systems using React, Node.js, and modern AI coding tools like Cursor and Claude.<br><br>
+export const resumePage = {
+  eyebrow: "Resume & skills",
+  headline: "Production stack, delivery track record, and continuous learning.",
+  intro:
+    "A focused view of the tools I ship with every week — AI agents, React/Next.js SaaS, Node APIs, and the data/billing layers that make products real.",
+  closing:
+    "Looking for a React/Next.js or AI agent engineer who can own delivery end to end? Let's align on scope and start shipping.",
+};
 
-Clients hire me when they need fast, clean, and scalable systems — not just code, but smart execution.<br><br>
-
-I can even demonstrate my skills on your task before payment so you can verify quality risk-free.<br><br>
-
-🚀 Top Rated Plus MERN Stack & AI Engineer | React, Next.js, Node.js | OpenAI, Cursor & Claude AI Specialist<br><br>
-
-I use AI coding agents (Cursor, Claude) to speed up development, refactoring, debugging, and system design.<br>
-This allows me to deliver in days what usually takes other developers weeks — with cleaner architecture and fewer bugs.<br><br>
-
-Clients turn to me when their React or Next.js app is buggy, sluggish, or abandoned by previous developers. I excel at rescuing MERN projects, resolving tough bugs, integrating AI capabilities, and deploying production-ready solutions—delivered quickly and efficiently.<br>
-✅ 100% Job Success Score<br>
-✅ 7+ Years of Professional Experience (Including Full-Time Upwork Freelancing Since 2021)<br>
-✅ Proven Expert in Debugging, Scaling, and Reviving Complex Codebases<br><br>
-
-<strong>Why Clients Choose Me:</strong><br>
-✅ React/Next.js Rescue Specialist - Revive buggy, abandoned, or underperforming apps<br>
-✅ AI Integration Expert - Add ChatGPT, OpenAI, and LLM capabilities to existing apps<br>
-✅ MERN Stack Architect - Build high-performance web apps from scratch<br>
-✅ API Optimization Guru - Efficiently fetch and render multiple APIs<br>
-✅ PWA & SEO Ready - Implement progressive web app manifests and performance optimizations<br>
-✅ AI-Enhanced Development - Use Cursor & Claude for faster, cleaner code delivery<br><br>
-
-<strong>My AI-Driven Development Process:</strong><br>
-⚡ 30% faster development using AI-assisted coding<br>
-⚡ 40% fewer bugs through AI code validation<br>
-⚡ 25% cost savings via smarter architecture decisions<br>
-⚡ 50% faster onboarding with AI-powered documentation<br><br>
-
-I don't just write code—I engineer intelligent, future-proof systems that drive business value.<br><br>
-
-<strong>Core Technical Skills</strong><br>
-Frontend: React.js, Next.js, TypeScript, Redux, Zustand, Tailwind CSS, Pixel-Perfect UI, Figma-to-Code Conversions<br>
-Backend: Node.js, Express.js, NestJS, RESTful APIs, GraphQL, JWT Authentication, Microservices Architecture<br>
-AI & Automation: OpenAI API, ChatGPT, Large Language Models (LLMs), AI Chatbots, Workflow Automations<br>
-Mobile: React Native for Cross-Platform iOS/Android Apps<br>
-Databases & DevOps: MongoDB, PostgreSQL, MySQL, Firebase, AWS Services, Docker, CI/CD Pipelines<br><br>
-
-<strong>Project Types I Specialize In</strong><br>
-• SaaS Platforms and Web Applications<br>
-• Interactive Dashboards & Admin Panels<br>
-• AI-Driven Tools and Applications<br>
-• Real-Time Features (e.g., Chat, Maps, Tracking Systems)<br>
-• Enterprise-Level React/Next.js Codebases<br>
-• Performance Tuning and Optimization Projects<br><br>
-
-<strong>Why Partner with Me?</strong><br>
-✔️ Crystal-clear communication throughout the project<br>
-✔️ Clean, modular, and maintainable codebases<br>
-✔️ Reliable on-time delivery with milestones<br>
-✔️ Long-term support for scalability and updates<br>
-✔️ Quick grasp of your existing systems to hit the ground running<br><br>
-
-Ready to fix your app, add AI magic, or build something new? Let's connect—send me an invite, and we'll get your project moving today!
-`;
-
-export const skills = [
-  { name: "NextJs", level: 80 },
-  { name: "ReactJS", level: 100 },
-  { name: "Cursor AI Coding", level: 95 },
-  { name: "Claude Code Assistant", level: 92 },
-  { name: "AI Agent Development", level: 88 },
-  { name: "LLM Prompt Engineering", level: 90 },
-  { name: "AI Workflow Automation", level: 85 },
-  { name: "OpenAI API Integration", level: 90 },
-  { name: "React Redux/Zustand", level: 90 },
-  { name: "Tailwind CSS", level: 80 },
-  { name: "ShadCN-UI", level: 80 },
-  { name: "Tanstack/React Query", level: 80 },
-  { name: "HTML5", level: 95 },
-  { name: "javascript", level: 90 },
-  { name: "React Native", level: 30 },
-  { name: "NodeJS", level: 70 },
-  { name: "Sass", level: 90 },
-  { name: "Third Party UI libraries", level: 70 },
-  { name: "NestJs", level: 80 },
-  { name: "Heroku", level: 90 },
-  { name: "AWS Amplify", level: 70 },
-  { name: "API Integration", level: 95 },
-  { name: "TypeScript", level: 70 },
-  { name: "Analytical", level: 85 },
-  { name: "Responsive design", level: 95 },
-  { name: "Testing and debugging", level: 75 },
-  { name: "Search engine optimization", level: 50 },
-  { name: "Team Leading", level: 70 },
-  { name: "Design Customization", level: 75 },
-  { name: "learning and improving", level: 80 },
-  { name: "Communication", level: 75 },
-  { name: "Teaching", level: 70 },
+/** Grouped technical skills — ordered by market demand & portfolio focus. */
+export const skillGroups = [
+  {
+    id: "ai",
+    title: "AI & Agents",
+    blurb: "The highest-leverage work I take on right now.",
+    skills: [
+      { name: "Claude API & Agent Systems", level: 92 },
+      { name: "Cursor / AI-assisted Development", level: 95 },
+      { name: "OpenAI API Integration", level: 90 },
+      { name: "RAG & Vector Search (pgvector)", level: 88 },
+      { name: "Multi-agent Orchestration", level: 86 },
+      { name: "LLM Tool-calling & Streaming", level: 90 },
+      { name: "AI Workflow Automation (n8n)", level: 80 },
+    ],
+  },
+  {
+    id: "frontend",
+    title: "Frontend",
+    blurb: "Interfaces that stay fast under real product load.",
+    skills: [
+      { name: "React", level: 98 },
+      { name: "Next.js", level: 95 },
+      { name: "TypeScript", level: 88 },
+      { name: "Zustand / Redux", level: 90 },
+      { name: "Tailwind CSS", level: 90 },
+      { name: "Shadcn UI", level: 88 },
+      { name: "TanStack Query", level: 86 },
+      { name: "Zod & React Hook Form", level: 85 },
+      { name: "Responsive UI / Design Systems", level: 92 },
+      { name: "React Native", level: 58 },
+    ],
+  },
+  {
+    id: "backend",
+    title: "Backend & APIs",
+    blurb: "Services, auth, billing, and real-time features.",
+    skills: [
+      { name: "Node.js", level: 88 },
+      { name: "Express", level: 88 },
+      { name: "NestJS", level: 80 },
+      { name: "REST API Design", level: 92 },
+      { name: "Supabase (Auth, Realtime, Storage)", level: 88 },
+      { name: "Stripe Billing & Webhooks", level: 85 },
+      { name: "WebSockets / Real-time Systems", level: 84 },
+      { name: "GraphQL", level: 72 },
+    ],
+  },
+  {
+    id: "data-cloud",
+    title: "Data & Cloud",
+    blurb: "Persistence and deployment for production apps.",
+    skills: [
+      { name: "PostgreSQL", level: 85 },
+      { name: "MongoDB", level: 82 },
+      { name: "Vercel", level: 90 },
+      { name: "Docker", level: 75 },
+      { name: "AWS", level: 72 },
+      { name: "Next.js SEO & Performance", level: 78 },
+    ],
+  },
 ];
+
+/** Flat list derived from groups (highest level first within demand order). */
+export const skills = skillGroups.flatMap((group) => group.skills);
 
 export const educationTimeline = [
   {

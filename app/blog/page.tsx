@@ -11,20 +11,31 @@ import {
 import { SectionTitle } from "@/components/section-title";
 import { blogPosts } from "@/data/blog";
 import { blogIconMap, formatBlogDate } from "@/lib/blog-icons";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Blog",
+export const metadata: Metadata = createPageMetadata({
+  title: "Blog — AI Agents, RAG & Shipping Notes",
   description:
-    "Hands-on articles about AI agents, Cursor, automation, dashboards, and shipping fast with modern tooling.",
-  alternates: { canonical: "/blog" },
-};
+    "Practical articles by Asim Ali on multi-agent AI, production RAG with pgvector, streaming tool-calling, Cursor workflows, automation, and shipping faster with modern tooling.",
+  path: "/blog",
+  keywords: [
+    "AI agent blog",
+    "RAG tutorials",
+    "Claude API articles",
+    "Cursor AI development",
+    "Next.js AI engineering",
+  ],
+});
 
 export default function BlogPage() {
-  const [featured, ...rest] = blogPosts;
+  const posts = [...blogPosts].sort((a, b) =>
+    b.publishedAt.localeCompare(a.publishedAt),
+  );
+  const [featured, ...rest] = posts;
   const FeaturedIcon = blogIconMap[featured.icon];
-  const totalArticles = blogPosts.length;
-  const totalCategories = new Set(blogPosts.map((p) => p.category)).size;
-  const totalTags = new Set(blogPosts.flatMap((p) => p.tags)).size;
+  const totalArticles = posts.length;
+  const totalCategories = new Set(posts.map((p) => p.category)).size;
+  const totalTags = new Set(posts.flatMap((p) => p.tags)).size;
 
   return (
     <main className="blog-page">
@@ -37,8 +48,8 @@ export default function BlogPage() {
         </span>
         <h2>Practical writing on AI, automation, and shipping fast.</h2>
         <p>
-          Real-world articles on building AI agents, using Cursor productively,
-          designing AI-powered dashboards, and turning ideas into shipped
+          Real-world articles on multi-agent systems, production RAG, streaming
+          tool-calling agents, Cursor workflows, and turning ideas into shipped
           products — written from the trenches.
         </p>
 
@@ -69,7 +80,7 @@ export default function BlogPage() {
 
       <Link
         href={`/blog/${featured.slug}`}
-        className={`blog-featured accent-${featured.accent}`}
+        className={`blog-featured accent-${featured.accent} blog-reveal`}
         aria-label={`Read article: ${featured.title}`}
       >
         <div className="blog-featured-glow" aria-hidden="true" />
@@ -98,13 +109,14 @@ export default function BlogPage() {
       </Link>
 
       <section className="blog-grid" aria-label="All blog posts">
-        {rest.map((post) => {
+        {rest.map((post, index) => {
           const Icon = blogIconMap[post.icon];
           return (
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className={`blog-card accent-${post.accent}`}
+              className={`blog-card accent-${post.accent} blog-reveal`}
+              style={{ animationDelay: `${120 + index * 70}ms` }}
               aria-label={`Read article: ${post.title}`}
             >
               <div className="blog-card-top">

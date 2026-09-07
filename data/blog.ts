@@ -2,6 +2,241 @@ import type { BlogPost } from "@/types/content";
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "multi-agent-orchestration-production",
+    title:
+      "Multi-Agent Orchestration in Production: One Brain, Many Specialists",
+    excerpt:
+      "How to design an orchestrator that coordinates research, database, analysis, and writing agents in parallel — the same pattern behind modern AI workspaces and client-ready reports.",
+    publishedAt: "2026-07-22",
+    readTime: "11 min read",
+    category: "AI Agents",
+    tags: [
+      "Multi-Agent",
+      "Claude API",
+      "Orchestration",
+      "Next.js",
+      "Node.js",
+    ],
+    accent: "cyan",
+    icon: "Workflow",
+    intro:
+      "A single LLM call can write a paragraph. A multi-agent system can research a market, query your listings database, analyze trade-offs, and deliver a client-ready report — while you watch specialists work in parallel. After shipping an AI agent platform with web search, tool-calling, RAG, and multi-agent desks, here's the production pattern I keep reusing.",
+    sections: [
+      {
+        heading: "Why one fat agent usually fails",
+        paragraphs: [
+          "Cramming research, SQL, analysis, and writing into one mega-prompt looks efficient until the model drops a step, invents a tool result, or burns tokens re-reading the same context. Specialists stay sharp because each has a narrow job and a short system prompt.",
+          "The orchestrator is not a smarter model — it's a project manager. It breaks the user goal into steps, assigns work, waits for results, and decides when to stop.",
+        ],
+        callout: {
+          variant: "tip",
+          title: "Start with four roles",
+          text: "Preferences / intake, web research, domain database, and report writing cover most B2B demos. Add analysis as a fifth only when synthesis quality drops.",
+        },
+      },
+      {
+        heading: "The orchestration loop",
+        paragraphs: [
+          "Treat orchestration like a typed state machine: plan → fan-out → gather → synthesize → optional email/export. Cap fan-out concurrency and total wall-clock time. Parallel specialists are useless if one tool hang freezes the UX.",
+        ],
+        bullets: [
+          "Plan: orchestrator returns a structured plan (JSON), never free-form prose.",
+          "Fan-out: run independent specialists concurrently with Promise.allSettled.",
+          "Gather: normalize each specialist's output through Zod before the next hop.",
+          "Synthesize: a writer agent only sees cleaned, validated context.",
+          "Stop: hard budgets on steps, tokens, and elapsed seconds.",
+        ],
+        code: {
+          language: "ts",
+          snippet:
+            "async function runDesk(goal: string) {\n  const plan = await orchestrator.plan(goal);\n  const settled = await Promise.allSettled(\n    plan.tasks.map((t) => specialists[t.role].run(t.input)),\n  );\n  const context = settled\n    .filter((r) => r.status === \"fulfilled\")\n    .map((r) => r.value);\n  return writer.compose({ goal, context });\n}",
+        },
+      },
+      {
+        heading: "Streaming progress to the UI",
+        paragraphs: [
+          "Clients don't want a 40-second spinner. Stream status events: \"researching Atlanta comps…\", \"querying listings…\", \"drafting report…\". In Next.js, a route handler that writes NDJSON or SSE keeps the chat UI honest without waiting for the final blob.",
+          "Show which specialist is active. It builds trust and makes debugging obvious when a tool fails.",
+        ],
+      },
+      {
+        heading: "Failure modes worth designing for",
+        bullets: [
+          "One specialist times out — continue with partial context and note gaps in the report.",
+          "Tool returns garbage — schema validation rejects it; orchestrator retries once or skips.",
+          "User changes the goal mid-run — cancel in-flight work with AbortController.",
+          "Cost spikes — log token usage per specialist; kill runs that exceed a budget.",
+        ],
+        callout: {
+          variant: "warning",
+          title: "Don't let writers call tools",
+          text: "Keep tool access on research/database agents only. The writer should compose from validated context. Mixing tool calls into long-form generation is where hallucinations sneak into PDFs.",
+        },
+      },
+      {
+        heading: "What to ship first",
+        paragraphs: [
+          "Ship one vertical desk — real estate research, support triage, or sales brief — with 3–4 specialists and a polished streaming UI. Once that feels reliable for a week, cloning the pattern into a second domain is mostly prompts and tools, not architecture.",
+        ],
+      },
+    ],
+    conclusion:
+      "Multi-agent systems win when orchestration is boring and specialists are sharp. Plan in JSON, fan out safely, validate everything, stream status to the UI, and keep the writer tool-free. That's how you move from a clever demo to something a client will actually run twice.",
+  },
+  {
+    slug: "production-rag-pgvector-claude",
+    title:
+      "Production RAG with Supabase pgvector + Claude: Memory That Actually Helps",
+    excerpt:
+      "A practical RAG stack for business documents: chunking, embeddings, similarity search, and long-term user preference memory — without drowning in vector DB complexity.",
+    publishedAt: "2026-07-16",
+    readTime: "10 min read",
+    category: "RAG & Memory",
+    tags: ["RAG", "Supabase", "pgvector", "Claude", "Embeddings"],
+    accent: "green",
+    icon: "Brain",
+    intro:
+      "RAG fails in demos for boring reasons: bad chunks, no metadata filters, stuffing the entire retrieval dump into the prompt, and zero memory of what the user already told you. Here's the lean production pattern I use with Supabase pgvector and Claude — document Q&A plus preferences that stick across sessions.",
+    sections: [
+      {
+        heading: "What RAG is responsible for (and what it isn't)",
+        paragraphs: [
+          "RAG retrieves relevant passages; the model reasons over them. It is not a replacement for SQL facts you already store cleanly, and it is not a license to skip auth. If a document is private, retrieval must respect the same row-level security as your app.",
+        ],
+        bullets: [
+          "Use RAG for policies, manuals, SOPs, and long PDFs.",
+          "Use structured DB queries for prices, inventory, and user accounts.",
+          "Use preference memory for tone, constraints, and recurring client needs.",
+        ],
+      },
+      {
+        heading: "Chunking that survives contact with reality",
+        paragraphs: [
+          "Aim for 400–800 token chunks with ~10–15% overlap. Keep section titles in metadata. Prefer splitting on headings over blind character cuts. Store source_url, doc_id, and updated_at so you can cite and re-index.",
+        ],
+        callout: {
+          variant: "tip",
+          title: "Cite or don't ship",
+          text: "Force the model to answer with short citations (doc title + section). If it can't point to a chunk, prefer \"I don't see that in your docs\" over a confident guess.",
+        },
+      },
+      {
+        heading: "pgvector query shape",
+        paragraphs: [
+          "Embed the user question with the same model you used at index time. Query top-k (usually 6–12), optionally re-rank, then pass only the top passages into Claude with clear separators.",
+        ],
+        code: {
+          language: "sql",
+          snippet:
+            "-- Example similarity lookup (cosine)\nselect id, content, metadata,\n  1 - (embedding <=> $1) as score\nfrom document_chunks\nwhere workspace_id = $2\norder by embedding <=> $1\nlimit 8;",
+        },
+      },
+      {
+        heading: "Long-term preference memory",
+        paragraphs: [
+          "Separate \"document memory\" from \"user memory.\" Preferences are small structured facts: budget caps, preferred neighborhoods, communication tone, always-include HOA fees. Store them as rows (or short embeddings) keyed by user_id, and inject a compact preference block into every agent turn.",
+          "This is what makes an assistant feel personal without stuffing chat history forever.",
+        ],
+      },
+      {
+        heading: "Evaluation you can run every Friday",
+        bullets: [
+          "10 golden questions with known answers from your corpus.",
+          "Measure citation hit-rate and \"I don't know\" accuracy.",
+          "Re-run after every embedding model or chunking change.",
+          "Log empty retrievals — they usually mean bad filters or stale indexes.",
+        ],
+        callout: {
+          variant: "warning",
+          title: "Stale indexes hurt more than weak models",
+          text: "If ops updates a PDF and nobody re-embeds it, your agent will confidently quote last quarter's policy. Hook re-index to document upload webhooks.",
+        },
+      },
+    ],
+    conclusion:
+      "Great RAG is mostly data hygiene and product discipline. Chunk cleanly, filter by tenancy, retrieve narrowly, cite sources, and keep user preferences as structured memory. Claude will look brilliant when the context you feed it is honest.",
+  },
+  {
+    slug: "streaming-tool-calling-agents-nextjs",
+    title:
+      "Streaming Tool-Calling Agents with Next.js + Node.js (No Black Box UX)",
+    excerpt:
+      "How to stream tokens and tool events from a Node agent API into a Next.js UI — so users see live research, weather fetches, and decisions instead of a frozen spinner.",
+    publishedAt: "2026-07-08",
+    readTime: "9 min read",
+    category: "Full-Stack AI",
+    tags: [
+      "Next.js",
+      "Node.js",
+      "Streaming",
+      "Tool Calling",
+      "Claude API",
+    ],
+    accent: "blue",
+    icon: "Zap",
+    intro:
+      "The difference between a toy AI demo and a product people trust is visibility. When Claude decides to call a weather tool versus answer from knowledge, the UI should show that decision. Here's the full-stack pattern I use: a Node streaming agent backend and a Next.js front end that renders tokens and tool traces in real time.",
+    sections: [
+      {
+        heading: "Split the concerns",
+        paragraphs: [
+          "Keep the agent runtime on Node (or a Next route that delegates to it). The browser should only consume a stream of typed events: token, tool_start, tool_result, error, done. That keeps API keys server-side and makes mobile clients easy later.",
+        ],
+        bullets: [
+          "Frontend: chat transcript + tool timeline.",
+          "Backend: model client, tool registry, abort signals.",
+          "Protocol: NDJSON or SSE with a versioned event schema.",
+        ],
+      },
+      {
+        heading: "Event schema first",
+        paragraphs: [
+          "If you stream raw model chunks without structure, you'll rewrite the UI three times. Define events up front and validate them.",
+        ],
+        code: {
+          language: "ts",
+          snippet:
+            "type AgentEvent =\n  | { type: \"token\"; text: string }\n  | { type: \"tool_start\"; name: string; input: unknown }\n  | { type: \"tool_result\"; name: string; output: unknown }\n  | { type: \"error\"; message: string }\n  | { type: \"done\" };\n\nfunction write(event: AgentEvent) {\n  res.write(JSON.stringify(event) + \"\\n\");\n}",
+        },
+      },
+      {
+        heading: "Tool-calling that users can understand",
+        paragraphs: [
+          "When the model requests a tool, emit tool_start immediately — before the await. Users perceive speed when they see intent. After the tool returns, emit tool_result with a short, human summary (not a 2KB JSON dump).",
+          "Classic teaching example: weather. The agent either answers from knowledge or calls getWeather(city). Showing that branch is the whole point of a tool-calling demo.",
+        ],
+        callout: {
+          variant: "note",
+          title: "Abort is a feature",
+          text: "Wire AbortController from the browser stop button to the Node request. Cancel outstanding tool fetches. Orphaned tool calls are how bills quietly inflate.",
+        },
+      },
+      {
+        heading: "Next.js consumption pattern",
+        paragraphs: [
+          "On the client, read the body stream, split on newlines, parse events, and append tokens to the assistant message. Keep tool events in a side timeline so the prose stays readable.",
+        ],
+        bullets: [
+          "Optimistic user message, then open the stream.",
+          "Disable send while a run is active; enable stop.",
+          "On error events, keep prior tokens — don't wipe the bubble.",
+          "On done, persist the transcript if you have auth.",
+        ],
+      },
+      {
+        heading: "Production checklist",
+        bullets: [
+          "Rate-limit by IP and by user.",
+          "Timeout tools independently (e.g. 8s) from the model stream.",
+          "Never echo secrets in tool_result events.",
+          "Log event counts and latency percentiles per route.",
+        ],
+      },
+    ],
+    conclusion:
+      "Streaming turns agents from magic boxes into inspectable workflows. Ship a tiny event protocol, show tool decisions live, and let users cancel. The model quality matters — but perceived reliability is mostly how honestly you stream the work.",
+  },
+  {
     slug: "build-your-first-ai-agent",
     title: "How to Build Your First AI Agent (Step-by-Step with Real Use Case)",
     excerpt:

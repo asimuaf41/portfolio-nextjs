@@ -1,4 +1,5 @@
 User-Agent: *
 Allow: /
 
+Host: https://asimportfolio-6fd1d.web.app
 Sitemap: https://asimportfolio-6fd1d.web.app/sitemap.xml

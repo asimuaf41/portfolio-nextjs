@@ -7,6 +7,7 @@ export type Project = {
   slug: string;
   title: string;
   summary: string;
+  category: string;
   stack: string[];
   image: string;
   demoUrl: string;
