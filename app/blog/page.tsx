@@ -16,9 +16,11 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Blog — AI Agents, RAG & Shipping Notes",
   description:
-    "Practical articles by Asim Ali on multi-agent AI, production RAG with pgvector, streaming tool-calling, Cursor workflows, automation, and shipping faster with modern tooling.",
+    "Practical articles by Asim Ali on AI automation with n8n and Trigger.dev, multi-agent AI, production RAG with pgvector, streaming tool-calling, Cursor workflows, and shipping faster with modern tooling.",
   path: "/blog",
   keywords: [
+    "n8n automation",
+    "Trigger.dev",
     "AI agent blog",
     "RAG tutorials",
     "Claude API articles",
@@ -48,7 +50,7 @@ export default function BlogPage() {
         </span>
         <h2>Practical writing on AI, automation, and shipping fast.</h2>
         <p>
-          Real-world articles on multi-agent systems, production RAG, streaming
+          Real-world articles on AI automation, multi-agent systems, production RAG, streaming
           tool-calling agents, Cursor workflows, and turning ideas into shipped
           products — written from the trenches.
         </p>

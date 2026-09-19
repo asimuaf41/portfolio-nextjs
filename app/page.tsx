@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CalendarDays, Clock, PenLine } from "lucide-react";
 import { BackgroundTexture } from "@/components/background-texture";
+import { HomeAutomation } from "@/components/home-automation";
 import { HomeHeroIntro } from "@/components/home-hero-intro";
 import { blogPosts } from "@/data/blog";
 import { blogIconMap, formatBlogDate } from "@/lib/blog-icons";
@@ -15,6 +16,8 @@ export const metadata: Metadata = createPageMetadata({
   keywords: [
     "hire React developer",
     "AI agent freelancer",
+    "AI automation n8n",
+    "Trigger.dev",
     "Next.js SaaS developer",
     "Upwork Top Rated Plus",
   ],
@@ -32,6 +35,8 @@ export default function HomePage() {
         <BackgroundTexture />
       </section>
 
+      <HomeAutomation />
+
       <section
         id="recent-writing"
         className="home-recent"
@@ -45,8 +50,8 @@ export default function HomePage() {
             </span>
             <h2>Latest from the blog</h2>
             <p>
-              Fresh notes on multi-agent orchestration, production RAG,
-              streaming tool-calling agents, and shipping fast with Cursor +
+              Fresh notes on n8n and Trigger.dev automation, multi-agent
+              orchestration, production RAG, and shipping fast with Cursor +
               Claude.
             </p>
           </div>

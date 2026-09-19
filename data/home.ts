@@ -1,7 +1,7 @@
 export const personalInfo = {
   name: "Asim Ali",
   detail:
-    "AI/ML Certified Full-Stack Developer | React, Next.js, Node.js & AI Agents. I build fast, scalable SaaS products, web apps, and mobile applications for startups and growing businesses. Specializing in React, Next.js, Node.js, and React Native, I also create custom AI agent systems using Claude/OpenAI APIs, RAG, vector databases, and tool-calling automation. From rescuing complex codebases to launching production-ready platforms from scratch, I deliver clean, reliable solutions that scale.",
+    "AI/ML Certified Full-Stack Developer | React, Next.js, Node.js, AI Agents & Automation. I build fast, scalable SaaS products, web apps, and mobile applications for startups and growing businesses. Specializing in React, Next.js, Node.js, and React Native, I also create custom AI agent systems and business automation workflows using Claude/OpenAI APIs, n8n, Trigger.dev, Make.com, RAG, and tool-calling. From rescuing complex codebases to launching production-ready platforms from scratch, I deliver clean, reliable solutions that scale.",
 };
 
 export const socialProfiles = [

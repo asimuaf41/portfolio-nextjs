@@ -124,8 +124,8 @@ export function HomeHeroIntro() {
         })}
       </div>
 
-      <a href="#recent-writing" className="home-scroll-indicator home-hero-meta">
-        <span>See latest research</span>
+      <a href="#automation" className="home-scroll-indicator home-hero-meta">
+        <span>See automation services</span>
         <ChevronDown size={18} />
       </a>
     </div>

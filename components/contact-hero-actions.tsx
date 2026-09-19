@@ -14,8 +14,8 @@ export function ContactHeroActions() {
 
   useEffect(() => {
     const from = searchParams.get("from");
-    if (from === "about" || from === "projects" || from === "resume") {
-      setBackSource(from);
+    if (from === "about" || from === "automation" || from === "projects" || from === "resume") {
+      setBackSource(from === "automation" ? "about" : from);
       return;
     }
 

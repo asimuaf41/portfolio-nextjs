@@ -2,6 +2,201 @@ import type { BlogPost } from "@/types/content";
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "n8n-claude-automation-workflows",
+    title:
+      "Four Claude Automations in n8n You Can Ship This Week",
+    excerpt:
+      "A practical build for lead qualification, AI support with confidence gating, a weekday content digest, and overdue invoice follow-up — plus how to run n8n locally, take it live, and when Trigger.dev is the better fit.",
+    publishedAt: "2026-09-19",
+    readTime: "14 min read",
+    category: "Automation",
+    tags: ["n8n", "Claude API", "Trigger.dev", "Automation", "Webhooks"],
+    accent: "orange",
+    icon: "Zap",
+    intro:
+      "Visual automation is how most small businesses actually adopt AI — not a custom agent platform. If you can score a lead, answer a support inbox, send a weekday digest, and follow up on unpaid invoices, you have a sellable suite. This is the exact n8n + Claude stack I use to build those four workflows, how I test them locally, and when I switch the same patterns into Trigger.dev inside a Next.js app.",
+    sections: [
+      {
+        heading: "The four workflows that actually get hired",
+        paragraphs: [
+          "Clients rarely ask for \"an n8n instance.\" They ask for fewer missed leads, fewer repetitive tickets, a newsletter that does not eat Monday morning, and invoices that get followed up without a spreadsheet ritual. Those four jobs map cleanly to webhooks, cron, Claude, Gmail, and Google Sheets.",
+          "Typical engagement ranges, if you are packaging this as freelance work: lead qualification around $300–$800, support automation $500–$1,500, content workflows $400–$1,000, and invoice follow-up $300–$700. Bundle them as one suite and you are in the same lane as the automation offer on this site.",
+        ],
+        bullets: [
+          "Lead qualification — webhook in, score + reply out, HOT leads ping sales.",
+          "Customer support — answer from a knowledge base, escalate when confidence is low.",
+          "Content digest — weekday cron, RSS in, newsletter and social post out.",
+          "Invoice follow-up — daily scan of overdue rows, tone changes by 7 / 14 / 30 days.",
+        ],
+        callout: {
+          variant: "tip",
+          title: "Ship one vertical first",
+          text: "Do not start with all four in production. Qualify leads until the sheet and emails look trustworthy, then clone the Claude + IF-node pattern into support and billing.",
+        },
+      },
+      {
+        heading: "Run n8n on your machine",
+        paragraphs: [
+          "Local n8n is enough to design, test webhooks, and screenshot a demo. Create a free n8n account when the editor prompts you if you want to export to n8n Cloud later. The editor opens at http://localhost:5678.",
+        ],
+        code: {
+          language: "bash",
+          snippet:
+            "# Fastest — no global install\nnpx n8n\n\n# Or install once\nnpm install -g n8n\nn8n start",
+        },
+        callout: {
+          variant: "note",
+          title: "Keep secrets out of nodes",
+          text: "Store the Anthropic key, Gmail OAuth, and Slack tokens in n8n credentials — never in a hardcoded HTTP body you will later screenshot for a client.",
+        },
+      },
+      {
+        heading: "Workflow 1 — Lead qualification bot",
+        paragraphs: [
+          "The shape is simple: a contact form POSTs to n8n, Claude scores the lead, the lead gets a short personalized email, the row lands in Google Sheets, and sales only hears about HOT leads.",
+        ],
+        bullets: [
+          "Webhook — POST, path /lead-qualifier. Copy the production URL into your form backend.",
+          "HTTP Request — Claude Messages API with your Anthropic credential.",
+          "Code — parse the model’s JSON (score, reason, reply).",
+          "Gmail — send the reply to the original email address.",
+          "Google Sheets — append name, email, company, score, reason, timestamp.",
+          "IF — notify Slack or email only when score equals HOT.",
+        ],
+        code: {
+          language: "json",
+          snippet:
+            "{\n  \"model\": \"claude-3-5-haiku-latest\",\n  \"max_tokens\": 500,\n  \"messages\": [{\n    \"role\": \"user\",\n    \"content\": \"You are a sales qualifier. Score this lead HOT, WARM, or COLD and write a 2-sentence reply.\\n\\nName: {{ $json.name }}\\nEmail: {{ $json.email }}\\nCompany: {{ $json.company }}\\nMessage: {{ $json.message }}\\n\\nRespond as JSON: {\\\"score\\\": \\\"HOT|WARM|COLD\\\", \\\"reason\\\": \\\"...\\\", \\\"reply\\\": \\\"...\\\"}\"\n  }]\n}",
+        },
+      },
+      {
+        heading: "Parse Claude, email the lead, notify on HOT",
+        paragraphs: [
+          "Claude’s text is JSON inside content[0].text. A small Code node keeps later nodes clean. Point Gmail at the webhook payload for the recipient, and at the parsed object for the body. Then branch.",
+        ],
+        code: {
+          language: "js",
+          snippet:
+            "const response = JSON.parse($input.first().json.content[0].text);\nreturn [{ json: response }];\n\n// Gmail\n// To: {{ $('Webhook').item.json.email }}\n// Subject: Thanks for reaching out, {{ $('Webhook').item.json.name }}\n// Body: {{ $json.reply }}",
+        },
+        callout: {
+          variant: "warning",
+          title: "Test vs production webhooks",
+          text: "n8n uses a test URL while you have the editor open, and a production URL after you publish. If curl works once and then 404s, you are hitting the test path after the session ended.",
+        },
+      },
+      {
+        heading: "Smoke-test the webhook",
+        paragraphs: [
+          "Use a sample that should score HOT so you can verify every side effect: email, sheet row, and sales ping. Swap the host if your editor is not on 5678.",
+        ],
+        code: {
+          language: "bash",
+          snippet:
+            "curl -X POST http://localhost:5678/webhook/lead-qualifier \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"Jordan Hale\",\n    \"email\": \"jordan@example.com\",\n    \"company\": \"Northwind Labs\",\n    \"message\": \"We need a React developer for a 3-month build. Budget is $15,000.\"\n  }'",
+        },
+      },
+      {
+        heading: "Workflow 2 — Support with a human fallback",
+        paragraphs: [
+          "Unattended auto-replies are how support automations lose trust. The useful version answers from your FAQ, and only sends when the model is willing to stand behind the answer. Everything else becomes a draft in a human inbox.",
+        ],
+        bullets: [
+          "Trigger — inbound email, form webhook, or helpdesk webhook.",
+          "Claude — system prompt holds the knowledge base; answers only from that text.",
+          "Code — detect a NEEDS_HUMAN_REVIEW marker and set autoSend.",
+          "IF — auto-send high-confidence replies; otherwise forward to review.",
+          "Sheets — log question, draft, autoSend, timestamp for later QA.",
+        ],
+        code: {
+          language: "js",
+          snippet:
+            "const reply = $input.first().json.content[0].text;\nconst needsHuman = reply.includes(\"NEEDS_HUMAN_REVIEW\");\n\nreturn [{\n  json: {\n    reply: reply.replace(\"NEEDS_HUMAN_REVIEW\", \"\").trim(),\n    needsHuman,\n    autoSend: !needsHuman,\n  },\n}];",
+        },
+        callout: {
+          variant: "tip",
+          title: "Put the FAQ in the system prompt first",
+          text: "For a first version, paste a short FAQ into the system prompt. When that FAQ outgrows a prompt, move retrieval to a RAG step — same IF-node, better answers.",
+        },
+      },
+      {
+        heading: "A support prompt that refuses to improvise",
+        paragraphs: [
+          "Keep replies short, cite only the knowledge you provided, and force a review token instead of a polite guess. Add your unsubscribe line once in the system prompt so every auto-send stays compliant.",
+        ],
+        code: {
+          language: "json",
+          snippet:
+            "{\n  \"model\": \"claude-3-5-haiku-latest\",\n  \"max_tokens\": 800,\n  \"system\": \"You are support for [Company]. Answer ONLY from the knowledge base. If you cannot answer confidently, reply with NEEDS_HUMAN_REVIEW plus a draft. Keep answers under 150 words.\\n\\nKnowledge base:\\n[PASTE FAQ]\\n\",\n  \"messages\": [{\n    \"role\": \"user\",\n    \"content\": \"Customer question: {{ $json.question }}\"\n  }]\n}",
+        },
+      },
+      {
+        heading: "Workflow 3 — Weekday content digest",
+        paragraphs: [
+          "This one is a schedule, not a webhook. At 08:00 on weekdays, n8n pulls a few RSS feeds, keeps the five newest items, asks Claude for a tight briefing, emails the list, and optionally posts one insight to LinkedIn or X.",
+        ],
+        bullets: [
+          "Schedule Trigger — cron 0 8 * * 1-5.",
+          "RSS Read — one node per source (industry blogs, changelogs, research feeds).",
+          "Merge — combine items, then a Code node to sort by pubDate and slice(0, 5).",
+          "Claude — summarize for a named audience with one takeaway per article and one action.",
+          "Gmail — send the digest. HTTP Request — LinkedIn/X only after you have approved copy in staging.",
+        ],
+        code: {
+          language: "js",
+          snippet:
+            "const items = $input.all()\n  .sort(\n    (a, b) =>\n      new Date(b.json.pubDate).getTime() -\n      new Date(a.json.pubDate).getTime(),\n  )\n  .slice(0, 5);\n\nreturn items;",
+        },
+      },
+      {
+        heading: "Workflow 4 — Invoice follow-up by overdue tier",
+        paragraphs: [
+          "Every morning, read unpaid rows from Google Sheets. Compute days overdue, pick a tone, let Claude write a short reminder, send it, then write last_followup_date and followup_count back to the sheet. No threats. Payment link stays a placeholder until you inject the real URL from the row.",
+        ],
+        code: {
+          language: "js",
+          snippet:
+            "const daysPast = Number($json.days_overdue);\nlet tone = \"gentle reminder\";\nif (daysPast > 7 && daysPast <= 14) tone = \"firm but professional\";\nif (daysPast > 14) tone = \"urgent, mention a possible service pause\";\n\nreturn [{ json: { ...$json, tone } }];\n\n// Claude user prompt\n// Write a {{ $json.tone }} payment reminder under 100 words.\n// Client: {{ $json.client_name }}\n// Amount: {{ $json.amount }}\n// Due: {{ $json.due_date }}\n// Days overdue: {{ $json.days_overdue }}\n// End with the payment link: {{ $json.payment_link }}",
+        },
+        callout: {
+          variant: "warning",
+          title: "Billing needs a human gate at first",
+          text: "Auto-send 7-day reminders only after you have reviewed a week of drafts. 14- and 30-day notes should stay on a review branch until finance trusts the tone.",
+        },
+      },
+      {
+        heading: "Take n8n live without overbuilding",
+        paragraphs: [
+          "Local is for design. Clients need a URL that stays up. Pick the hosting that matches how much ops you want to own.",
+        ],
+        bullets: [
+          "n8n Cloud — fastest path. Import the workflow, attach credentials, publish. Free tier is enough for demos (a handful of active workflows and a few thousand executions a month).",
+          "Railway — official n8n template, add basic auth, point webhooks at the public URL.",
+          "Render or any Docker host — image n8nio/n8n, port 5678, persist the volume so you do not lose workflows on restart.",
+        ],
+        callout: {
+          variant: "note",
+          title: "Publish, then rotate the webhook",
+          text: "After deploy, update the form/helpdesk to the production webhook and send one real-shaped payload. Confirm Gmail, Sheets, and the IF branch before you tell the client it is live.",
+        },
+      },
+      {
+        heading: "When Trigger.dev is the better tool",
+        paragraphs: [
+          "n8n, Make, and Zapier win when operations people need to see and edit the graph — Gmail, Sheets, Slack, RSS, cron. Trigger.dev wins when the workflow belongs next to your Next.js/Node codebase: typed jobs, retries, long-running tasks, and deploys with the app.",
+          "I use both. Visual n8n for Gmail/Sheets suites and client-editable ops. Trigger.dev when a React dashboard should enqueue “qualify this lead” or “send reminder” as a job with a run ID, logs, and a retry policy — the same four business workflows, as code.",
+        ],
+        bullets: [
+          "Reach for n8n when the customer will maintain the workflow themselves.",
+          "Reach for Trigger.dev when the automation is a product feature, not a spreadsheet glue layer.",
+          "Same Claude prompts, same HOT/WARM/COLD schema, different runtime.",
+        ],
+      },
+    ],
+    conclusion:
+      "You do not need a multi-agent platform to sell automation. Four n8n workflows — qualify, support, digest, follow up — cover the work most small teams still do by hand. Run them locally, keep a human in the loop until the logs look boring, then host n8n or move the same jobs into Trigger.dev when they belong inside the product. That is a portfolio you can demo on a call this week.",
+  },
+  {
     slug: "multi-agent-orchestration-production",
     title:
       "Multi-Agent Orchestration in Production: One Brain, Many Specialists",
@@ -695,7 +890,7 @@ export const blogPosts: BlogPost[] = [
           "Now translate each step in your map to a piece of software. AI is only one of those pieces — and often not the most important one. The pipeline usually looks like this:",
         ],
         bullets: [
-          "Trigger: webhook, cron, or inbox watcher (Zapier, n8n, custom).",
+          "Trigger: webhook, cron, or inbox watcher (n8n, Trigger.dev, Make, Zapier).",
           "Read: API call or scraping (only if allowed).",
           "Decide: this is where the LLM lives — classify, extract, summarize, choose.",
           "Validate: Zod or similar schema check, with retries if invalid.",

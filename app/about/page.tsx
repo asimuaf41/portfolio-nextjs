@@ -15,6 +15,7 @@ import {
   Figma,
   Gauge,
   LayoutDashboard,
+  Mails,
   Radio,
   ServerCog,
   Smartphone,
@@ -30,6 +31,7 @@ import {
   aboutFacts,
   aboutProfile,
   aboutStats,
+  automationOffer,
   freelancePlatforms,
   services,
   UPWORK_PROFILE_URL,
@@ -43,6 +45,7 @@ const helpIconMap: Record<string, LucideIcon> = {
   Bot,
   Brain,
   Workflow,
+  Mails,
   Zap,
   Activity,
   Radio,
@@ -52,6 +55,7 @@ const helpIconMap: Record<string, LucideIcon> = {
 };
 
 const serviceIcons: Record<string, LucideIcon> = {
+  "AI Business Automation": Workflow,
   "AI Agent Development": Bot,
   "RAG & Document Intelligence": Brain,
   "React / Next.js SaaS & Rescue": BriefcaseBusiness,
@@ -63,9 +67,11 @@ const serviceIcons: Record<string, LucideIcon> = {
 export const metadata: Metadata = createPageMetadata({
   title: "About Asim Ali",
   description:
-    "Meet Asim Ali — Top Rated Plus React/Next.js & AI agent developer. 6,200+ Upwork hours, RAG systems, Claude API, multi-agent orchestration, and full-stack SaaS delivery.",
+    "Meet Asim Ali — Top Rated Plus React/Next.js & AI agent developer. 6,200+ Upwork hours, RAG systems, Claude API, n8n and Trigger.dev automation, multi-agent orchestration, and full-stack SaaS delivery.",
   path: "/about",
   keywords: [
+    "AI automation n8n",
+    "Trigger.dev",
     "about Asim Ali",
     "AI agent developer bio",
     "React Next.js freelancer Pakistan",
@@ -188,6 +194,78 @@ export default function AboutPage() {
         </ul>
       </section>
 
+      <section
+        id="automation"
+        className="about-automation about-reveal"
+        aria-labelledby="about-automation-heading"
+      >
+        <header className="about-automation-head">
+          <span className="about-eyebrow">{automationOffer.eyebrow}</span>
+          <h3 id="about-automation-heading">{automationOffer.suite.title}</h3>
+          <p>{automationOffer.suite.intro}</p>
+        </header>
+
+        <ul className="about-automation-modules">
+          {automationOffer.suite.modules.map((module) => (
+            <li key={module.title} className="about-automation-module">
+              <span>{module.step}</span>
+              <div>
+                <h4>{module.title}</h4>
+                <p>{module.detail}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <div className="about-automation-meta">
+          <div className="home-automation-tools" aria-label="Suite technologies">
+            {automationOffer.suite.tech.map((tool) => (
+              <span key={tool}>{tool}</span>
+            ))}
+          </div>
+          <p className="about-automation-result">{automationOffer.suite.result}</p>
+        </div>
+
+        <aside
+          id="automation-dashboard"
+          className="about-dashboard"
+          aria-labelledby="about-dashboard-heading"
+        >
+          <div className="about-dashboard-copy">
+            <span className="about-featured-label">
+              <LayoutDashboard size={13} />
+              {automationOffer.dashboard.eyebrow}
+            </span>
+            <h4 id="about-dashboard-heading">
+              {automationOffer.dashboard.title}
+            </h4>
+            <p>{automationOffer.dashboard.copy}</p>
+          </div>
+          <div className="about-dashboard-plans">
+            {automationOffer.dashboard.plans.map((plan) => (
+              <article
+                key={plan.name}
+                className={
+                  plan.featured
+                    ? "about-dashboard-plan is-featured"
+                    : "about-dashboard-plan"
+                }
+              >
+                <span>{plan.name}</span>
+                <strong>{plan.price}</strong>
+                <p>{plan.note}</p>
+              </article>
+            ))}
+            <Link
+              href="/contact?from=automation"
+              className="about-featured-cta"
+            >
+              Discuss a workflow <ArrowRight size={14} />
+            </Link>
+          </div>
+        </aside>
+      </section>
+
       <section className="about-story-grid about-reveal">
         <article className="about-story-card">
           <div className="about-story-icon">
@@ -246,8 +324,8 @@ export default function AboutPage() {
         <SectionTitle title="Services" />
         <p className="about-services-lead about-reveal">
           Focused offers — pick the lane that matches your project, or combine
-          them into one delivery. Includes Supabase and Stripe when your product
-          needs auth, data, or billing.
+          them into one delivery. Includes AI automation, Supabase, and Stripe
+          when your product needs workflows, auth, data, or billing.
         </p>
         <div className="service-grid">
           {services.map((item) => {

@@ -21,12 +21,14 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Projects & Case Studies",
   description:
-    "Selected production projects by Asim Ali — AI agent platforms, real estate apps, e-signature SaaS, admin dashboards, and education products built with React, Next.js, and Node.js.",
+    "Selected production projects by Asim Ali — OptiField AI lead agent, automation suites, real estate apps, e-signature SaaS, admin dashboards, and education products built with React, Next.js, and Node.js.",
   path: "/projects",
   keywords: [
     "React projects portfolio",
     "Next.js case studies",
     "AI agent platform demo",
+    "OptiField HVAC AI agent",
+    "field service automation",
     "full-stack project examples",
   ],
 });

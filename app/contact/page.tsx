@@ -32,6 +32,8 @@ export const metadata: Metadata = createPageMetadata({
     "contact Asim Ali",
     "hire React developer",
     "hire AI agent developer",
+    "AI automation n8n",
+    "Trigger.dev",
     "Upwork React freelancer",
   ],
 });

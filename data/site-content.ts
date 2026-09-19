@@ -53,6 +53,26 @@ export const projects: Project[] = [
     codeUrl: "https://github.com/asimuaf41",
   },
   {
+    slug: "optifield",
+    title: "OptiField — Autonomous AI Agent for HVAC Lead Capture & Booking",
+    summary:
+      "An autonomous AI agent for HVAC and home-service teams that captures missed calls, SMS, and web forms, then qualifies the lead, books or reschedules the job, and only hands off when a human is needed. Owners get live metrics on resolution, escalation, recovered jobs, and booking rate — staff supervise conversations instead of running every reply.",
+    category: "Automation",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "Twilio",
+      "Trigger.dev",
+      "OpenAI",
+      "PostgreSQL",
+      "Vercel",
+    ],
+    image: "/optifield-dashboard.png",
+    demoUrl: "https://dashboard.optifield.ai/dashboard",
+    codeUrl: "https://github.com/asimuaf41",
+  },
+  {
     slug: "e-sign-platform",
     title: "E-Signature Platform Inspired by DocuSign",
     summary:
@@ -195,9 +215,10 @@ export const projectsPage = {
   eyebrow: "Selected work",
   headline: "Production platforms built for real business outcomes.",
   intro:
-    "Full-stack products across AI agents, real estate, legal, education, and SaaS — focused on scalable architecture, clean UX, and shipping work that holds up in production.",
+    "Full-stack products across AI agents, business automation, real estate, legal, education, and SaaS — focused on scalable architecture, clean UX, and shipping work that holds up in production.",
   domains: [
     { label: "AI Agents", blurb: "RAG, tool-calling, multi-agent flows" },
+    { label: "Automation", blurb: "OptiField, n8n, Trigger.dev, lead & booking agents" },
     { label: "Real Estate", blurb: "Listings, maps, admin ops" },
     { label: "SaaS & Docs", blurb: "E-sign, workflows, dashboards" },
     { label: "Education", blurb: "Social + academic platforms" },
@@ -348,7 +369,7 @@ export const aboutProfile = {
   hook: "Most clients come to me in one of two situations: their React or Next.js app is buggy, slow, or needs features a previous developer couldn't deliver — or they need a SaaS product, internal tool, or AI-powered application built from scratch, properly and fast.",
   credibility: `Over ${aboutYearsExperience}+ years of full-stack development — full-time on Upwork since 2021 — I've completed 13 long-term projects with a 100% Job Success Score, 6,200+ hours logged, and Top Rated Plus status. Every project I've taken on has been delivered.`,
   focus:
-    "I build AI-powered web applications and custom AI agent systems using React, Next.js, Node.js, and the Claude API — delivering fast, scalable, production-ready solutions for startups and growing businesses.",
+    "I build AI-powered web applications, custom AI agent systems, and business automation workflows using React, Next.js, Node.js, the Claude API, n8n, Trigger.dev, and Make.com — delivering fast, scalable, production-ready solutions for startups and growing businesses.",
   featured: {
     label: "Recently launched",
     title: "AI Agent Studio",
@@ -363,10 +384,12 @@ export const aboutProfile = {
     "LLM features embedded into existing React/Next.js apps",
     "Vector database design (Supabase pgvector, Pinecone)",
     "Streaming AI responses with live tool-calling",
-    "Automation pipelines with n8n and custom Node.js",
+    "Automation pipelines with n8n, Trigger.dev, Make.com, Zapier, and custom Node.js",
+    "Lead scoring, support, content, and invoice follow-up systems",
+    "React dashboards for scores, email history, and manual triggers",
   ],
   result:
-    "If you need an AI assistant inside your SaaS, an internal agent that can query your database and take actions, document intelligence for operations, or an LLM-powered automation workflow — I build the full stack as one integrated system, not a patchwork of vendors.",
+    "If you need an AI assistant inside your SaaS, an internal agent that can query your database and take actions, document intelligence for operations, or an LLM-powered automation workflow with a live control dashboard — I build the full stack as one integrated system, not a patchwork of vendors.",
   fullstack:
     "My core stack is React, Next.js, Node.js, and Express, with TypeScript, Redux, Zustand, and Tailwind on the frontend. On the backend I work with Supabase, PostgreSQL, MongoDB, MySQL, Stripe billing APIs, and REST/GraphQL. I deploy to AWS, Vercel, and Docker — equally comfortable starting from a blank repo or rescuing a messy codebase.",
   saas:
@@ -378,6 +401,8 @@ export const aboutProfile = {
     { icon: "Bot", label: "Claude / OpenAI agent development" },
     { icon: "Brain", label: "RAG & document intelligence" },
     { icon: "Workflow", label: "Multi-agent orchestration" },
+    { icon: "Mails", label: "n8n / Trigger.dev / Make / Zapier" },
+    { icon: "LayoutDashboard", label: "Lead scoring dashboards" },
     { icon: "Zap", label: "Streaming chat UIs" },
     { icon: "Activity", label: "Stripe billing & subscriptions" },
     { icon: "Radio", label: "Real-time chat & notifications" },
@@ -386,10 +411,111 @@ export const aboutProfile = {
     { icon: "Figma", label: "Figma → pixel-perfect Next.js" },
   ],
   closing:
-    "Whether you're launching a SaaS product, adding AI to an existing platform, rescuing a broken codebase, or integrating LLM features into React/Next.js — send a message with what you're building. I'll tell you honestly if I'm the right fit.",
+    "Whether you're launching a SaaS product, automating leads and support, adding AI to an existing platform, rescuing a broken codebase, or integrating LLM features into React/Next.js — send a message with what you're building. I'll tell you honestly if I'm the right fit.",
+};
+
+export const automationOffer = {
+  eyebrow: "AI Automation Services",
+  headline: "I take repetitive work off your plate.",
+  intro:
+    "Custom AI workflows that qualify leads, answer customers, publish content, and follow up on invoices — so your team spends time on work that actually needs a person.",
+  workflows: [
+    {
+      icon: "UserCheck",
+      title: "Lead qualification",
+      description:
+        "Automatically score incoming leads and send the right response, so your team only talks to people who are ready.",
+    },
+    {
+      icon: "Headset",
+      title: "Customer support",
+      description:
+        "AI answers common questions around the clock, with confidence scoring so edge cases still reach a human.",
+    },
+    {
+      icon: "Newspaper",
+      title: "Content workflows",
+      description:
+        "Automated newsletters and social posts from your sources — drafted, reviewed, and scheduled on a cadence you control.",
+    },
+    {
+      icon: "Receipt",
+      title: "Invoice follow-up",
+      description:
+        "Personalized payment reminders that go out on schedule, without chasing every overdue invoice by hand.",
+    },
+  ],
+  tools: ["n8n", "Trigger.dev", "Make.com", "Claude API", "OpenAI", "Zapier"],
+  turnaround: "Typical turnaround: 2–5 days per workflow",
+  suite: {
+    title: "AI Business Automation Suite",
+    intro:
+      "A ready-to-run set of AI workflows built around your tools — not a generic template. Designed to remove 10–15 hours of weekly admin from a typical small business.",
+    modules: [
+      {
+        step: "01",
+        title: "Lead qualification bot",
+        detail:
+          "Claude API, webhook, and email — score new leads and reply automatically.",
+      },
+      {
+        step: "02",
+        title: "Customer support automation",
+        detail:
+          "RAG over your docs with confidence scoring, so answers stay accurate and humans still get the hard questions.",
+      },
+      {
+        step: "03",
+        title: "Daily content newsletter",
+        detail:
+          "RSS, Claude, and email — a drafted, on-brand digest without a weekly content scramble.",
+      },
+      {
+        step: "04",
+        title: "Invoice follow-up system",
+        detail:
+          "Scheduled, personalized payment reminders that keep cash collection moving.",
+      },
+    ],
+    tech: [
+      "n8n",
+      "Trigger.dev",
+      "Claude API (Anthropic)",
+      "Google Sheets",
+      "Gmail",
+      "Webhooks",
+      "Cron scheduling",
+    ],
+    result:
+      "Typically eliminates 10–15 hours of manual work per week for a small business.",
+  },
+  dashboard: {
+    eyebrow: "Workflow + control layer",
+    title: "See every lead, score, and message in one React dashboard",
+    copy: "I can build the automation workflow and a custom React dashboard where you review leads, scores, email history, and trigger workflows manually when you need to step in.",
+    plans: [
+      {
+        name: "Workflow only",
+        price: "$800",
+        note: "Production-ready automation, wired into your existing tools.",
+        featured: false,
+      },
+      {
+        name: "Workflow + React dashboard",
+        price: "$2,500",
+        note: "Full visibility and manual control on top of the automations.",
+        featured: true,
+      },
+    ],
+  },
 };
 
 export const services = [
+  {
+    title: "AI Business Automation",
+    description:
+      "Custom n8n, Trigger.dev, Make.com, and Zapier workflows — lead qualification, 24/7 support answers, content publishing, and invoice follow-up. Typical turnaround is 2–5 days per workflow.",
+  },
   {
     title: "AI Agent Development",
     description:
@@ -428,7 +554,7 @@ export const resumePage = {
   eyebrow: "Resume & skills",
   headline: "Production stack, delivery track record, and continuous learning.",
   intro:
-    "A focused view of the tools I ship with every week — AI agents, React/Next.js SaaS, Node APIs, and the data/billing layers that make products real.",
+    "A focused view of the tools I ship with every week — AI agents, n8n and Trigger.dev automation, React/Next.js SaaS, Node APIs, and the data/billing layers that make products real.",
   closing:
     "Looking for a React/Next.js or AI agent engineer who can own delivery end to end? Let's align on scope and start shipping.",
 };
@@ -446,7 +572,7 @@ export const skillGroups = [
       { name: "RAG & Vector Search (pgvector)", level: 88 },
       { name: "Multi-agent Orchestration", level: 86 },
       { name: "LLM Tool-calling & Streaming", level: 90 },
-      { name: "AI Workflow Automation (n8n)", level: 80 },
+      { name: "AI Workflow Automation (n8n, Trigger.dev, Make, Zapier)", level: 88 },
     ],
   },
   {
