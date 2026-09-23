@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 export const siteConfig = {
   name: "Asim Ali",
   shortName: "Asim Portfolio",
-  title: "Asim Ali | React/Next.js & AI Agent Developer",
-  description:
-    "Hire Asim Ali — Top Rated Plus full-stack engineer building React/Next.js SaaS, AI agents with Claude & OpenAI, RAG systems, n8n and Trigger.dev automation, and production Node.js APIs.",
+      title: "Asim Ali | AI Agent & Automation Engineer",
+    description:
+        "Hire Asim Ali — Top Rated Plus AI Agent & Automation Engineer building production AI systems (Claude API, OpenAI, RAG, multi-agent orchestration) with the full-stack React/Next.js, Node.js, and Supabase product built around them.",
   url: "https://asimportfolio-6fd1d.web.app",
   locale: "en_US",
   language: "en",
@@ -18,7 +18,7 @@ export const siteConfig = {
     url: "/og-share.png",
     width: 1200,
     height: 630,
-    alt: "Asim Ali — React/Next.js & AI Agent Developer",
+        alt: "Asim Ali — AI Agent & Automation Engineer",
   },
   profileImage: "/asim-30-june-profile.jpg",
   keywords: [
