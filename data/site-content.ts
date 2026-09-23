@@ -364,7 +364,7 @@ export const freelancePlatforms = [
 ];
 
 export const aboutProfile = {
-  eyebrow: "React / Next.js & AI Agent Developer",
+    eyebrow: "AI Agent & Automation Engineer | React, Next.js, Node.js",
   headline: "I ship production systems — not demos that die in staging.",
   hook: "Most clients come to me in one of two situations: their React or Next.js app is buggy, slow, or needs features a previous developer couldn't deliver — or they need a SaaS product, internal tool, or AI-powered application built from scratch, properly and fast.",
   credibility: `Over ${aboutYearsExperience}+ years of full-stack development — full-time on Upwork since 2021 — I've completed 13 long-term projects with a 100% Job Success Score, 6,200+ hours logged, and Top Rated Plus status. Every project I've taken on has been delivered.`,
