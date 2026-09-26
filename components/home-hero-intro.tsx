@@ -109,7 +109,7 @@ export function HomeHeroIntro() {
 
       <HomeHighlightStats />
 
-      <div className="home-hero-actions home-hero-meta">
+      <div className="home-hero-actions">
         <Link href="/case-studies" className="home-hero-cta home-hero-cta-primary">
           <FileText size={15} />
           View case studies
