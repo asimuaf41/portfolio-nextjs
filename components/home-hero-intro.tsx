@@ -1,9 +1,12 @@
 "use client";
 
 import type { CSSProperties } from "react";
+import Link from "next/link";
 import {
+  ArrowRight,
   ChevronDown,
   Facebook,
+  FileText,
   Github,
   Linkedin,
   Twitter,
@@ -106,6 +109,17 @@ export function HomeHeroIntro() {
 
       <HomeHighlightStats />
 
+      <div className="home-hero-actions home-hero-meta">
+        <Link href="/case-studies" className="home-hero-cta home-hero-cta-primary">
+          <FileText size={15} />
+          View case studies
+          <ArrowRight size={15} />
+        </Link>
+        <Link href="/contact?from=home" className="home-hero-cta">
+          Let&apos;s talk
+        </Link>
+      </div>
+
       <div className="social-row home-hero-meta">
         {socialProfiles.map((social) => {
           const Icon =
@@ -124,8 +138,8 @@ export function HomeHeroIntro() {
         })}
       </div>
 
-      <a href="#automation" className="home-scroll-indicator home-hero-meta">
-        <span>See automation services</span>
+      <a href="#case-studies" className="home-scroll-indicator home-hero-meta">
+        <span>See real problems I solved</span>
         <ChevronDown size={18} />
       </a>
     </div>

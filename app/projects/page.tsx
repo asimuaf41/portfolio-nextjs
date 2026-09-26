@@ -161,11 +161,18 @@ export default function ProjectsPage() {
             ))}
           </div>
           <div className="projects-featured-actions">
+            <Link
+              href="/case-studies/ai-agent-studio"
+              className="projects-btn projects-btn-primary"
+            >
+              <Sparkles size={14} />
+              Read case study
+            </Link>
             <a
               href={featured.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="projects-btn projects-btn-primary"
+              className="projects-btn"
             >
               <ExternalLink size={14} />
               Live Demo

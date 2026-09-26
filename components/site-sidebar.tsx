@@ -89,7 +89,8 @@ export function SiteSidebar({ onNavigate }: { onNavigate?: () => void }) {
                 onClick={onNavigate}
                 className={cn(
                   "sidebar-nav-link block rounded px-3 py-2 text-center text-sm font-semibold text-[#9ca4ba]",
-                  pathname === item.href &&
+                  (pathname === item.href ||
+                    (item.href !== "/" && pathname.startsWith(`${item.href}/`))) &&
                     "bg-[#037fff] text-white hover:bg-[#037fff] hover:text-white",
                 )}
               >

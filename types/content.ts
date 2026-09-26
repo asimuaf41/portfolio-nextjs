@@ -66,3 +66,32 @@ export type BlogPost = {
   sections: BlogSection[];
   conclusion: string;
 };
+
+export type CaseStudyFeature = {
+  title: string;
+  description: string;
+};
+
+export type CaseStudy = {
+  slug: string;
+  title: string;
+  summary: string;
+  targetClient: string;
+  accent: BlogAccent;
+  icon: BlogIcon;
+  problem: string[];
+  challenge: string[];
+  builtIntro: string;
+  features: CaseStudyFeature[];
+  additionalFeatures: string[];
+  result: string[];
+  liveUrl?: string;
+  liveLabel?: string;
+  secondaryLiveUrl?: string;
+  secondaryLiveLabel?: string;
+  codeUrl?: string;
+  builtOutro?: string;
+  techStack: string[];
+  keywords: string[];
+  published: boolean;
+};
