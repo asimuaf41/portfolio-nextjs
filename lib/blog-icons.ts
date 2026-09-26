@@ -2,8 +2,11 @@ import {
   AlertTriangle,
   Bot,
   Brain,
+  GraduationCap,
   LayoutDashboard,
+  PenLine,
   Rocket,
+  Scale,
   Workflow,
   Zap,
   type LucideIcon,
@@ -18,6 +21,9 @@ export const blogIconMap: Record<BlogIcon, LucideIcon> = {
   Workflow,
   AlertTriangle,
   Rocket,
+  PenLine,
+  Scale,
+  GraduationCap,
 };
 
 export const formatBlogDate = (iso: string) =>

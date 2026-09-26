@@ -31,7 +31,10 @@ export type BlogIcon =
   | "Brain"
   | "Workflow"
   | "AlertTriangle"
-  | "Rocket";
+  | "Rocket"
+  | "PenLine"
+  | "Scale"
+  | "GraduationCap";
 
 export type BlogCallout = {
   variant: "tip" | "warning" | "note";

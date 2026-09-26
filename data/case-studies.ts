@@ -167,7 +167,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "optifield",
     title: "OptiField.ai — Autonomous AI Lead Agent for Field Service",
     summary:
-      "An autonomous SMS AI agent for HVAC teams that recovers missed calls, qualifies leads, and books jobs end-to-end — while staff supervise, escalate, and take over only when needed.",
+      "An autonomous SMS AI agent for HVAC teams that recovers missed calls, qualifies leads, and books jobs — with full Stripe subscription billing, webhooks, and Customer Portal so OptiField can onboard and retain paying customers.",
     targetClient: "Field service & scheduling businesses",
     accent: "green",
     icon: "Workflow",
@@ -176,7 +176,7 @@ export const caseStudies: CaseStudy[] = [
       "Full FSM platforms like ServiceTitan and Housecall Pro exist, but they are heavy and expensive for smaller operators. OptiField is not another dispatch or inventory system — it is a focused wedge: autonomous lead capture → AI-run qualification and booking → confirmed appointment, with human oversight always available.",
     ],
     challenge: [
-      "Shipping this as production SaaS meant solving several hard problems at once: reliable Twilio voice/SMS ingestion with accurate answered-vs-missed detection on forwarded office calls; an agent orchestrator that runs the full SMS conversation by default (not a shared inbox that helps staff type faster); hard escalation and takeover state machines so emergencies, complaints, and uncertain cases never get guessed; multi-tenant data isolation with Supabase RLS so each business only sees its own customers and jobs; and real technician availability via Google/Microsoft calendars or FSM mappings (Housecall Pro, ServiceTitan, Jobber) so the agent never books a slot nobody can actually work.",
+      "Shipping this as production SaaS meant solving several hard problems at once: reliable Twilio voice/SMS ingestion with accurate answered-vs-missed detection on forwarded office calls; an agent orchestrator that runs the full SMS conversation by default (not a shared inbox that helps staff type faster); hard escalation and takeover state machines so emergencies, complaints, and uncertain cases never get guessed; multi-tenant data isolation with Supabase RLS so each business only sees its own customers and jobs; real technician availability via Google/Microsoft calendars or FSM mappings (Housecall Pro, ServiceTitan, Jobber); and a full Stripe subscription stack so OptiField can charge, renew, and recover failed payments without engineering touching every account.",
     ],
     builtIntro:
       "A multi-tenant field-service SaaS built from a full PRD suite — Master, Inbox, Workflows/AI Agent, Booking, Dashboard, Admin, Voice Routing, and Settings — with the AI agent as the primary actor:",
@@ -202,6 +202,11 @@ export const caseStudies: CaseStudy[] = [
           "The agent checks availability, proposes 2–3 concrete slots in SMS, and creates bookings via the same internal APIs staff use. Schedule Categories control what the agent may book; Change Order CO-01 auto-assigns the least-busy eligible technician and creates a real calendar/FSM invite for the customer.",
       },
       {
+        title: "Stripe Billing & Self-Serve Signup",
+        description:
+          "End-to-end Stripe integration for a real SaaS revenue loop: plan-specific signup URLs, Stripe Elements/Checkout with immediate subscription charge, webhook sync for checkout.session.completed, invoice.paid, invoice.payment_failed, and subscription updated/deleted events, local invoice mirroring for admin, Stripe Customer Portal for card updates, and admin plan management that creates matching Stripe Prices — including past_due handling, comped accounts, and terminate flows that cancel the subscription.",
+      },
+      {
         title: "Owner Dashboard & Daily Digest",
         description:
           "ROI metrics owners renew on: inbound leads, missed calls, booked-job rate, jobs recovered from missed calls, AI resolution rate, escalation rate by reason, human takeover rate, and speed to first response — plus a daily digest email so owners do not have to remember to log in.",
@@ -209,7 +214,7 @@ export const caseStudies: CaseStudy[] = [
       {
         title: "Admin, Settings & Multi-Tenant Ops",
         description:
-          "Internal OptiField admin for businesses, plans, Stripe billing, and impersonation with audit logs. Tenant settings cover business profile, roles, notifications, phone forwarding, and Schedule Categories — the permission model that gates what the AI is allowed to book.",
+          "Internal OptiField admin for businesses, plans, billing status, impersonation with audit logs, and Stripe invoice visibility. Tenant settings cover business profile, roles, notifications, phone forwarding, Schedule Categories, and My Account billing portal access for owners/managers.",
       },
     ],
     additionalFeatures: [
@@ -217,12 +222,13 @@ export const caseStudies: CaseStudy[] = [
       "Hard agent guardrails — never quotes firm final pricing, never makes warranty/legal claims, always identifies as automated, escalates rather than guesses",
       "Restricted technician logins — real users.role = technician, server-side limited to /technician/calendar for Google/Microsoft or FSM mapping",
       "Background jobs on Trigger.dev — missed-call textback, lead follow-up sequences, qualification timeouts, daily owner summary",
-      "Self-serve sign-up with plan URL, Stripe payment, TCPA/SMS consent capture, and Twilio number provisioning through onboarding",
+      "TCPA/SMS consent capture at signup with timestamp and IP logged for compliance before charging the card",
+      "Stripe webhook signature verification and server-only secret keys — no raw card data ever touches OptiField servers",
     ],
     builtOutro:
-      "Engineered against a complete PRD suite and change orders (including technician calendar/FSM integration), using AI-assisted development for domain logic across the eight core modules — at production quality, not demo quality.",
+      "Engineered against a complete PRD suite and change orders (including technician calendar/FSM integration and Stripe PLG signup), using AI-assisted development for domain logic across the core modules — at production quality, not demo quality.",
     result: [
-      "A live multi-tenant platform where the default path from missed call or form lead to booked job requires no human typing a reply. Staff supervise, escalate, and take over only when needed. Designed to recover after-hours and slow-follow-up revenue that smaller HVAC shops otherwise lose to competitors.",
+      "A live multi-tenant platform where the default path from missed call or form lead to booked job requires no human typing a reply — and where OptiField itself can onboard paying customers through Stripe without manual billing ops. Staff supervise, escalate, and take over only when needed. Designed to recover after-hours and slow-follow-up revenue that smaller HVAC shops otherwise lose to competitors.",
     ],
     liveUrl: "https://dashboard.optifield.ai/dashboard",
     liveLabel: "Live dashboard",
@@ -234,7 +240,7 @@ export const caseStudies: CaseStudy[] = [
       "Twilio Voice + Messaging",
       "Trigger.dev",
       "OpenAI API",
-      "Stripe",
+      "Stripe (Checkout, Subscriptions, Webhooks, Customer Portal)",
       "Vercel",
     ],
     keywords: [
@@ -243,8 +249,205 @@ export const caseStudies: CaseStudy[] = [
       "HVAC lead recovery",
       "missed call SMS automation",
       "Twilio AI booking",
+      "Stripe SaaS billing",
       "multi-tenant field service SaaS",
       "autonomous scheduling agent",
+    ],
+    published: true,
+  },
+  {
+    slug: "e-signature-saas",
+    title: "E-Signature Platform — DocuSign-Style Document Workflows",
+    summary:
+      "A production e-signature SaaS where teams upload PDFs, place signature fields, send envelopes, and collect legally binding signatures — built for businesses that need document workflows without enterprise DocuSign pricing complexity.",
+    targetClient: "SaaS & operations teams needing e-sign",
+    accent: "cyan",
+    icon: "PenLine",
+    problem: [
+      "Businesses still chase wet signatures and email PDF ping-pong for contracts, disclosures, and onboarding paperwork. Enterprise e-sign tools are powerful but heavy and expensive for mid-market teams that simply need upload → fields → send → signed — with a clean audit trail.",
+    ],
+    challenge: [
+      "Building a trustworthy document platform means solving PDF rendering and interactive field placement, secure envelope delivery to recipients who may not have accounts, role-aware signing flows, status tracking from draft through completed, and auth that keeps documents private without making the signer experience painful.",
+    ],
+    builtIntro:
+      "A full-stack e-signature and document management platform inspired by DocuSign workflows:",
+    features: [
+      {
+        title: "PDF Upload & Field Placement",
+        description:
+          "Users upload PDF documents and add interactive fields — signature, date, name, and related inputs — positioned on the document before sending.",
+      },
+      {
+        title: "Envelope Sending",
+        description:
+          "Documents are packaged as envelopes and sent to recipients for digital signing, with clear status tracking through the signing lifecycle.",
+      },
+      {
+        title: "Recipient Signing Experience",
+        description:
+          "Recipients open the envelope, complete required fields, sign securely, and submit — without needing a complex onboarding path.",
+      },
+      {
+        title: "Auth & Document Security",
+        description:
+          "Next Auth protects the platform side while keeping the signing flow accessible to invited recipients. Forms are validated with React Hook Form and Zod.",
+      },
+    ],
+    additionalFeatures: [
+      "ShadCN UI + Tailwind for a clean, modern document ops interface",
+      "Node.js / Express API with MongoDB for document and envelope persistence",
+    ],
+    result: [
+      "A live e-signature product teams can use to replace manual PDF email chains with a structured send-and-sign workflow.",
+    ],
+    liveUrl: "https://e-sign-front.ourmethod.com/",
+    liveLabel: "Live platform",
+    techStack: [
+      "Next.js",
+      "ShadCN UI",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Next Auth",
+      "React Hook Form",
+      "Zod",
+    ],
+    keywords: [
+      "e-signature SaaS",
+      "DocuSign alternative",
+      "digital signature platform",
+      "PDF envelope workflow",
+      "Next.js document SaaS",
+    ],
+    published: true,
+  },
+  {
+    slug: "tun-university-network",
+    title: "TUN University Network — Social + Academic Campus Platform",
+    summary:
+      "A university social and academic network with student-facing activity feeds, notes, lectures, attendance, real-time chat, and a dedicated admin dashboard for moderating posts, groups, and engagement.",
+    targetClient: "EdTech & campus product teams",
+    accent: "amber",
+    icon: "GraduationCap",
+    problem: [
+      "Universities and student networks often run learning and social activity across disconnected tools — chat in one app, notes in another, attendance in a spreadsheet, and no single place for groups or campus events. Students lose context; admins lose visibility.",
+    ],
+    challenge: [
+      "Shipping a campus platform means supporting high-interaction social features (posts, likes, comments, shares, groups) alongside academic workflows (notes, lectures, attendance) and real-time chat — while giving admins a separate control surface to moderate and manage the network without breaking the student experience.",
+    ],
+    builtIntro:
+      "A two-surface education product: the student TUN app and a dedicated Tun Admin Dashboard:",
+    features: [
+      {
+        title: "Student Social & Academic Hub",
+        description:
+          "Students interact through posts, groups, and event sharing while also accessing notes, lectures, and attendance — keeping social and academic life in one connected experience.",
+      },
+      {
+        title: "Real-Time Chat",
+        description:
+          "Live messaging so campus conversations stay inside the product instead of leaking to unmanaged side channels.",
+      },
+      {
+        title: "Tun Admin Dashboard",
+        description:
+          "Centralized moderation and management for university posts, likes, shares, comments, and groups — giving operators one place to oversee network activity.",
+      },
+      {
+        title: "Engagement Data in One Place",
+        description:
+          "Interaction data is centralized so admins can understand what is happening across the social layer without exporting raw tables.",
+      },
+    ],
+    additionalFeatures: [
+      "React frontends with Redux state and Ant Design UI",
+      "Node.js / Express API with MongoDB persistence",
+    ],
+    result: [
+      "A live campus platform with both student and admin surfaces — demonstrating full-stack delivery for education products that need social engagement and operational control.",
+    ],
+    liveUrl: "https://www.tun.com/app/",
+    liveLabel: "Live student app",
+    secondaryLiveUrl: "https://tunadmin-158a6.web.app/login",
+    secondaryLiveLabel: "Admin dashboard",
+    techStack: [
+      "React",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Redux",
+      "Ant Design",
+      "SCSS",
+      "Axios",
+    ],
+    keywords: [
+      "EdTech platform",
+      "university social network",
+      "campus admin dashboard",
+      "React education SaaS",
+      "student engagement app",
+    ],
+    published: true,
+  },
+  {
+    slug: "legal-emirates",
+    title: "Legal Emirates — Dubai Law Firm Discovery Platform",
+    summary:
+      "A professional legal directory and firm presence for Dubai — helping clients find trusted lawyers and law firms with a polished, conversion-focused web experience backed by a modern React stack.",
+    targetClient: "Legal firms & professional services",
+    accent: "orange",
+    icon: "Scale",
+    problem: [
+      "People searching for legal help in Dubai need confidence quickly — which firm to trust, who specializes in what, and how to make contact. Generic brochure sites do not convert high-intent legal inquiries, and weak discovery experiences lose leads to competitors.",
+    ],
+    challenge: [
+      "Building a legal discovery platform means balancing brand trust with practical lead capture: clear firm positioning, searchable lawyer/firm presentation, responsive UX for mobile visitors, and a content structure that supports SEO for competitive legal queries in the UAE market.",
+    ],
+    builtIntro:
+      "A premier legal platform for connecting users with top lawyers and law firms in Dubai:",
+    features: [
+      {
+        title: "Firm & Lawyer Discovery",
+        description:
+          "A client-facing experience designed to help visitors evaluate and connect with legal professionals — built around trust, clarity, and conversion.",
+      },
+      {
+        title: "Brand Presence for a Established Practice",
+        description:
+          "Supports Legal Emirates' positioning as a leading UAE legal brand with over 27 years of trusted service under Bader Hamad Al Zaabi.",
+      },
+      {
+        title: "Full-Stack Delivery",
+        description:
+          "React frontend with Node.js / Express API and MongoDB, styled for a polished professional-services look with Redux-managed application state.",
+      },
+    ],
+    additionalFeatures: [
+      "Responsive Ant Design + SCSS UI tuned for professional services",
+      "Production deployment at legalemirates.com",
+    ],
+    result: [
+      "A live legal discovery and firm presence site that turns search intent into credible firm contact opportunities for a Dubai-based practice.",
+    ],
+    liveUrl: "https://legalemirates.com/",
+    liveLabel: "Live website",
+    techStack: [
+      "React",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Redux",
+      "Ant Design",
+      "SCSS",
+      "Axios",
+    ],
+    keywords: [
+      "legal website Dubai",
+      "law firm platform",
+      "lawyer directory",
+      "React legal marketing site",
+      "professional services web app",
     ],
     published: true,
   },

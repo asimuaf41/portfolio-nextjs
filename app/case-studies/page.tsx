@@ -22,14 +22,16 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Case Studies — Real Problems Solved",
   description:
-    "In-depth case studies by Asim Ali — AI Agent Studio, Real Estate Operations SaaS, and OptiField autonomous HVAC lead agent. See the real-world problem, technical challenge, what was built, and the result for each production project.",
+    "In-depth case studies by Asim Ali — AI agents, OptiField Stripe SaaS, real estate ops, e-signature, EdTech, and legal platforms. See the problem, challenge, build, and result for each production project.",
   path: "/case-studies",
   keywords: [
     "case studies",
     "AI agent case study",
     "OptiField case study",
+    "Stripe SaaS case study",
+    "e-signature SaaS",
+    "EdTech case study",
     "Next.js portfolio case study",
-    "production AI platform",
     "freelance developer case studies",
   ],
 });

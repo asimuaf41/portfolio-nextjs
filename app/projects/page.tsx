@@ -18,6 +18,18 @@ import { SectionTitle } from "@/components/section-title";
 import { projects, projectsPage } from "@/data/site-content";
 import { createPageMetadata } from "@/lib/seo";
 
+/** Map portfolio project slugs to published case-study slugs. */
+const projectCaseStudySlugs: Record<string, string> = {
+  "ai-agent-platform": "ai-agent-studio",
+  optifield: "optifield",
+  "e-sign-platform": "e-signature-saas",
+  "method-admin-dashboard": "real-estate-saas",
+  "method-atlanta": "real-estate-saas",
+  "tun-university-network": "tun-university-network",
+  "tun-admin-dashboard": "tun-university-network",
+  "legal-emirates": "legal-emirates",
+};
+
 export const metadata: Metadata = createPageMetadata({
   title: "Projects & Case Studies",
   description:
@@ -270,9 +282,21 @@ export default function ProjectsPage() {
                     </span>
                   ))}
                 </div>
-                <Link href="/contact?from=projects" className="projects-card-cta">
-                  Build something similar <ArrowRight size={14} />
-                </Link>
+                {projectCaseStudySlugs[project.slug] ? (
+                  <Link
+                    href={`/case-studies/${projectCaseStudySlugs[project.slug]}`}
+                    className="projects-card-cta"
+                  >
+                    Read case study <ArrowRight size={14} />
+                  </Link>
+                ) : (
+                  <Link
+                    href="/contact?from=projects"
+                    className="projects-card-cta"
+                  >
+                    Build something similar <ArrowRight size={14} />
+                  </Link>
+                )}
               </div>
             </article>
           ))}

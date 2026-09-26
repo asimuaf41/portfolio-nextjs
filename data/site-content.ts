@@ -67,6 +67,7 @@ export const projects: Project[] = [
       "Trigger.dev",
       "OpenAI",
       "PostgreSQL",
+      "Stripe",
       "Vercel",
     ],
     image: "/optifield-dashboard.png",
