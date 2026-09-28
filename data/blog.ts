@@ -8,8 +8,11 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "A practical build for lead qualification, AI support with confidence gating, a weekday content digest, and overdue invoice follow-up — plus how to run n8n locally, take it live, and when Trigger.dev is the better fit.",
     publishedAt: "2026-09-19",
-    readTime: "14 min read",
     category: "Automation",
+    difficulty: "Intermediate",
+    popularity: 1,
+    pinned: true,
+    pinOrder: 1,
     tags: ["n8n", "Claude API", "Trigger.dev", "Automation", "Webhooks"],
     accent: "orange",
     icon: "Zap",
@@ -203,8 +206,11 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "How to design an orchestrator that coordinates research, database, analysis, and writing agents in parallel — the same pattern behind modern AI workspaces and client-ready reports.",
     publishedAt: "2026-07-22",
-    readTime: "11 min read",
-    category: "AI Agents",
+    category: "AI",
+    difficulty: "Advanced",
+    popularity: 2,
+    pinned: true,
+    pinOrder: 2,
     tags: [
       "Multi-Agent",
       "Claude API",
@@ -285,8 +291,11 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "A practical RAG stack for business documents: chunking, embeddings, similarity search, and long-term user preference memory — without drowning in vector DB complexity.",
     publishedAt: "2026-07-16",
-    readTime: "10 min read",
-    category: "RAG & Memory",
+    category: "AI",
+    difficulty: "Advanced",
+    popularity: 3,
+    pinned: true,
+    pinOrder: 3,
     tags: ["RAG", "Supabase", "pgvector", "Claude", "Embeddings"],
     accent: "green",
     icon: "Brain",
@@ -358,8 +367,9 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "How to stream tokens and tool events from a Node agent API into a Next.js UI — so users see live research, weather fetches, and decisions instead of a frozen spinner.",
     publishedAt: "2026-07-08",
-    readTime: "9 min read",
-    category: "Full-Stack AI",
+    category: "Full-Stack",
+    difficulty: "Intermediate",
+    popularity: 7,
     tags: [
       "Next.js",
       "Node.js",
@@ -437,8 +447,9 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "A beginner-friendly walkthrough for building a real, useful AI agent that takes input, plans actions, calls tools, and produces results — using a real customer-support workflow.",
     publishedAt: "2026-04-22",
-    readTime: "12 min read",
-    category: "AI Agents",
+    category: "AI",
+    difficulty: "Beginner",
+    popularity: 8,
     tags: ["AI Agents", "OpenAI", "LangChain", "Tools", "TypeScript"],
     accent: "purple",
     icon: "Bot",
@@ -547,13 +558,123 @@ export const blogPosts: BlogPost[] = [
       "Don't try to build the next AutoGPT. Pick one painful, repetitive workflow your team or your client already does, automate the 80% an LLM can handle, and leave a human approval at the end. Once that one agent runs reliably for a week, expanding it is just adding tools — and you'll already have the entire mental model for every agent you'll ever build.",
   },
   {
+    slug: "claude-code-speed",
+    title: "How I Use Claude to Speed Up the Code I Ship",
+    excerpt:
+      "The plan-and-review loop I run in Claude so features land in hours: long-context reading, a strict diff review, and a handoff into Cursor that keeps the code honest.",
+    publishedAt: "2026-09-28",
+    category: "Full-Stack",
+    difficulty: "Expert",
+    popularity: 5,
+    tags: ["Claude", "Code Review", "AI Coding", "Workflow", "Cursor"],
+    accent: "amber",
+    icon: "Brain",
+    intro:
+      "Cursor is where the files change. Claude is why those changes are faster and less wrong. I use Claude before the edit, to turn a vague ticket into a plan, and after the edit, as a senior reviewer who has not fallen in love with the diff. Across React, Next.js, and Node work, that loop is the other half of the speed: less time hunting the real bug, less time rewriting a confident-but-wrong first draft.",
+    sections: [
+      {
+        heading: "Claude is the second pass, not the editor",
+        paragraphs: [
+          "Speed dies in two places: deciding what to change, and trusting a change you did not fully read. An in-editor agent is excellent at the middle — touching the files. It is weaker at holding a long spec, a messy legacy module, and your constraints in one head without starting to type.",
+          "I keep Claude on that outer loop. It reads more than it writes. When I do ask it for code, the code is a sketch I will re-implement in the repo, not a blob I paste over a file I have not opened.",
+        ],
+        callout: {
+          variant: "tip",
+          title: "Split the jobs",
+          text: "Claude plans and reviews. Cursor edits the repo. Mixing both jobs into one chat is how a confident plan turns into an unreviewed multi-file change.",
+        },
+      },
+      {
+        heading: "Plan the change before any file moves",
+        paragraphs: [
+          "For anything past a one-line fix I paste the ticket, the relevant types, and the constraint that matters — no new dependency, keep the public API, match this file. Then I ask for a plan with file paths, risks, and what I should not touch.",
+          "If the plan is wrong, the implementation would have been wrong. I correct it in prose, which is minutes, instead of untangling a diff, which is an afternoon. This is the same habit as plan-before-agent in the editor, done where the context window is the point.",
+        ],
+        bullets: [
+          "State the outcome, the stack, and the files that are in bounds.",
+          "Ask for risks and for the approach you are rejecting.",
+          "Stop when the plan names files. Do not let it invent a second architecture.",
+        ],
+      },
+      {
+        heading: "Give it the real context, not a summary of the context",
+        paragraphs: [
+          "Claude gets fast when the prompt stops making it guess your codebase. I paste the type, the route, the caller, and the failing test — four chunks, not the whole repository. Long context is for a contract, a migration note, or a module I do not trust myself to skim.",
+          "A short, accurate packet beats a dumped folder. The model will happily review twelve unrelated files and miss the one invariant that matters.",
+        ],
+        callout: {
+          variant: "note",
+          title: "Name the invariant",
+          text: "One line — \"amounts are integer cents\" or \"this route is public\" — saves more time than another thousand tokens of surrounding code.",
+        },
+      },
+      {
+        heading: "Review the diff like a strict senior",
+        paragraphs: [
+          "After the edit, I paste the diff back and ask Claude to be blunt: security, race conditions, broken callers, tests that do not assert the new behavior, and anything that changed outside the plan. I want objections, not encouragement.",
+          "This is where the hours come back. A review that used to wait for another person now happens before I open the pull request. I still read the diff myself. Claude tells me where to look first.",
+        ],
+        code: {
+          language: "txt",
+          snippet:
+            "You are a strict staff engineer reviewing this diff.\nStack: Next.js App Router, TypeScript, Zod.\n\nRules:\n- Flag security issues, race conditions, and missing tests.\n- Flag edits that were not in the plan.\n- Do not praise the code.\n- Reply as a short list: file, line concern, why it breaks, suggested fix.\n\nPlan:\n[paste plan]\n\nDiff:\n[paste diff]",
+        },
+      },
+      {
+        heading: "The prompts I reuse every week",
+        paragraphs: [
+          "I do not invent a new review voice each time. A small set of prompts is faster than a clever one-off, because I already know what a good answer looks like.",
+        ],
+        bullets: [
+          "Plan: \"List the files to change, the risk, and what must stay untouched. No code yet.\"",
+          "Bug: \"Here is the failing behavior and the suspect function. Name the root cause in two sentences, then the smallest fix.\"",
+          "Rewrite: \"Make this function easier to test without changing what callers see. Show the before/after shape only.\"",
+          "Review: \"Be a strict senior. Find what this diff got wrong. Be blunt.\"",
+        ],
+      },
+      {
+        heading: "Where the speed actually shows up",
+        paragraphs: [
+          "The dramatic wins are rare. The weekly wins are boring: understanding a file I did not write, drafting the empty and error states, turning a Slack thread into acceptance criteria, and spotting that a \"small\" refactor changed a public type.",
+          "Stack those and a feature that used to fill two days fits in a morning, with the review already done. The model is not typing faster than me. It is removing the stalls.",
+        ],
+      },
+      {
+        heading: "Where I will not let it drive",
+        paragraphs: [
+          "Claude does not choose the architecture, touch billing webhooks unsupervised, or get production data pasted into a prompt. If I cannot explain the change after the review, it does not ship. Speed that I cannot defend in a client call is not speed.",
+        ],
+        bullets: [
+          "Architecture stays a human decision. Claude may critique it.",
+          "Secrets and customer rows stay out of the prompt.",
+          "A green explanation is not a green test. Run the code.",
+        ],
+        callout: {
+          variant: "warning",
+          title: "Confidence is not a review",
+          text: "If the answer sounds finished and you cannot point to the line that proves it, ask for the line. The fast path is the one you can check.",
+        },
+      },
+      {
+        heading: "The loop I run with Cursor",
+        paragraphs: [
+          "On a real ticket the order is stable. Claude turns the ticket into a plan and names the files. Cursor implements against that plan with those files pinned. Claude reviews the diff. I run the tests and keep the parts I can explain.",
+          "That is the pair behind the Full-Stack notes on this site: one article for the editor, this one for the model that plans and challenges the edit. Use both and the 10x is the time you no longer spend being surprised by your own diff.",
+        ],
+      },
+    ],
+    conclusion:
+      "Claude speeds up the code by shortening the two slow ends of the work: the plan, and the review. Keep it out of the editor until the plan is specific, then make it argue with the diff before you merge. Paired with an in-repo agent, you spend the saved hours on the decisions that still need you — and you ship work you can still explain.",
+  },
+  {
     slug: "cursor-10x-development-speed",
     title: "How I Use Cursor to 10x My Development Speed",
     excerpt:
       "The exact workflow, prompts, and habits I rely on inside Cursor to ship features in hours instead of days — without sacrificing code quality or review discipline.",
     publishedAt: "2026-04-18",
-    readTime: "11 min read",
-    category: "Productivity",
+    category: "Full-Stack",
+    difficulty: "Expert",
+    popularity: 4,
     tags: ["Cursor", "Workflow", "AI Coding", "Productivity", "DevTools"],
     accent: "blue",
     icon: "Zap",
@@ -646,8 +767,9 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "A practical architecture guide for adding real AI features — summaries, natural-language search, anomaly detection, auto-insights — into existing React + Node dashboards without rebuilding them.",
     publishedAt: "2026-04-12",
-    readTime: "13 min read",
-    category: "Architecture",
+    category: "Full-Stack",
+    difficulty: "Intermediate",
+    popularity: 9,
     tags: ["React", "Node.js", "AI", "Dashboards", "Architecture"],
     accent: "cyan",
     icon: "LayoutDashboard",
@@ -759,8 +881,9 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "An honest, hands-on comparison of the three tools developers reach for daily. What each one is genuinely great at, where it falls down, and the workflow I use to combine them.",
     publishedAt: "2026-04-08",
-    readTime: "10 min read",
-    category: "Tools",
+    category: "AI",
+    difficulty: "Beginner",
+    popularity: 11,
     tags: ["Claude", "ChatGPT", "Cursor", "Comparison", "AI Tools"],
     accent: "amber",
     icon: "Brain",
@@ -850,8 +973,9 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "A repeatable, no-fluff framework for spotting automation opportunities and turning a 2-hour manual workflow into a 30-second AI pipeline — including the human-in-the-loop pattern that keeps it safe.",
     publishedAt: "2026-04-03",
-    readTime: "12 min read",
     category: "Automation",
+    difficulty: "Beginner",
+    popularity: 10,
     tags: ["Automation", "AI", "Workflow", "Business", "Operations"],
     accent: "green",
     icon: "Workflow",
@@ -947,8 +1071,9 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Ten mistakes I see developers make every single week with AI coding tools — plus the simple, five-minute habits that fix each one and dramatically improve output quality.",
     publishedAt: "2026-03-28",
-    readTime: "10 min read",
-    category: "Best Practices",
+    category: "AI",
+    difficulty: "Beginner",
+    popularity: 12,
     tags: ["AI", "Pitfalls", "Best Practices", "Code Quality"],
     accent: "pink",
     icon: "AlertTriangle",
@@ -1040,8 +1165,9 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "The exact 48-hour playbook I follow to take a raw idea from sketch to a deployed MVP that real users can try — including hour-by-hour tasks, the stack, and the only three rules that matter.",
     publishedAt: "2026-03-21",
-    readTime: "12 min read",
-    category: "Shipping",
+    category: "Startups",
+    difficulty: "Beginner",
+    popularity: 6,
     tags: ["MVP", "Shipping", "AI Stack", "Indie Hacking", "Solo Dev"],
     accent: "orange",
     icon: "Rocket",

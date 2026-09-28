@@ -4,22 +4,18 @@ import { notFound } from "next/navigation";
 import {
   ArrowLeft,
   ArrowRight,
-  CalendarDays,
   CheckCircle2,
-  Clock,
   Info,
   Lightbulb,
   ListOrdered,
-  Tag,
   TriangleAlert,
 } from "lucide-react";
+import { BlogMeta } from "@/components/blog-meta";
+import { BlogPostCard } from "@/components/blog-post-card";
 import { SeoJsonLd } from "@/components/seo-jsonld";
 import { blogPosts } from "@/data/blog";
-import {
-  blogIconMap,
-  formatBlogDateLong,
-  slugifyHeading,
-} from "@/lib/blog-icons";
+import { isoDuration, readTimeMinutes, relatedPosts, topicPath } from "@/lib/blog";
+import { blogIconMap, slugifyHeading } from "@/lib/blog-icons";
 import {
   articleJsonLd,
   breadcrumbJsonLd,
@@ -86,6 +82,8 @@ export default async function BlogDetailPage({
   if (!post) notFound();
 
   const Icon = blogIconMap[post.icon];
+  const minutes = readTimeMinutes(post);
+  const siblings = relatedPosts(post);
   const currentIndex = posts.findIndex((item) => item.slug === slug);
   const prevPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
   const nextPost =
@@ -107,6 +105,9 @@ export default async function BlogDetailPage({
           path: `/blog/${post.slug}`,
           publishedAt: post.publishedAt,
           tags: post.tags,
+          section: post.category,
+          timeRequired: isoDuration(minutes),
+          educationalLevel: post.difficulty,
         })}
       />
       <SeoJsonLd
@@ -127,23 +128,17 @@ export default async function BlogDetailPage({
         <span className="blog-article-icon" aria-hidden="true">
           <Icon size={36} strokeWidth={1.7} />
         </span>
-        <span className="blog-card-category">{post.category}</span>
+        <Link href={topicPath(post.category)} className="blog-card-category">
+          {post.category}
+        </Link>
         <h1>{post.title}</h1>
         <p className="blog-article-excerpt">{post.excerpt}</p>
-        <div className="blog-article-meta">
-          <span>
-            <CalendarDays size={14} />
-            {formatBlogDateLong(post.publishedAt)}
-          </span>
-          <span>
-            <Clock size={14} />
-            {post.readTime}
-          </span>
-          <span>
-            <Tag size={14} />
-            {post.tags.length} tags
-          </span>
-        </div>
+        <BlogMeta
+          post={post}
+          className="blog-article-meta"
+          dateStyle="long"
+          iconSize={14}
+        />
         <div className="blog-article-tags">
           {post.tags.map((tag) => (
             <span key={tag} className="blog-card-tag">
@@ -247,6 +242,20 @@ export default async function BlogDetailPage({
           </div>
         </aside>
       </div>
+
+      {siblings.length > 0 ? (
+        <section className="blog-block" aria-labelledby="related-heading">
+          <header className="blog-block-head">
+            <h2 id="related-heading">More in {post.category}</h2>
+            <p>Other articles in this topic.</p>
+          </header>
+          <div className="blog-grid">
+            {siblings.map((item, index) => (
+              <BlogPostCard key={item.slug} post={item} index={index} />
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       {(prevPost || nextPost) && (
         <nav className="blog-article-nav" aria-label="Other articles">

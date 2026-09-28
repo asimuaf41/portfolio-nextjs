@@ -55,19 +55,28 @@ export type BlogSection = {
   callout?: BlogCallout;
 };
 
+export type BlogCategory = "AI" | "Automation" | "Full-Stack" | "Startups";
+
+export type BlogDifficulty = "Beginner" | "Intermediate" | "Advanced" | "Expert";
+
 export type BlogPost = {
   slug: string;
   title: string;
   excerpt: string;
   publishedAt: string;
-  readTime: string;
-  category: string;
+  category: BlogCategory;
   tags: string[];
   accent: BlogAccent;
   icon: BlogIcon;
   intro: string;
   sections: BlogSection[];
   conclusion: string;
+  /** Editorial rank. 1 is the strongest piece to recommend. */
+  popularity: number;
+  difficulty: BlogDifficulty;
+  /** Shown in the pinned row on the blog index. */
+  pinned?: boolean;
+  pinOrder?: number;
 };
 
 export type CaseStudyFeature = {

@@ -401,6 +401,7 @@ export const aboutProfile = {
     { icon: "ServerCog", label: "Node.js / Express / NestJS APIs" },
     { icon: "Database", label: "Supabase, PostgreSQL & pgvector" },
     { icon: "Bot", label: "Claude / OpenAI agent development" },
+    { icon: "Brain", label: "Claude-assisted coding speed" },
     { icon: "Brain", label: "RAG & document intelligence" },
     { icon: "Workflow", label: "Multi-agent orchestration" },
     { icon: "Mails", label: "n8n / Trigger.dev / Make / Zapier" },
@@ -414,6 +415,18 @@ export const aboutProfile = {
   ],
   closing:
     "Whether you're launching a SaaS product, automating leads and support, adding AI to an existing platform, rescuing a broken codebase, or integrating LLM features into React/Next.js — send a message with what you're building. I'll tell you honestly if I'm the right fit.",
+  claude: {
+    eyebrow: "Claude in the workflow",
+    title: "Claude is how the code gets faster without getting sloppy",
+    summary:
+      "I use Claude as the planning and review half of development. It reads the ticket, the types, and the diff. Cursor changes the files. That split is why a multi-day feature often fits in a morning — the plan is specific before anyone edits, and a strict pass catches the confident mistakes before they merge.",
+    points: [
+      "Plan first: files to touch, risks, and what must stay unchanged.",
+      "Long context for the spec or the legacy module, not a dumped repo.",
+      "A blunt diff review — security, missing tests, and edits outside the plan.",
+      "Then Cursor implements. I still run the code and read the change.",
+    ],
+  },
 };
 
 export const automationOffer = {
@@ -569,6 +582,7 @@ export const skillGroups = [
     blurb: "The highest-leverage work I take on right now.",
     skills: [
       { name: "Claude API & Agent Systems", level: 92 },
+      { name: "Claude-assisted coding & review", level: 94 },
       { name: "Cursor / AI-assisted Development", level: 95 },
       { name: "OpenAI API Integration", level: 90 },
       { name: "RAG & Vector Search (pgvector)", level: 88 },

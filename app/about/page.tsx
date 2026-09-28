@@ -266,6 +266,28 @@ export default function AboutPage() {
         </aside>
       </section>
 
+      <section
+        className="about-claude about-reveal"
+        aria-labelledby="about-claude-heading"
+      >
+        <div className="about-claude-copy">
+          <span className="about-eyebrow">{aboutProfile.claude.eyebrow}</span>
+          <h3 id="about-claude-heading">{aboutProfile.claude.title}</h3>
+          <p>{aboutProfile.claude.summary}</p>
+          <Link href="/blog/claude-code-speed" className="about-featured-cta">
+            How Claude speeds up the code <ArrowRight size={14} />
+          </Link>
+        </div>
+        <ul className="about-claude-points" aria-label="How Claude is used">
+          {aboutProfile.claude.points.map((point) => (
+            <li key={point}>
+              <Brain size={16} strokeWidth={2} />
+              <span>{point}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <section className="about-story-grid about-reveal">
         <article className="about-story-card">
           <div className="about-story-icon">

@@ -20,6 +20,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/resume", changeFrequency: "monthly", priority: 0.85 },
     { path: "/contact", changeFrequency: "monthly", priority: 0.85 },
     { path: "/blog", changeFrequency: "weekly", priority: 0.8 },
+    { path: "/blog/topic/ai", changeFrequency: "weekly", priority: 0.75 },
+    {
+      path: "/blog/topic/automation",
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      path: "/blog/topic/full-stack",
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
+    {
+      path: "/blog/topic/startups",
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
     { path: "/gallery", changeFrequency: "monthly", priority: 0.4 },
   ];
 
@@ -40,7 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${siteConfig.url}/blog/${post.slug}`,
       lastModified: new Date(post.publishedAt),
       changeFrequency: "monthly" as const,
-      priority: 0.7,
+      priority: post.pinned ? 0.85 : 0.7,
     })),
   ];
 }

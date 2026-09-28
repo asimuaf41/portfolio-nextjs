@@ -230,20 +230,29 @@ export function articleJsonLd({
   path,
   publishedAt,
   tags,
+  section,
+  timeRequired,
+  educationalLevel,
 }: {
   title: string;
   description: string;
   path: string;
   publishedAt: string;
   tags: string[];
+  section?: string;
+  timeRequired?: string;
+  educationalLevel?: string;
 }) {
   return {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": ["BlogPosting", "LearningResource"],
     headline: title,
     description,
     datePublished: publishedAt,
     dateModified: publishedAt,
+    articleSection: section,
+    timeRequired,
+    educationalLevel,
     author: {
       "@type": "Person",
       name: siteConfig.name,
@@ -258,5 +267,34 @@ export function articleJsonLd({
     image: [absoluteUrl(`${path}/opengraph-image.png`)],
     keywords: tags.join(", "),
     inLanguage: siteConfig.language,
+  };
+}
+
+export function itemListJsonLd({
+  name,
+  description,
+  path,
+  items,
+}: {
+  name: string;
+  description: string;
+  path: string;
+  items: Array<{ name: string; path: string }>;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name,
+    description,
+    url: absoluteUrl(path),
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: items.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.name,
+        url: absoluteUrl(item.path),
+      })),
+    },
   };
 }

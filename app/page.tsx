@@ -2,23 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
-  CalendarDays,
-  Clock,
   Clock3,
   FileText,
   PenLine,
   Target,
 } from "lucide-react";
 import { BackgroundTexture } from "@/components/background-texture";
+import { BlogMeta } from "@/components/blog-meta";
 import { HomeAutomation } from "@/components/home-automation";
 import { HomeHeroIntro } from "@/components/home-hero-intro";
 import { HomeWorkflow } from "@/components/home-workflow";
-import { blogPosts } from "@/data/blog";
 import {
   caseStudiesPage,
   getPublishedCaseStudies,
 } from "@/data/case-studies";
-import { blogIconMap, formatBlogDate } from "@/lib/blog-icons";
+import { popularPosts, postsByDate } from "@/lib/blog";
+import { blogIconMap } from "@/lib/blog-icons";
 import { createPageMetadata, siteConfig } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -38,9 +37,11 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function HomePage() {
-  const recentPosts = [...blogPosts]
-    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
-    .slice(0, 3);
+  const recentPosts = postsByDate().slice(0, 3);
+  const mostRead = popularPosts(
+    3,
+    recentPosts.map((post) => post.slug),
+  );
   const studies = getPublishedCaseStudies();
 
   return (
@@ -118,7 +119,7 @@ export default function HomePage() {
       <section
         id="recent-writing"
         className="home-recent"
-        aria-label="Recent articles"
+        aria-label="Latest and most read articles"
       >
         <header className="home-recent-head">
           <div>
@@ -128,9 +129,8 @@ export default function HomePage() {
             </span>
             <h2>Latest from the blog</h2>
             <p>
-              Fresh notes on n8n and Trigger.dev automation, multi-agent
-              orchestration, production RAG, and shipping fast with Cursor +
-              Claude.
+              Fresh notes on agents, n8n automation, full-stack AI, and
+              shipping an MVP — plus the pieces I rank highest below.
             </p>
           </div>
           <Link href="/blog" className="home-recent-cta">
@@ -157,16 +157,42 @@ export default function HomePage() {
                 </div>
                 <h3>{post.title}</h3>
                 <p>{post.excerpt}</p>
-                <div className="home-recent-card-foot">
-                  <span>
-                    <CalendarDays size={13} />
-                    {formatBlogDate(post.publishedAt)}
+                <BlogMeta post={post} className="home-recent-card-foot" />
+              </Link>
+            );
+          })}
+        </div>
+
+        <header className="home-recent-head">
+          <div>
+            <h2>Most read</h2>
+            <p>
+              Ranked guides on Cursor, weekend MVPs, and streaming agents into
+              a real UI — the next stop after the latest three.
+            </p>
+          </div>
+        </header>
+
+        <div className="home-recent-grid">
+          {mostRead.map((post, index) => {
+            const Icon = blogIconMap[post.icon];
+            return (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className={`home-recent-card accent-${post.accent}`}
+                style={{ animationDelay: `${index * 90}ms` }}
+                aria-label={`Read article: ${post.title}`}
+              >
+                <div className="home-recent-card-top">
+                  <span className="blog-card-icon" aria-hidden="true">
+                    <Icon size={20} strokeWidth={1.8} />
                   </span>
-                  <span>
-                    <Clock size={13} />
-                    {post.readTime}
-                  </span>
+                  <span className="blog-card-category">{post.category}</span>
                 </div>
+                <h3>{post.title}</h3>
+                <p>{post.excerpt}</p>
+                <BlogMeta post={post} className="home-recent-card-foot" />
               </Link>
             );
           })}
