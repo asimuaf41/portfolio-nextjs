@@ -79,6 +79,35 @@ export type BlogPost = {
   pinOrder?: number;
 };
 
+export type TestimonialMetric = {
+  value: string;
+  label: string;
+};
+
+export type Testimonial = {
+  id: string;
+  quote: string;
+  /**
+   * When false, `quote` is a professional summary written from the review,
+   * not the client's exact words.
+   */
+  verbatim?: boolean;
+  /** Upwork reviews in this set often omit a personal name. */
+  attribution: string;
+  project: string;
+  /** Upwork contract title when it differs from the product name. */
+  jobTitle?: string;
+  projectType: string;
+  timeframe: string;
+  /** Documented result from the contract — not an inferred percentage. */
+  outcome: string;
+  metrics?: TestimonialMetric[];
+  skills: string[];
+  rating: 5;
+  featured?: boolean;
+  accent: BlogAccent;
+};
+
 export type CaseStudyFeature = {
   title: string;
   description: string;

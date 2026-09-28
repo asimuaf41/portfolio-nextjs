@@ -110,6 +110,9 @@ export default function HomePage() {
             );
           })}
         </div>
+        <Link href="/testimonials" className="home-recent-cta">
+          Client testimonials <ArrowRight size={16} />
+        </Link>
       </section>
 
       <HomeWorkflow />
