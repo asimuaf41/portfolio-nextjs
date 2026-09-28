@@ -5,10 +5,12 @@ import {
   ArrowLeft,
   ArrowRight,
   CheckCircle2,
+  Clock3,
   ExternalLink,
   Github,
   Layers3,
   Target,
+  Users,
 } from "lucide-react";
 import { SeoJsonLd } from "@/components/seo-jsonld";
 import { caseStudies, getCaseStudy } from "@/data/case-studies";
@@ -53,7 +55,7 @@ export async function generateMetadata({
 
   return createPageMetadata({
     title: study.title,
-    description: study.summary,
+    description: `${study.impact}. ${study.summary}`,
     path: `/case-studies/${study.slug}`,
     keywords: study.keywords,
     type: "article",
@@ -126,7 +128,26 @@ export default async function CaseStudyDetailPage({
           {study.targetClient}
         </span>
         <h1>{study.title}</h1>
+        <p className="case-article-impact">{study.impact}</p>
         <p className="case-article-summary">{study.summary}</p>
+        <div className="case-delivery-meta" aria-label="Delivery details">
+          <span>
+            <Clock3 size={14} />
+            {study.delivery}
+          </span>
+          <span>
+            <Users size={14} />
+            Solo full-stack delivery
+          </span>
+        </div>
+        <dl className="case-metrics" aria-label="Key outcomes">
+          {study.metrics.map((metric) => (
+            <div key={metric.label} className="case-metric">
+              <dt>{metric.value}</dt>
+              <dd>{metric.label}</dd>
+            </div>
+          ))}
+        </dl>
         <div className="case-article-actions">
           {study.liveUrl ? (
             <a
@@ -212,6 +233,18 @@ export default async function CaseStudyDetailPage({
 
           <section id="result" className="case-article-section">
             <h2>The Result</h2>
+            <dl className="case-metrics case-metrics-inline" aria-label="Key outcomes">
+              {study.metrics.map((metric) => (
+                <div key={metric.label} className="case-metric">
+                  <dt>{metric.value}</dt>
+                  <dd>{metric.label}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="case-delivery-note">
+              <Clock3 size={14} />
+              {study.delivery}
+            </p>
             {study.result.map((paragraph) => (
               <p key={paragraph.slice(0, 40)}>{paragraph}</p>
             ))}

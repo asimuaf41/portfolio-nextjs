@@ -314,7 +314,13 @@ export default function AboutPage() {
       </section>
 
       <aside className="about-closing about-reveal">
-        <p>{aboutProfile.closing}</p>
+        <div className="about-closing-copy">
+          <p>{aboutProfile.closing}</p>
+          <p className="about-closing-process">
+            <Link href="/#how-i-work">See how an engagement runs</Link>:
+            discovery, a named artifact at each stage, then launch and support.
+          </p>
+        </div>
         <Link href="/contact?from=about" className="about-closing-cta">
           Start a conversation <ArrowRight size={16} />
         </Link>

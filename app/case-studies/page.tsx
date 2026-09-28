@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import {
   ArrowRight,
+  Clock3,
   ExternalLink,
   FileText,
   Github,
@@ -85,7 +86,20 @@ export default function CaseStudiesPage() {
                 </span>
               </div>
               <h3>{study.title}</h3>
+              <p className="case-study-card-impact">{study.impact}</p>
               <p>{study.summary}</p>
+              <dl className="case-metrics case-metrics-compact" aria-label="Key outcomes">
+                {study.metrics.map((metric) => (
+                  <div key={metric.label} className="case-metric">
+                    <dt>{metric.value}</dt>
+                    <dd>{metric.label}</dd>
+                  </div>
+                ))}
+              </dl>
+              <span className="case-delivery-chip">
+                <Clock3 size={12} />
+                {study.delivery}
+              </span>
               <div className="case-study-card-tags">
                 {study.techStack.slice(0, 4).map((tag) => (
                   <span key={tag} className="case-tag">

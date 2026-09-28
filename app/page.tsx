@@ -4,6 +4,7 @@ import {
   ArrowRight,
   CalendarDays,
   Clock,
+  Clock3,
   FileText,
   PenLine,
   Target,
@@ -11,6 +12,7 @@ import {
 import { BackgroundTexture } from "@/components/background-texture";
 import { HomeAutomation } from "@/components/home-automation";
 import { HomeHeroIntro } from "@/components/home-hero-intro";
+import { HomeWorkflow } from "@/components/home-workflow";
 import { blogPosts } from "@/data/blog";
 import {
   caseStudiesPage,
@@ -94,7 +96,12 @@ export default function HomePage() {
                   </span>
                 </div>
                 <h3>{study.title}</h3>
+                <p className="home-case-card-impact">{study.impact}</p>
                 <p>{study.summary}</p>
+                <span className="home-case-card-delivery">
+                  <Clock3 size={12} />
+                  {study.delivery}
+                </span>
                 <span className="home-case-card-cta">
                   Read case study <ArrowRight size={14} />
                 </span>
@@ -103,6 +110,8 @@ export default function HomePage() {
           })}
         </div>
       </section>
+
+      <HomeWorkflow />
 
       <HomeAutomation />
 

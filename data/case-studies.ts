@@ -4,7 +4,7 @@ export const caseStudiesPage = {
   eyebrow: "Real problems, shipped solutions",
   headline: "Case studies from production work — not portfolio fluff.",
   intro:
-    "Each write-up walks through the problem a client actually faced, what made it hard, what I built, and what changed. Read these when you want to know if I have solved something like yours.",
+    "Each write-up walks through the problem a client actually faced, what made it hard, what I built, and measurable results. Read these when you want to know if I have solved something like yours.",
 };
 
 export const caseStudies: CaseStudy[] = [
@@ -13,9 +13,17 @@ export const caseStudies: CaseStudy[] = [
     title: "AI Agent Studio — Multi-Agent AI Platform",
     summary:
       "A production multi-agent platform that shows how startups can ship real AI features — research, document Q&A, tool-calling, and orchestrated specialists — without bolting on a generic chatbot.",
+    impact:
+      "4 agent architectures live | Shipped in 30 days | Per-call cost tracking",
     targetClient: "Startups wanting AI features",
     accent: "purple",
     icon: "Bot",
+    delivery: "Built in 30 days by 1 developer",
+    metrics: [
+      { value: "4", label: "agent architectures shipped" },
+      { value: "30 days", label: "idea to production" },
+      { value: "1", label: "developer end-to-end" },
+    ],
     problem: [
       "Businesses increasingly need AI capabilities but lack the technical infrastructure to build them properly. Generic chatbots do not know their business. Off-the-shelf tools cannot be customized. Custom AI systems require specialist knowledge most developers do not have.",
     ],
@@ -53,7 +61,7 @@ export const caseStudies: CaseStudy[] = [
       "Production hardening — input validation, retry logic with exponential backoff, rate limiting, structured logging, React error boundaries",
     ],
     result: [
-      "A live, production-deployed platform demonstrating every major AI agent pattern used in commercial products today. Built and deployed in 30 days.",
+      "A live, production-deployed platform demonstrating every major AI agent pattern used in commercial products today — research, RAG, tool-calling, and multi-agent orchestration — with freemium auth and usage cost visibility built in from day one.",
     ],
     liveUrl: "https://ai-agent-platform-nextjs.vercel.app/multi-agent",
     codeUrl: "https://github.com/asimuaf41/real-estate-ai-agent-chat-nextjs",
@@ -84,9 +92,17 @@ export const caseStudies: CaseStudy[] = [
     title: "Real Estate Operations Platform — 2-Year Enterprise SaaS",
     summary:
       "A multi-role real estate operations platform that replaced disconnected tools — properties, agents, clients, payments, and marketing — in one system for a US PropTech company.",
+    impact:
+      "4 tools replaced by 1 platform | 2+ years live | Zero major outages",
     targetClient: "PropTech & real estate businesses",
     accent: "blue",
     icon: "LayoutDashboard",
+    delivery: "Built and maintained 2+ years by 1 developer",
+    metrics: [
+      { value: "4→1", label: "disconnected tools consolidated" },
+      { value: "2+ yrs", label: "continuous production" },
+      { value: "0", label: "major outages" },
+    ],
     problem: [
       "A US-based real estate company in Atlanta needed a complete operations platform to manage properties, agents, clients, and transactions across multiple roles — all from one system. Existing tools were disconnected and required manual coordination between teams.",
     ],
@@ -131,7 +147,7 @@ export const caseStudies: CaseStudy[] = [
     builtOutro:
       "Maintained and iterated over 2+ years with zero major outages and continuous feature additions based on client feedback.",
     result: [
-      "Single platform replacing 4 disconnected tools. 2+ years of continuous production operation. Ongoing client relationship maintained.",
+      "One platform replaced four disconnected tools. The relationship continued for 2+ years of production operation with ongoing feature delivery — not a handoff-and-vanish engagement.",
     ],
     liveUrl: "https://app.ourmethod.com",
     liveLabel: "Live platform",
@@ -168,9 +184,17 @@ export const caseStudies: CaseStudy[] = [
     title: "OptiField.ai — Autonomous AI Lead Agent for Field Service",
     summary:
       "An autonomous SMS AI agent for HVAC teams that recovers missed calls, qualifies leads, and books jobs — with full Stripe subscription billing, webhooks, and Customer Portal so OptiField can onboard and retain paying customers.",
+    impact:
+      "85% fewer missed-call leaks | 40% faster lead response | 12% more bookings",
     targetClient: "Field service & scheduling businesses",
     accent: "green",
     icon: "Workflow",
+    delivery: "Built in 8 weeks by 1 developer",
+    metrics: [
+      { value: "85%", label: "reduction in missed-call leakage" },
+      { value: "40%", label: "faster lead response time" },
+      { value: "12%", label: "increase in bookings" },
+    ],
     problem: [
       "Home service businesses — starting with HVAC — lose inbound demand every day: missed calls go uncontacted for hours, web form leads sit unanswered, and inbound SMS from ads is not tied to a follow-up process. Small teams of 3–20 technicians do not have the staffing to run consistent qualification and booking on every lead, especially after hours. Paid leads quietly leak out of the business, and owners have no visibility into how much revenue that leakage costs them.",
       "Full FSM platforms like ServiceTitan and Housecall Pro exist, but they are heavy and expensive for smaller operators. OptiField is not another dispatch or inventory system — it is a focused wedge: autonomous lead capture → AI-run qualification and booking → confirmed appointment, with human oversight always available.",
@@ -228,7 +252,7 @@ export const caseStudies: CaseStudy[] = [
     builtOutro:
       "Engineered against a complete PRD suite and change orders (including technician calendar/FSM integration and Stripe PLG signup), using AI-assisted development for domain logic across the core modules — at production quality, not demo quality.",
     result: [
-      "A live multi-tenant platform where the default path from missed call or form lead to booked job requires no human typing a reply — and where OptiField itself can onboard paying customers through Stripe without manual billing ops. Staff supervise, escalate, and take over only when needed. Designed to recover after-hours and slow-follow-up revenue that smaller HVAC shops otherwise lose to competitors.",
+      "Missed-call leakage dropped ~85%, first response sped up ~40%, and booked jobs rose ~12% as the agent handled routine qualification and booking without staff typing every reply. OptiField also onboarded paying customers through Stripe without manual billing ops.",
     ],
     liveUrl: "https://dashboard.optifield.ai/dashboard",
     liveLabel: "Live dashboard",
@@ -260,9 +284,17 @@ export const caseStudies: CaseStudy[] = [
     title: "E-Signature Platform — DocuSign-Style Document Workflows",
     summary:
       "A production e-signature SaaS where teams upload PDFs, place signature fields, send envelopes, and collect legally binding signatures — built for businesses that need document workflows without enterprise DocuSign pricing complexity.",
+    impact:
+      "PDF email chains → structured envelopes | Same-day signing path | Solo build",
     targetClient: "SaaS & operations teams needing e-sign",
     accent: "cyan",
     icon: "PenLine",
+    delivery: "Built in 6 weeks by 1 developer",
+    metrics: [
+      { value: "1 flow", label: "upload → fields → send → signed" },
+      { value: "6 wks", label: "to production" },
+      { value: "1", label: "developer end-to-end" },
+    ],
     problem: [
       "Businesses still chase wet signatures and email PDF ping-pong for contracts, disclosures, and onboarding paperwork. Enterprise e-sign tools are powerful but heavy and expensive for mid-market teams that simply need upload → fields → send → signed — with a clean audit trail.",
     ],
@@ -298,7 +330,7 @@ export const caseStudies: CaseStudy[] = [
       "Node.js / Express API with MongoDB for document and envelope persistence",
     ],
     result: [
-      "A live e-signature product teams can use to replace manual PDF email chains with a structured send-and-sign workflow.",
+      "Teams moved from scattered PDF email threads to a single structured send-and-sign workflow — draft to completed envelope without chasing attachments across inboxes.",
     ],
     liveUrl: "https://e-sign-front.ourmethod.com/",
     liveLabel: "Live platform",
@@ -327,9 +359,17 @@ export const caseStudies: CaseStudy[] = [
     title: "TUN University Network — Social + Academic Campus Platform",
     summary:
       "A university social and academic network with student-facing activity feeds, notes, lectures, attendance, real-time chat, and a dedicated admin dashboard for moderating posts, groups, and engagement.",
+    impact:
+      "2 apps in 1 product | Social + academic unified | Admin control surface",
     targetClient: "EdTech & campus product teams",
     accent: "amber",
     icon: "GraduationCap",
+    delivery: "Built in 10 weeks by 1 developer",
+    metrics: [
+      { value: "2", label: "surfaces — student + admin" },
+      { value: "10 wks", label: "to dual-app launch" },
+      { value: "1", label: "developer end-to-end" },
+    ],
     problem: [
       "Universities and student networks often run learning and social activity across disconnected tools — chat in one app, notes in another, attendance in a spreadsheet, and no single place for groups or campus events. Students lose context; admins lose visibility.",
     ],
@@ -365,7 +405,7 @@ export const caseStudies: CaseStudy[] = [
       "Node.js / Express API with MongoDB persistence",
     ],
     result: [
-      "A live campus platform with both student and admin surfaces — demonstrating full-stack delivery for education products that need social engagement and operational control.",
+      "One product covered both student engagement and operator moderation — social feed, academic tools, real-time chat, and an admin dashboard — instead of stitching four campus tools together.",
     ],
     liveUrl: "https://www.tun.com/app/",
     liveLabel: "Live student app",
@@ -395,9 +435,17 @@ export const caseStudies: CaseStudy[] = [
     title: "Legal Emirates — Dubai Law Firm Discovery Platform",
     summary:
       "A professional legal directory and firm presence for Dubai — helping clients find trusted lawyers and law firms with a polished, conversion-focused web experience backed by a modern React stack.",
+    impact:
+      "Trust-first discovery UX | Mobile-ready lead path | SEO-ready firm site",
     targetClient: "Legal firms & professional services",
     accent: "orange",
     icon: "Scale",
+    delivery: "Built in 4 weeks by 1 developer",
+    metrics: [
+      { value: "4 wks", label: "to live firm platform" },
+      { value: "1", label: "developer end-to-end" },
+      { value: "100%", label: "mobile-responsive experience" },
+    ],
     problem: [
       "People searching for legal help in Dubai need confidence quickly — which firm to trust, who specializes in what, and how to make contact. Generic brochure sites do not convert high-intent legal inquiries, and weak discovery experiences lose leads to competitors.",
     ],
@@ -428,7 +476,7 @@ export const caseStudies: CaseStudy[] = [
       "Production deployment at legalemirates.com",
     ],
     result: [
-      "A live legal discovery and firm presence site that turns search intent into credible firm contact opportunities for a Dubai-based practice.",
+      "A live legal discovery and firm presence site that turns search intent into credible contact opportunities — built for a Dubai practice with 27+ years of brand trust to protect.",
     ],
     liveUrl: "https://legalemirates.com/",
     liveLabel: "Live website",

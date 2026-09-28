@@ -75,13 +75,23 @@ export type CaseStudyFeature = {
   description: string;
 };
 
+export type CaseStudyMetric = {
+  value: string;
+  label: string;
+};
+
 export type CaseStudy = {
   slug: string;
   title: string;
   summary: string;
+  /** Short outcome headline shown on cards — e.g. "85% fewer missed calls". */
+  impact: string;
   targetClient: string;
   accent: BlogAccent;
   icon: BlogIcon;
+  /** e.g. "Built in 8 weeks by 1 developer" */
+  delivery: string;
+  metrics: CaseStudyMetric[];
   problem: string[];
   challenge: string[];
   builtIntro: string;
