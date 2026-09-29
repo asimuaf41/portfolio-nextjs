@@ -1,6 +1,17 @@
+export type NavIcon =
+  | "Home"
+  | "User"
+  | "FileText"
+  | "FolderKanban"
+  | "Layers"
+  | "Quote"
+  | "Mail"
+  | "PenLine";
+
 export type NavItem = {
   href: string;
   label: string;
+  icon: NavIcon;
 };
 
 export type Project = {

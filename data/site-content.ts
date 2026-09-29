@@ -1,15 +1,15 @@
 import type { NavItem, Project } from "@/types/content";
 
 export const navItems: NavItem[] = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/resume", label: "Resume" },
-  { href: "/projects", label: "Projects" },
-  { href: "/case-studies", label: "Case Studies" },
-  { href: "/testimonials", label: "Testimonials" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "Home", icon: "Home" },
+  { href: "/about", label: "About", icon: "User" },
+  { href: "/resume", label: "Resume", icon: "FileText" },
+  { href: "/projects", label: "Projects", icon: "FolderKanban" },
+  { href: "/case-studies", label: "Case Studies", icon: "Layers" },
+  { href: "/testimonials", label: "Testimonials", icon: "Quote" },
+  { href: "/contact", label: "Contact", icon: "Mail" },
   // { href: "/gallery", label: "Gallery" },
-  { href: "/blog", label: "Blog" },
+  { href: "/blog", label: "Blog", icon: "PenLine" },
 ];
 
 export const projects: Project[] = [

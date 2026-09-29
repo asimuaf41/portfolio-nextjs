@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { BackgroundTexture } from "@/components/background-texture";
 import { ContactHeroActions } from "@/components/contact-hero-actions";
+import { FaqSection } from "@/components/faq-section";
 import { ScrollRevealEffects } from "@/components/scroll-reveal-effects";
 import { SectionTitle } from "@/components/section-title";
 import {
@@ -85,6 +86,8 @@ export default function ContactPage() {
           </Suspense>
         </div>
       </header>
+
+      <FaqSection className="contact-reveal" />
 
       <section
         className="contact-channels contact-reveal"

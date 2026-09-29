@@ -3,12 +3,48 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  Facebook,
+  FileText,
+  FolderKanban,
+  Github,
+  Home,
+  Layers,
+  Linkedin,
+  Mail,
+  MapPin,
+  PenLine,
+  Quote,
+  Twitter,
+  User,
+  type LucideIcon,
+} from "lucide-react";
 import { navItems } from "@/data/site-content";
-import { personalInfo } from "@/data/home";
+import { personalInfo, socialProfiles } from "@/data/home";
 import { cn } from "@/lib/utils";
+import type { NavIcon } from "@/types/content";
 
 const WHATSAPP_NUMBER = "+923026046119";
 const WHATSAPP_HREF = "https://wa.me/923026046119";
+const EMAIL_ADDRESS = "asimuaf41@gmail.com";
+
+const navIconMap: Record<NavIcon, LucideIcon> = {
+  Home,
+  User,
+  FileText,
+  FolderKanban,
+  Layers,
+  Quote,
+  Mail,
+  PenLine,
+};
+
+const socialIconMap = {
+  Facebook,
+  Twitter,
+  LinkedIn: Linkedin,
+  GitHub: Github,
+} as const;
 
 function WhatsAppIcon({ size = 13 }: { size?: number }) {
   return (
@@ -77,32 +113,65 @@ export function SiteSidebar({ onNavigate }: { onNavigate?: () => void }) {
           <p className="sidebar-profile-role">
             Full-Stack &amp; AI Engineer
           </p>
+          <span className="sidebar-timezone">
+            <MapPin size={11} aria-hidden="true" />
+            {personalInfo.location} · {personalInfo.timezone}
+          </span>
         </div>
       </div>
 
       <nav aria-label="Main navigation" className="sidebar-nav">
         <ul className="space-y-2">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                onClick={onNavigate}
-                className={cn(
-                  "sidebar-nav-link block rounded px-3 py-2 text-center text-sm font-semibold text-[#9ca4ba]",
-                  (pathname === item.href ||
-                    (item.href !== "/" && pathname.startsWith(`${item.href}/`))) &&
-                    "bg-[#037fff] text-white hover:bg-[#037fff] hover:text-white",
-                )}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
+          {navItems.map((item) => {
+            const Icon = navIconMap[item.icon];
+            const isActive =
+              pathname === item.href ||
+              (item.href !== "/" && pathname.startsWith(`${item.href}/`));
+            return (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  onClick={onNavigate}
+                  aria-current={isActive ? "page" : undefined}
+                  className={cn(
+                    "sidebar-nav-link flex items-center justify-center gap-2.5 rounded px-3 py-2 text-sm font-semibold text-[#9ca4ba]",
+                    isActive &&
+                      "bg-[#037fff] text-white hover:bg-[#037fff] hover:text-white",
+                  )}
+                >
+                  <Icon size={16} strokeWidth={1.9} aria-hidden="true" />
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
 
       <footer className="sidebar-footer">
         <div className="sidebar-footer-divider" aria-hidden="true" />
+
+        <div className="sidebar-footer-social" aria-label="Social profiles">
+          {socialProfiles.map((social) => {
+            const Icon =
+              socialIconMap[social.icon as keyof typeof socialIconMap];
+            return (
+              <a
+                key={social.label}
+                href={social.link}
+                aria-label={social.label}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {Icon ? <Icon size={15} /> : social.label.slice(0, 2)}
+              </a>
+            );
+          })}
+          <a href={`mailto:${EMAIL_ADDRESS}`} aria-label="Email Asim Ali">
+            <Mail size={15} />
+          </a>
+        </div>
+
         <p className="sidebar-footer-brand">{personalInfo.name}</p>
         <p className="sidebar-footer-copy">
           &copy; {year} · Building products with React, Next.js &amp; AI

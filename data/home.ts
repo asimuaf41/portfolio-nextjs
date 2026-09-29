@@ -1,5 +1,7 @@
 export const personalInfo = {
   name: "Asim Ali",
+  location: "Pakistan",
+  timezone: "GMT+5",
   detail:
         "AI Agent & Automation Engineer | React, Next.js, Node.js. I build AI systems that do real work — agents that qualify leads, answer questions from your own data, and take actions in your database, not just chat — then build the full production system around them: backend, database, auth, integrations, and deployment. Also comfortable with React Native, Claude/OpenAI APIs, n8n, Trigger.dev, Make.com, RAG, and tool-calling. From rescuing complex codebases to launching production-ready platforms from scratch, I deliver clean, reliable solutions that scale.",
 };
@@ -53,4 +55,38 @@ export const homeHighlights = [
     href: "https://www.upwork.com/freelancers/asimali170",
     external: true,
   },
+];
+
+/** Cycled by the hero's typewriter tagline. Purely a visual effect. */
+export const heroRoles = [
+  "AI Agent Engineer",
+  "Automation Specialist",
+  "React & Next.js Developer",
+  "RAG & Multi-Agent Builder",
+];
+
+/** Scrolling marquee strip under the hero CTAs. */
+export const heroTechStack = [
+  "React",
+  "Next.js",
+  "Node.js",
+  "TypeScript",
+  "Claude API",
+  "OpenAI",
+  "n8n",
+  "Trigger.dev",
+  "Supabase",
+  "Stripe",
+];
+/**
+ * Simulated log lines for the hero's "agent activity" demo panel.
+ * Illustrative only — not a live feed.
+ */
+export const heroAgentLog = [
+  "Scanning new lead from web form...",
+  "Qualifying lead -> Hot (fit score 92%)",
+  "Booking call -> Tue 10:00 AM",
+  "Confidence check -> escalate to human",
+  "Invoice reminder sent -> Paid",
+  "RAG lookup -> 3 sources cited",
 ];

@@ -1,6 +1,7 @@
 "use client";
 
-import type { CSSProperties } from "react";
+import type { CSSProperties, MouseEvent as ReactMouseEvent } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -13,6 +14,7 @@ import {
 } from "lucide-react";
 import { personalInfo, socialProfiles } from "@/data/home";
 import { HomeHighlightStats } from "@/components/home-highlight-stats";
+import { HomeRoleTypewriter } from "@/components/home-role-typewriter";
 
 const socialIconMap = {
   Facebook,
@@ -83,9 +85,36 @@ function WordReveal({
   );
 }
 
+/** Subtle 3D tilt that follows the cursor over the primary CTA button. */
+function useMagneticTilt() {
+  const ref = useRef<HTMLAnchorElement>(null);
+
+  function onMouseMove(event: ReactMouseEvent<HTMLAnchorElement>) {
+    const node = ref.current;
+    if (!node) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const rect = node.getBoundingClientRect();
+    const x = event.clientX - rect.left - rect.width / 2;
+    const y = event.clientY - rect.top - rect.height / 2;
+    const tiltX = (y / (rect.height / 2)) * -8;
+    const tiltY = (x / (rect.width / 2)) * 8;
+    node.style.transform = `perspective(320px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-2px)`;
+  }
+
+  function onMouseLeave() {
+    const node = ref.current;
+    if (!node) return;
+    node.style.transform = "";
+  }
+
+  return { ref, onMouseMove, onMouseLeave };
+}
+
 export function HomeHeroIntro() {
   const greeting = "Hi, I am ";
   const nameStart = greeting.length * 0.034 + 0.12;
+  const magneticCta = useMagneticTilt();
 
   return (
     <div className="home-hero-content">
@@ -102,6 +131,8 @@ export function HomeHeroIntro() {
         </span>
       </h1>
 
+      <HomeRoleTypewriter />
+
       <p className="home-hero-detail">
         <span className="sr-only">{personalInfo.detail}</span>
         <WordReveal text={personalInfo.detail} baseDelay={0.72} step={0.012} />
@@ -110,7 +141,13 @@ export function HomeHeroIntro() {
       <HomeHighlightStats />
 
       <div className="home-hero-actions">
-        <Link href="/case-studies" className="home-hero-cta home-hero-cta-primary">
+        <Link
+          href="/case-studies"
+          ref={magneticCta.ref}
+          onMouseMove={magneticCta.onMouseMove}
+          onMouseLeave={magneticCta.onMouseLeave}
+          className="home-hero-cta home-hero-cta-primary"
+        >
           <FileText size={15} />
           View case studies
           <ArrowRight size={15} />

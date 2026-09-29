@@ -31,7 +31,12 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
           >
             Asim Ali
           </span>
-          <Button variant="outline" size="sm" onClick={() => setOpen(true)}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setOpen(true)}
+            aria-label="Open menu"
+          >
             <Menu className="h-4 w-4" />
           </Button>
         </div>
@@ -42,7 +47,12 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
         />
         <div className={`mobile-drawer ${open ? "mobile-drawer-open" : ""}`}>
           <div className="flex justify-end p-3">
-            <Button variant="ghost" size="sm" onClick={() => setOpen(false)}>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setOpen(false)}
+              aria-label="Close menu"
+            >
               <X className="h-4 w-4" />
             </Button>
           </div>

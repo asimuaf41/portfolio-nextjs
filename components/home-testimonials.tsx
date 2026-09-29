@@ -53,7 +53,10 @@ function TestimonialCard({
         <span className="home-testimonial-when">{item.timeframe}</span>
       </figcaption>
       {item.skills.length > 0 ? (
-        <ul className="home-testimonial-skill-list" aria-label="Endorsed skills">
+        <ul
+          className="home-testimonial-skill-list"
+          aria-label="Endorsed skills"
+        >
           {item.skills.map((skill) => (
             <li key={skill}>{skill}</li>
           ))}
@@ -63,13 +66,17 @@ function TestimonialCard({
   );
 }
 
-export function TestimonialsSection() {
+export function TestimonialsSection({
+  className = "",
+}: {
+  className?: string;
+}) {
   const lead = featuredTestimonial;
 
   return (
     <section
       id="testimonials"
-      className="home-testimonials"
+      className={["home-testimonials", className].filter(Boolean).join(" ")}
       aria-labelledby="home-testimonials-heading"
     >
       <header className="home-recent-head">
@@ -82,10 +89,10 @@ export function TestimonialsSection() {
             What clients wrote after the work
           </h2>
           <p>
-            Method is the lead note: a full-time React partnership that is
-            still going after more than four years. The cards under it keep
-            the other Upwork reviews, including a separate long-term React
-            contract, in the client&apos;s own words.
+            Method is the lead note: a full-time React partnership that is still
+            going after more than four years. The cards under it keep the other
+            Upwork reviews, including a separate long-term React contract, in
+            the client&apos;s own words.
           </p>
         </div>
         <Link
@@ -100,16 +107,18 @@ export function TestimonialsSection() {
 
       <figure className={`home-testimonial-featured accent-${lead.accent}`}>
         <div className="home-testimonial-featured-top">
-          <span className="home-testimonial-lead-badge">
-            {lead.project}
-          </span>
+          <span className="home-testimonial-lead-badge">{lead.project}</span>
           <Stars rating={lead.rating} />
         </div>
         {lead.verbatim === false ? (
           <p className="home-testimonial-summary">{lead.quote}</p>
         ) : (
           <>
-            <Quote className="home-testimonial-mark" size={28} aria-hidden="true" />
+            <Quote
+              className="home-testimonial-mark"
+              size={28}
+              aria-hidden="true"
+            />
             <blockquote>
               <p>{lead.quote}</p>
             </blockquote>
