@@ -4,9 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { ISourceOptions } from "@tsparticles/engine";
+import { useTheme } from "@/components/theme-provider";
 
 export function BackgroundTexture() {
   const [isReady, setIsReady] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -37,20 +39,23 @@ export function BackgroundTexture() {
       },
       particles: {
         color: {
-          value: [
-            "#241379",
-            "#2185bf",
-            "#1fbce1",
-            "#b62f56",
-            "#eb7d46",
-            "#fddc32",
-          ],
+          value:
+            theme === "light"
+              ? ["#7fc0ff", "#2185bf", "#4da3ff", "#94a3b8", "#64748b"]
+              : [
+                  "#241379",
+                  "#2185bf",
+                  "#1fbce1",
+                  "#b62f56",
+                  "#eb7d46",
+                  "#fddc32",
+                ],
         },
         links: {
-          color: "#2185bf",
+          color: theme === "light" ? "#7fc0ff" : "#2185bf",
           distance: 145,
           enable: true,
-          opacity: 0.2,
+          opacity: theme === "light" ? 0.28 : 0.2,
           width: 1,
         },
         move: {
@@ -63,14 +68,14 @@ export function BackgroundTexture() {
         },
         number: {
           density: { enable: true, area: 900 },
-          value: 60,
+          value: theme === "light" ? 42 : 60,
         },
-        opacity: { value: 0.6 },
+        opacity: { value: theme === "light" ? 0.45 : 0.6 },
         shape: { type: "circle" },
         size: { value: { min: 1, max: 4 } },
       },
     }),
-    [],
+    [theme],
   );
 
   if (!isReady) {
@@ -80,7 +85,8 @@ export function BackgroundTexture() {
   return (
     <div className="texture-layer" aria-hidden="true">
       <Particles
-        id="background-particles"
+        key={theme}
+        id={`background-particles-${theme}`}
         options={options}
         className="h-full w-full"
       />

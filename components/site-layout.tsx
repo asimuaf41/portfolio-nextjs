@@ -13,27 +13,20 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
   useEffect(() => setOpen(false), [pathname]);
 
   return (
-    <div className="portfolio-shell text-slate-100 lg:grid">
-      <aside className="hidden border-r border-[#2e344e] bg-[#191d2b] lg:block">
+    <div className="portfolio-shell lg:grid">
+      <aside className="portfolio-aside hidden lg:block">
         <SiteSidebar />
       </aside>
 
       <div className="lg:hidden">
-        <div className="sticky top-0 z-40 flex items-center justify-between border-b border-[#2e344e] bg-[#191d2b] p-3 backdrop-blur">
-          <span
-            className="font-signature text-2xl font-normal tracking-wide select-none"
-            style={{
-              fontFamily:
-                "'Pacifico', 'Dancing Script', 'Great Vibes', cursive, sans-serif",
-              color: "#037fff",
-              letterSpacing: "2px",
-            }}
-          >
+        <div className="mobile-topbar sticky top-0 z-40 flex items-center justify-between p-3 backdrop-blur">
+          <span className="mobile-topbar-brand font-signature text-2xl font-normal tracking-wide select-none">
             Asim Ali
           </span>
           <Button
             variant="outline"
             size="sm"
+            className="theme-aware-outline-btn"
             onClick={() => setOpen(true)}
             aria-label="Open menu"
           >
@@ -50,6 +43,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
             <Button
               variant="ghost"
               size="sm"
+              className="theme-aware-ghost-btn"
               onClick={() => setOpen(false)}
               aria-label="Close menu"
             >

@@ -3,8 +3,24 @@ import Script from "next/script";
 import { DM_Sans, JetBrains_Mono, Outfit } from "next/font/google";
 import { SeoJsonLd } from "@/components/seo-jsonld";
 import { SiteLayout } from "@/components/site-layout";
+import { ThemeProvider } from "@/components/theme-provider";
 import { personJsonLd, siteConfig, websiteJsonLd } from "@/lib/seo";
+import { DEFAULT_THEME, THEME_STORAGE_KEY } from "@/lib/theme";
 import "./globals.css";
+
+const themeBootScript = `
+(function () {
+  try {
+    var stored = localStorage.getItem(${JSON.stringify(THEME_STORAGE_KEY)});
+    var theme = stored === "light" || stored === "dark" ? stored : ${JSON.stringify(DEFAULT_THEME)};
+    document.documentElement.setAttribute("data-theme", theme);
+    document.documentElement.style.colorScheme = theme;
+  } catch (e) {
+    document.documentElement.setAttribute("data-theme", ${JSON.stringify(DEFAULT_THEME)});
+    document.documentElement.style.colorScheme = ${JSON.stringify(DEFAULT_THEME)};
+  }
+})();
+`;
 
 const displayFont = Outfit({
   subsets: ["latin"],
@@ -99,9 +115,16 @@ export default function RootLayout({
   return (
     <html
       lang={siteConfig.language}
+      data-theme={DEFAULT_THEME}
       className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`}
+      suppressHydrationWarning
     >
       <body className={bodyFont.className}>
+        <Script
+          id="theme-boot"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeBootScript }}
+        />
         <Script id="tawkto-widget" strategy="afterInteractive">
           {`
             var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
@@ -118,7 +141,9 @@ export default function RootLayout({
         </Script>
         <SeoJsonLd data={websiteJsonLd()} />
         <SeoJsonLd data={personJsonLd()} />
-        <SiteLayout>{children}</SiteLayout>
+        <ThemeProvider>
+          <SiteLayout>{children}</SiteLayout>
+        </ThemeProvider>
       </body>
     </html>
   );

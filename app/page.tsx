@@ -18,6 +18,7 @@ import { HomeTechMarquee } from "@/components/home-tech-marquee";
 import { HomeWorkflow } from "@/components/home-workflow";
 import { TestimonialsSection } from "@/components/home-testimonials";
 import { ScrollRevealEffects } from "@/components/scroll-reveal-effects";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 import { caseStudiesPage, getPublishedCaseStudies } from "@/data/case-studies";
 import { popularPosts, postsByDate } from "@/lib/blog";
 import { blogIconMap } from "@/lib/blog-icons";
@@ -49,6 +50,7 @@ export default function HomePage() {
 
   return (
     <main className="home-page">
+      <ThemeSwitcher className="home-theme-switcher" />
       <ScrollRevealEffects selector=".home-reveal" />
 
       <section className="home-hero">

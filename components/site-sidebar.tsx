@@ -134,9 +134,8 @@ export function SiteSidebar({ onNavigate }: { onNavigate?: () => void }) {
                   onClick={onNavigate}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "sidebar-nav-link flex items-center justify-center gap-2.5 rounded px-3 py-2 text-sm font-semibold text-[#9ca4ba]",
-                    isActive &&
-                      "bg-[#037fff] text-white hover:bg-[#037fff] hover:text-white",
+                    "sidebar-nav-link flex items-center justify-center gap-2.5 rounded px-3 py-2 text-sm font-semibold",
+                    isActive && "sidebar-nav-link-active",
                   )}
                 >
                   <Icon size={16} strokeWidth={1.9} aria-hidden="true" />
