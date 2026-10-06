@@ -227,8 +227,7 @@ export default function ContactPage() {
           <span className="contact-eyebrow">Map</span>
           <h3 id="contact-map-heading">Where I&apos;m based</h3>
           <p className="contact-map-lead">
-            Remote-first across time zones — locally based in Sangla Hill,
-            Nankana Sahib, Pakistan.
+            Remote-first across time zones — locally based in Lahore, Pakistan.
           </p>
         </header>
 
@@ -269,7 +268,7 @@ export default function ContactPage() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Map location — Sangla Hill, Pakistan"
+                title="Map location — Lahore, Pakistan"
               />
             </div>
           </div>

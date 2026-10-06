@@ -11,7 +11,7 @@ export const siteConfig = {
   language: "en",
   email: "asimuaf41@gmail.com",
   phone: "+923026046119",
-  location: "Sangla Hill, Nankana Sahib, Pakistan",
+  location: "Lahore, Pakistan",
   twitterHandle: "@MianAsimAli6",
   ogImage: {
     /** Stable share card (also regenerated via app/opengraph-image.tsx). */
@@ -171,7 +171,7 @@ export function personJsonLd() {
     description: siteConfig.description,
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Sangla Hill",
+      addressLocality: "Lahore",
       addressRegion: "Punjab",
       addressCountry: "PK",
     },

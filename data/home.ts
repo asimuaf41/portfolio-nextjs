@@ -1,6 +1,6 @@
 export const personalInfo = {
   name: "Asim Ali",
-  location: "Pakistan",
+  location: "Lahore, Pakistan",
   timezone: "GMT+5",
   detail:
         "AI Agent & Automation Engineer | React, Next.js, Node.js. I build AI systems that do real work — agents that qualify leads, answer questions from your own data, and take actions in your database, not just chat — then build the full production system around them: backend, database, auth, integrations, and deployment. Also comfortable with React Native, Claude/OpenAI APIs, n8n, Trigger.dev, Make.com, RAG, and tool-calling. From rescuing complex codebases to launching production-ready platforms from scratch, I deliver clean, reliable solutions that scale.",
