@@ -9954,3 +9954,16 @@ html[data-theme="light"] .case-metric dd {
 html[data-theme="light"] .case-article-back {
   color: #475569 !important;
 }
+
+.blog-article-banner {
+  margin: 0 auto 2rem;
+  max-width: 640px;
+}
+
+.blog-article-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+}

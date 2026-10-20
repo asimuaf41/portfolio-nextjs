@@ -1278,4 +1278,86 @@ export const blogPosts: BlogPost[] = [
     conclusion:
       "48 hours isn't about coding fast — it's about saying no fast. Cut scope, lean on AI for the boilerplate, deploy on hour one, and ship something real. You'll learn more from one launched MVP than from a month of polishing a draft. Do this twice and you've built a skill that compounds for the rest of your career: turning ideas into shipped products at the speed your competitors are still in meetings about.",
   },
+  {
+    slug: "ai-guardrails-client-repos",
+    title: "AI Writes the Code. My Guardrails Decide What Ships.",
+    excerpt:
+      "The four guardrails I install in every client repo before an AI agent writes a single line: one shared rulebook, secrets blocked by hooks, a type-check gate, and a senior review of every diff.",
+    publishedAt: "2026-10-20",
+    category: "AI",
+    difficulty: "Intermediate",
+    popularity: 13,
+    tags: ["Claude Code", "Cursor", "AGENTS.md", "Hooks", "DevSecOps", "TypeScript"],
+    accent: "cyan",
+    icon: "Brain",
+    image: {
+      src: "/blog/ai-guardrails-client-repos.png",
+      alt: "Four AI guardrails for client repos: rules, hooks, gate and review",
+    },
+    intro:
+      "AI can write a feature in 20 minutes. It can also hardcode your API key in 20 seconds. That is why every client project I take on starts the same way: before any AI agent writes a single line, I set up the guardrails. Here is what goes into every repo.",
+    sections: [
+      {
+        heading: "1. One rulebook for every AI tool",
+        paragraphs: [
+          "A single AGENTS.md that Claude Code, Cursor and the rest of the team's agents all read. The stack, the commands and the conventions stay the same, whoever (or whatever) writes the code.",
+          "One file means no drift. When a convention changes, it changes in one place instead of in three tool-specific config files that slowly disagree.",
+        ],
+        code: {
+          language: "md",
+          snippet:
+            "# AGENTS.md\n\n## Stack\nNext.js, TypeScript (strict), Tailwind\n\n## Commands\n- npm run check-types\n- npm run lint\n\n## Rules\n- Never read or edit .env files\n- No new dependencies without asking\n- Keep changes inside the requested scope",
+        },
+      },
+      {
+        heading: "2. Secrets blocked by code, not by hope",
+        paragraphs: [
+          "A line in a prompt saying \"never touch .env\" is a request. A hook is a rule. With hooks in place, agents physically can't read env files, hardcode keys or push to the repo.",
+          "The agent can ask nicely all it wants. The hook runs before the tool call, and the call is refused.",
+        ],
+        callout: {
+          variant: "warning",
+          title: "Prompts are not security",
+          text: "Anything you rely on an agent to remember can be forgotten. Anything enforced by a hook cannot.",
+        },
+      },
+      {
+        heading: "3. \"Done\" means it compiles",
+        paragraphs: [
+          "An agent can't finish a task until the type check passes. A stop hook runs the check, and if it fails the agent keeps working. No more \"it's done\" followed by a red build.",
+        ],
+        bullets: [
+          "Type check runs before any task can be marked complete",
+          "Failures go straight back to the agent as feedback",
+          "The build stays green on every handoff",
+        ],
+      },
+      {
+        heading: "4. Every diff gets a senior review",
+        paragraphs: [
+          "A read-only reviewer agent checks each change for scope creep, silenced errors, leaked secrets and invented APIs. Then I read the diff myself before anything merges.",
+          "The reviewer catches the mechanical problems. My read catches the judgment calls.",
+        ],
+        code: {
+          language: "txt",
+          snippet:
+            "$ agent: read apps/web/.env.local\nx Blocked: this file holds real secrets.\n$ agent: task complete\nv check-types passed  v review: SHIP",
+        },
+      },
+      {
+        heading: "The result for clients",
+        paragraphs: [
+          "AI-level speed with senior-level control. Features ship faster, and nothing reaches production that I can't explain line by line.",
+          "I also turn the setup into a written playbook, so a new developer on the team is productive on day one.",
+        ],
+        callout: {
+          variant: "tip",
+          title: "Inconsistent AI output?",
+          text: "If your team uses AI coding tools and the output feels inconsistent, this is usually the missing layer.",
+        },
+      },
+    ],
+    conclusion:
+      "Guardrails are what turn AI coding from a gamble into a process. Set them up before the first AI-written line, and every agent on the team works to the same senior standard. How is your team keeping AI-written code production-safe?",
+  },
 ];

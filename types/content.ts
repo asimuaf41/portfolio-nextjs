@@ -88,6 +88,8 @@ export type BlogPost = {
   /** Shown in the pinned row on the blog index. */
   pinned?: boolean;
   pinOrder?: number;
+  /** Optional banner shown on the article page and used as the share image. */
+  image?: { src: string; alt: string };
 };
 
 export type TestimonialMetric = {

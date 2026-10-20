@@ -64,8 +64,8 @@ export async function generateMetadata({
     section: post.category,
     publishedTime: post.publishedAt,
     modifiedTime: post.publishedAt,
-    image: `/blog/${post.slug}/opengraph-image.png`,
-    imageAlt: post.title,
+    image: post.image?.src ?? `/blog/${post.slug}/opengraph-image.png`,
+    imageAlt: post.image?.alt ?? post.title,
   });
 }
 
@@ -147,6 +147,19 @@ export default async function BlogDetailPage({
           ))}
         </div>
       </header>
+
+      {post.image ? (
+        <figure className="blog-article-banner blog-reveal">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={post.image.src}
+            alt={post.image.alt}
+            width={1400}
+            height={1400}
+            loading="eager"
+          />
+        </figure>
+      ) : null}
 
       <div className="blog-article-layout">
         <article className="blog-article-body">
