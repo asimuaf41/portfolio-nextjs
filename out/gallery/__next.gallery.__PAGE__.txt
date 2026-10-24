@@ -1,0 +1,32 @@
+2:"$Sreact.fragment"
+3:"/_next/static/chunks/1wf4iyaxf-il3.js"
+4:I[39756,["$3"],"default"]
+5:I[37457,["$3"],"default"]
+a:"/_next/static/chunks/0effzp13si6r1.js"
+b:"/_next/static/chunks/1dbs9l5czykd4.js"
+c:"/_next/static/chunks/2zau3o5q6pxjz.js"
+d:"/_next/static/chunks/1kua6mhanmuhe.js"
+e:I[40998,["$a","$b","$c","$d"],"GalleryClient"]
+f:"BackgroundTexture"
+10:I[22157,["$a","$b","$c","$d"],"$f"]
+11:I[97367,["$3"],"OutletBoundary"]
+12:"$Sreact.suspense"
+15:"ViewportBoundary"
+16:I[97367,["$3"],"$15"]
+17:"MetadataBoundary"
+18:I[97367,["$3"],"$17"]
+19:I[27201,["$3"],"IconMark"]
+7:X
+7:C
+8:X
+9:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$2","c",{"children":[["$","main",null,{"className":"relative","children":[["$","header",null,{"className":"section-title","children":[["$","h2",null,{"className":"text-3xl font-semibold","children":"Gallery"}],["$","div",null,{"className":"section-title-bar","children":["$","div",null,{"className":"section-title-bar-sub"}]}],null]}],["$","$Le",null,{"images":["/meProfile.webp","/asimg.jpeg","/asim1.jpeg","/asim11.jpg","/asim3.jpeg","/profile.jpg","/asim5.jpg","/asim5.jpeg","/asim7.jpg","/asim8.jpg","/asim9.jpg","/asim10.jpg","/asim2.jpeg","/asim12.jpg","/asim13.jpg","/asim14.jpg","/asim15.jpg","/asim16.jpg","/asim17.jpg","/asim18.jpg","/asim19.jpg","/asim20.jpg","/asim21.jpg","/asim22.jpg","/asim23.jpg","/asim25.jpeg","/meProfile.png"]}],["$","$L10",null,{}]]}],[["$","script","script-0",{"src":"/_next/static/chunks/2zau3o5q6pxjz.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/1kua6mhanmuhe.js","async":true}]],["$","$L11",null,{"children":["$","$12",null,{"name":"Next.MetadataOutlet","children":"$@13"}]}]]}],"p":"$@14","v":null,"s":"$8"}}]]
+1:[["children",{"s":"gallery","h":64,"d":{"r":["$","$2","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L5",null,{}]}]]}],"p":"$@6","v":"$7","s":"$8"},"c":"$Q9"}]]
+0:{"t":{"t":{"s":"","h":16,"c":"$Q1"},"h":{"r":["$","$2","h",{"children":[null,["$","$L16",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L18",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$12",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Gallery | Asim Ali"}],["$","meta","1",{"name":"description","content":"Photo gallery from Asim Ali’s portfolio — personal moments and project snapshots from a React/Next.js & AI engineering career."}],["$","meta","2",{"name":"application-name","content":"Asim Portfolio"}],["$","link","3",{"rel":"author","href":"https://asimportfolio-6fd1d.web.app"}],["$","meta","4",{"name":"author","content":"Asim Ali"}],["$","link","5",{"rel":"manifest","href":"/manifest.webmanifest"}],["$","meta","6",{"name":"keywords","content":"Asim Ali,React developer,Next.js developer,AI agent developer,full-stack JavaScript,Claude API,OpenAI,RAG,n8n automation,Trigger.dev,Make.com,Supabase,Node.js freelancer,Upwork Top Rated Plus,Asim Ali gallery,developer portfolio photos"}],["$","meta","7",{"name":"creator","content":"Asim Ali"}],["$","meta","8",{"name":"publisher","content":"Asim Ali"}],["$","meta","9",{"name":"robots","content":"index, follow"}],["$","meta","10",{"name":"googlebot","content":"index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"}],["$","meta","11",{"name":"category","content":"technology"}],["$","link","12",{"rel":"canonical","href":"https://asimportfolio-6fd1d.web.app/gallery/"}],["$","meta","13",{"name":"format-detection","content":"telephone=no, address=no, email=no"}],["$","meta","14",{"property":"og:title","content":"Gallery"}],["$","meta","15",{"property":"og:description","content":"Photo gallery from Asim Ali’s portfolio — personal moments and project snapshots from a React/Next.js & AI engineering career."}],["$","meta","16",{"property":"og:url","content":"https://asimportfolio-6fd1d.web.app/gallery/"}],["$","meta","17",{"property":"og:site_name","content":"Asim Ali Portfolio"}],["$","meta","18",{"property":"og:locale","content":"en_US"}],["$","meta","19",{"property":"og:image","content":"https://asimportfolio-6fd1d.web.app/og-share.png"}],["$","meta","20",{"property":"og:image:width","content":"1200"}],["$","meta","21",{"property":"og:image:height","content":"630"}],["$","meta","22",{"property":"og:image:alt","content":"Gallery"}],["$","meta","23",{"property":"og:type","content":"website"}],["$","meta","24",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","25",{"name":"twitter:site","content":"@MianAsimAli6"}],["$","meta","26",{"name":"twitter:creator","content":"@MianAsimAli6"}],["$","meta","27",{"name":"twitter:title","content":"Gallery"}],["$","meta","28",{"name":"twitter:description","content":"Photo gallery from Asim Ali’s portfolio — personal moments and project snapshots from a React/Next.js & AI engineering career."}],["$","meta","29",{"name":"twitter:image","content":"https://asimportfolio-6fd1d.web.app/og-share.png"}],["$","link","30",{"rel":"shortcut icon","href":"/favicon.svg"}],["$","link","31",{"rel":"icon","href":"/favicon.svg","type":"image/svg+xml"}],["$","link","32",{"rel":"icon","href":"/favicon.ico","sizes":"any"}],["$","link","33",{"rel":"apple-touch-icon","href":"/favicon.svg"}],["$","$L19","34",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@1a","v":null,"s":"$8"}},"a":"$@1b","u":"$@1c","b":"EayKiHG0czda7yfNAPQJ9"}
+13:null
+1c:true
+8:300
+8:C
+1b:0
+6:"$undefined"
+1a:"$undefined"
+14:"$undefined"
