@@ -26,7 +26,6 @@ const themeBootScript = `
 const displayFont = Outfit({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["500", "600", "700", "800"],
   display: "swap",
 });
 
