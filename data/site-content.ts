@@ -35,6 +35,26 @@ export const projects: Project[] = [
     secondaryCodeUrl: "https://github.com/asimuaf41/AI-agent-streaming-NodeJs",
   },
   {
+    slug: "shipwright",
+    title: "Shipwright — AI Agent That Audits & Fixes Vibe-Coded Apps",
+    summary:
+      "A SaaS in development that aims to find, prove and fix production problems in AI-built apps. The working demo (seeded data, scripted AI answers) shows the product experience: a streaming AI assistant with visible tool-check cards, a Stop button that cancels the model call, human approval before any action, a ⌘K command palette, and a dashboard with a filterable issues table whose state lives in the URL. Real repo audits and pull requests are planned next.",
+    category: "AI Agents",
+    stack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Vercel AI SDK",
+      "Claude API",
+      "TanStack Table",
+      "Turborepo",
+    ],
+    image: "/shipwright-dashboard.png",
+    demoUrl: "https://ai-engineer-2026-ten.vercel.app",
+    codeUrl: "https://github.com/asimuaf41/ai-engineer-2026",
+  },
+  {
     slug: "method-atlanta",
     title: "Method Atlanta",
     summary:

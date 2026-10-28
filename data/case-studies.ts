@@ -499,6 +499,90 @@ export const caseStudies: CaseStudy[] = [
     ],
     published: true,
   },
+  {
+    slug: "shipwright",
+    title: "Shipwright — Building the Trust Layer for AI-Built Apps",
+    summary:
+      "A solo build in public: a SaaS that will audit, prove and fix production problems in apps made with AI tools. The working demo, on seeded data, covers the AI assistant, dashboard and design system. Real audits and pull requests are still planned.",
+    impact:
+      "Working demo | Streaming AI assistant | ⌘K dashboard | Case study in progress",
+    targetClient: "Founders shipping AI-built apps",
+    accent: "cyan",
+    icon: "Rocket",
+    delivery: "Solo build, in progress (8 days of the plan shipped)",
+    metrics: [
+      { value: "<20 ms", label: "AI \"thinking\" feedback after a click (local build)" },
+      { value: "0.26 s", label: "until chat is usable while data loads (local build)" },
+      { value: "~1.2 s", label: "dashboard score chart load (local build)" },
+    ],
+    problem: [
+      "Founders now ship apps in a weekend with tools like Lovable, Bolt, v0 and Cursor. The demo works, the first users arrive, and then the quiet problems show up: a database key in the browser bundle, a table anyone can read, a payment webhook that trusts anyone, an AI endpoint with no limit that runs up a bill overnight.",
+      "Scanners stop at a report. Agencies audit by hand and take days. A non-technical founder is left with a list of words they cannot act on.",
+    ],
+    challenge: [
+      "The plan is for Shipwright to find a problem, prove it on the live app, fix it with a pull request in plain English, and guard every new push, escalating anything complex to a human engineer. People will only trust an AI that shows its work, and only pay for a dashboard they can navigate in seconds.",
+      "So I built the experience before the engine: the first eight days went into the interface and the AI interaction, on seeded data, with the audit engine to follow.",
+    ],
+    builtIntro:
+      "What is live today in the demo (seeded data, scripted AI answers, not yet auditing real repos):",
+    features: [
+      {
+        title: "Design and motion system",
+        description:
+          "One package holds the design tokens (colors, type, spacing, severity colors) and one set of motion rules, shared by every app in the monorepo. Light and dark mode are one switch, a rebrand is a change in one file, and a hook in my AI coding workflow rejects raw colors and old animation APIs so the system stays consistent.",
+      },
+      {
+        title: "AI assistant that earns trust",
+        description:
+          "Shows \"Thinking…\" within one frame, renders every check as a card (running, done or a clear error), streams formatted answers, has a Stop button wired to the server so cancelling also cancels the model call, and asks for human approval before any action that would change a system, such as opening a pull request.",
+      },
+      {
+        title: "Dashboard built for daily use",
+        description:
+          "KPI tiles with animated numbers and sparklines, a 30-day score chart with a launch-ready target line, open issues by area, and an issues table with search, severity filter, sorting, pagination, row selection and bulk actions. A ⌘K palette jumps to any page or issue, and every filter lives in the URL so a co-founder sees the same view.",
+      },
+      {
+        title: "Designed for the bad day",
+        description:
+          "Every widget loads and fails on its own: when I broke the score chart's API on purpose, only that card showed \"Couldn't load, try again\". Skeletons match the content shape, empty states separate \"no matches\" from \"nothing yet\", and the error page keeps navigation and shows a support reference.",
+      },
+    ],
+    additionalFeatures: [
+      "Animated landing page with a scroll story (find, prove, fix, guard) that respects the reduce-motion setting",
+      "Scripted AI model running through the real streaming pipeline, so the public demo has no API key and cannot run up a bill",
+      "Turborepo and pnpm monorepo with shared UI and AI packages and Zod-validated environment",
+      "Pinned, reviewed dependencies, and an architecture decision record for each major choice",
+    ],
+    result: [
+      "A working demo with measured, local numbers on seeded data (not customer results): thinking feedback under 20 ms versus 507 ms without the indicator, chat usable in 0.26 s versus 1.07 s without streaming, and the dashboard shell visible in about 90 ms. Keyboard navigation, screen-reader labels, reduced motion and a 390 px phone layout have been checked.",
+      "Planned, not built yet: performance and Lighthouse pass, sign-in and GitHub/Supabase connection, audit agents with structured findings, sandboxed live proof, a fix agent that opens pull requests with human approval, and billing.",
+    ],
+    liveUrl: "https://ai-engineer-2026-ten.vercel.app",
+    liveLabel: "Try the demo",
+    codeUrl: "https://github.com/asimuaf41/ai-engineer-2026",
+    techStack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "shadcn/ui",
+      "Vercel AI SDK",
+      "Claude (Anthropic)",
+      "TanStack Table",
+      "Recharts",
+      "Turborepo",
+      "Vercel",
+    ],
+    keywords: [
+      "AI app audit",
+      "vibe-coded apps",
+      "AI assistant dashboard",
+      "Next.js AI SaaS",
+      "streaming AI chat",
+      "Claude API SaaS case study",
+    ],
+    published: true,
+  },
 ];
 
 export function getCaseStudy(slug: string) {
