@@ -6,6 +6,9 @@ import {
   testimonialEndorsements,
 } from "@/data/testimonials";
 import { UPWORK_PROFILE_URL } from "@/data/site-content";
+import { MagneticHover } from "@/components/motion/magnetic-hover";
+import { Reveal } from "@/components/motion/reveal";
+import { Stagger } from "@/components/motion/stagger";
 import type { Testimonial } from "@/types/content";
 
 function Stars({ rating }: { rating: number }) {
@@ -27,17 +30,12 @@ function Stars({ rating }: { rating: number }) {
   );
 }
 
-function TestimonialCard({
-  item,
-  index,
-}: {
-  item: Testimonial;
-  index: number;
-}) {
+function TestimonialCard({ item }: { item: Testimonial }) {
   return (
-    <figure
+    <MagneticHover
+      as="figure"
+      inStagger
       className={`home-testimonial-card accent-${item.accent}`}
-      style={{ animationDelay: `${index * 80}ms` }}
     >
       <div className="home-testimonial-card-top">
         <Stars rating={item.rating} />
@@ -62,7 +60,7 @@ function TestimonialCard({
           ))}
         </ul>
       ) : null}
-    </figure>
+    </MagneticHover>
   );
 }
 
@@ -144,20 +142,20 @@ export function TestimonialsSection({
         </figcaption>
       </figure>
 
-      <div className="home-testimonial-grid">
-        {supportingTestimonials.map((item, index) => (
-          <TestimonialCard key={item.id} item={item} index={index} />
+      <Stagger className="home-testimonial-grid">
+        {supportingTestimonials.map((item) => (
+          <TestimonialCard key={item.id} item={item} />
         ))}
-      </div>
+      </Stagger>
 
-      <div className="home-testimonial-endorsements">
+      <Reveal className="home-testimonial-endorsements">
         <p>Skills these clients endorsed</p>
         <ul>
           {testimonialEndorsements.map((skill) => (
             <li key={skill}>{skill}</li>
           ))}
         </ul>
-      </div>
+      </Reveal>
     </section>
   );
 }

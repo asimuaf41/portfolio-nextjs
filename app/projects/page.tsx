@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import type { CSSProperties } from "react";
 import {
   ArrowRight,
   ChevronDown,
@@ -13,7 +12,12 @@ import {
   Tag,
 } from "lucide-react";
 import { BackgroundTexture } from "@/components/background-texture";
-import { ScrollRevealEffects } from "@/components/scroll-reveal-effects";
+import { AnimatedNumber } from "@/components/motion/animated-number";
+import { MagneticHover } from "@/components/motion/magnetic-hover";
+import { Reveal } from "@/components/motion/reveal";
+import { Stagger } from "@/components/motion/stagger";
+import { PageTransition } from "@/components/page-transition";
+import { ProjectsGrid } from "@/components/projects-grid";
 import { SectionTitle } from "@/components/section-title";
 import { projects, projectsPage } from "@/data/site-content";
 import { createPageMetadata } from "@/lib/seo";
@@ -22,6 +26,7 @@ import { createPageMetadata } from "@/lib/seo";
 const projectCaseStudySlugs: Record<string, string> = {
   "ai-agent-platform": "ai-agent-studio",
   optifield: "optifield",
+  shipwright: "shipwright",
   "e-sign-platform": "e-signature-saas",
   "method-admin-dashboard": "real-estate-saas",
   "method-atlanta": "real-estate-saas",
@@ -54,263 +59,190 @@ export default function ProjectsPage() {
     .size;
 
   return (
-    <main className="projects-page">
-      <ScrollRevealEffects selector=".projects-reveal" />
-      <SectionTitle title="Projects" />
+    <PageTransition>
+      <main className="projects-page">
+        <SectionTitle title="Projects" />
 
-      <header className="projects-hero projects-reveal">
-        <span
-          className="projects-eyebrow projects-anim-item"
-          style={{ "--i": 0 } as CSSProperties}
-        >
-          <Sparkles size={14} />
-          {projectsPage.eyebrow}
-        </span>
-        <h2
-          className="projects-anim-item"
-          style={{ "--i": 1 } as CSSProperties}
-        >
-          {projectsPage.headline}
-        </h2>
-        <p className="projects-anim-item" style={{ "--i": 2 } as CSSProperties}>
-          {projectsPage.intro}
-        </p>
+        <header className="projects-hero">
+          <Reveal as="span" className="projects-eyebrow" delay={0.05}>
+            <Sparkles size={14} />
+            {projectsPage.eyebrow}
+          </Reveal>
+          <h2>{projectsPage.headline}</h2>
+          <p>{projectsPage.intro}</p>
 
-        <dl
-          className="projects-stats projects-anim-item"
-          style={{ "--i": 3 } as CSSProperties}
-          aria-label="Project statistics"
-        >
-          <div className="projects-stat">
-            <dt>
-              <FolderKanban size={14} />
-              Projects
-            </dt>
-            <dd>{totalProjects}</dd>
-          </div>
-          <div className="projects-stat">
-            <dt>
-              <Layers3 size={14} />
-              Technologies
-            </dt>
-            <dd>{totalStacks}+</dd>
-          </div>
-          <div className="projects-stat">
-            <dt>
-              <Tag size={14} />
-              Domains
-            </dt>
-            <dd>{totalDomains}</dd>
-          </div>
-        </dl>
+          <Reveal
+            as="dl"
+            className="projects-stats"
+            aria-label="Project statistics"
+            delay={0.1}
+          >
+            <div className="projects-stat">
+              <dt>
+                <FolderKanban size={14} />
+                Projects
+              </dt>
+              <dd>
+                <AnimatedNumber value={totalProjects} />
+              </dd>
+            </div>
+            <div className="projects-stat">
+              <dt>
+                <Layers3 size={14} />
+                Technologies
+              </dt>
+              <dd>
+                <AnimatedNumber value={`${totalStacks}+`} />
+              </dd>
+            </div>
+            <div className="projects-stat">
+              <dt>
+                <Tag size={14} />
+                Domains
+              </dt>
+              <dd>
+                <AnimatedNumber value={totalDomains} />
+              </dd>
+            </div>
+          </Reveal>
 
-        <a
-          href="#projects-portfolio"
-          className="projects-scroll-cue projects-anim-item"
-          style={{ "--i": 4 } as CSSProperties}
-        >
-          <span>Browse portfolio</span>
-          <ChevronDown size={18} />
-        </a>
-      </header>
-
-      <section
-        className="projects-domains projects-reveal"
-        aria-labelledby="projects-domains-heading"
-      >
-        <header className="projects-section-head">
-          <span className="projects-eyebrow">Domains</span>
-          <h3 id="projects-domains-heading">Where the work lives</h3>
+          <Reveal
+            as="a"
+            href="#projects-portfolio"
+            className="projects-scroll-cue"
+            delay={0.2}
+          >
+            <span>Browse portfolio</span>
+            <ChevronDown size={18} />
+          </Reveal>
         </header>
-        <ul className="projects-domains-grid">
-          {projectsPage.domains.map((domain, index) => (
-            <li
-              key={domain.label}
-              className="projects-domain-card projects-stagger"
-              style={{ "--i": index } as CSSProperties}
-            >
-              <strong>{domain.label}</strong>
-              <span>{domain.blurb}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
 
-      <article
-        className="projects-featured projects-reveal"
-        aria-labelledby="projects-featured-heading"
-      >
-        <div className="projects-featured-glow" aria-hidden="true" />
-        <div
-          className="projects-featured-media projects-stagger"
-          style={{ "--i": 0 } as CSSProperties}
+        <section
+          className="projects-domains"
+          aria-labelledby="projects-domains-heading"
         >
-          <Image
-            src={featured.image}
-            alt={featured.title}
-            width={1200}
-            height={680}
-            className="h-full w-full object-cover"
-            priority
-          />
-          <span className="projects-featured-category">{featured.category}</span>
-        </div>
-        <div
-          className="projects-featured-body projects-stagger"
-          style={{ "--i": 1 } as CSSProperties}
-        >
-          <span className="projects-featured-label">
-            <Sparkles size={13} />
-            Featured build
-          </span>
-          <h3 id="projects-featured-heading">{featured.title}</h3>
-          <p>{featured.summary}</p>
-          <div className="projects-featured-tags">
-            {featured.stack.slice(0, 6).map((item) => (
-              <span key={item} className="projects-tag">
-                {item}
-              </span>
+          <Reveal as="header" className="projects-section-head">
+            <span className="projects-eyebrow">Domains</span>
+            <h3 id="projects-domains-heading">Where the work lives</h3>
+          </Reveal>
+          <Stagger as="ul" className="projects-domains-grid">
+            {projectsPage.domains.map((domain) => (
+              <MagneticHover
+                as="li"
+                inStagger
+                key={domain.label}
+                className="projects-domain-card"
+              >
+                <strong>{domain.label}</strong>
+                <span>{domain.blurb}</span>
+              </MagneticHover>
             ))}
+          </Stagger>
+        </section>
+
+        <article
+          className="projects-featured"
+          aria-labelledby="projects-featured-heading"
+        >
+          <div className="projects-featured-glow" aria-hidden="true" />
+          <div className="projects-featured-media">
+            <Image
+              src={featured.image}
+              alt={featured.title}
+              width={1200}
+              height={680}
+              className="h-full w-full object-cover"
+              priority
+            />
+            <span className="projects-featured-category">
+              {featured.category}
+            </span>
           </div>
-          <div className="projects-featured-actions">
-            <Link
-              href="/case-studies/ai-agent-studio"
-              className="projects-btn projects-btn-primary"
-            >
-              <Sparkles size={14} />
-              Read case study
-            </Link>
-            <a
-              href={featured.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="projects-btn"
-            >
-              <ExternalLink size={14} />
-              Live Demo
-            </a>
-            <a
-              href={featured.codeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="projects-btn"
-            >
-              <Github size={14} />
-              View Code
-            </a>
-            {featured.secondaryCodeUrl ? (
+          <Reveal className="projects-featured-body" amount={0.2}>
+            <span className="projects-featured-label">
+              <Sparkles size={13} />
+              Featured build
+            </span>
+            <h3 id="projects-featured-heading">{featured.title}</h3>
+            <p>{featured.summary}</p>
+            <div className="projects-featured-tags">
+              {featured.stack.slice(0, 6).map((item) => (
+                <span key={item} className="projects-tag">
+                  {item}
+                </span>
+              ))}
+            </div>
+            <div className="projects-featured-actions">
+              <Link
+                href="/case-studies/ai-agent-studio"
+                transitionTypes={["nav-forward"]}
+                className="projects-btn projects-btn-primary"
+              >
+                <Sparkles size={14} />
+                Read case study
+              </Link>
               <a
-                href={featured.secondaryCodeUrl}
+                href={featured.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="projects-btn"
+              >
+                <ExternalLink size={14} />
+                Live Demo
+              </a>
+              <a
+                href={featured.codeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="projects-btn"
               >
                 <Github size={14} />
-                Node API
+                View Code
               </a>
-            ) : null}
-          </div>
-        </div>
-      </article>
+              {featured.secondaryCodeUrl ? (
+                <a
+                  href={featured.secondaryCodeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="projects-btn"
+                >
+                  <Github size={14} />
+                  Node API
+                </a>
+              ) : null}
+            </div>
+          </Reveal>
+        </article>
 
-      <section
-        id="projects-portfolio"
-        className="projects-portfolio projects-reveal"
-        aria-labelledby="projects-portfolio-heading"
-      >
-        <header className="projects-section-head">
-          <span className="projects-eyebrow">Portfolio</span>
-          <h3 id="projects-portfolio-heading">More shipped work</h3>
-          <p className="projects-section-lead">
-            Additional platforms and tools across the same delivery standards —
-            demo links and source where available.
-          </p>
-        </header>
+        <section
+          id="projects-portfolio"
+          className="projects-portfolio"
+          aria-labelledby="projects-portfolio-heading"
+        >
+          <Reveal as="header" className="projects-section-head">
+            <span className="projects-eyebrow">Portfolio</span>
+            <h3 id="projects-portfolio-heading">More shipped work</h3>
+            <p className="projects-section-lead">
+              Additional platforms and tools across the same delivery standards —
+              demo links and source where available.
+            </p>
+          </Reveal>
 
-        <div className="projects-grid">
-          {rest.map((project, index) => (
-            <article
-              key={project.slug}
-              className="projects-card projects-stagger"
-              style={{ "--i": index % 4 } as CSSProperties}
-            >
-              <div className="projects-card-media">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  width={900}
-                  height={560}
-                  className="h-full w-full object-cover"
-                />
-                <span className="projects-card-category">{project.category}</span>
-                <div className="projects-card-overlay">
-                  <a
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <ExternalLink size={13} />
-                    Live
-                  </a>
-                  <a
-                    href={project.codeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Github size={13} />
-                    Code
-                  </a>
-                  {project.secondaryCodeUrl ? (
-                    <a
-                      href={project.secondaryCodeUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Github size={13} />
-                      API
-                    </a>
-                  ) : null}
-                </div>
-              </div>
-              <div className="projects-card-content">
-                <h3>{project.title}</h3>
-                <p>{project.summary}</p>
-                <div className="projects-card-tags">
-                  {project.stack.slice(0, 5).map((item) => (
-                    <span key={item} className="projects-tag">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-                {projectCaseStudySlugs[project.slug] ? (
-                  <Link
-                    href={`/case-studies/${projectCaseStudySlugs[project.slug]}`}
-                    className="projects-card-cta"
-                  >
-                    Read case study <ArrowRight size={14} />
-                  </Link>
-                ) : (
-                  <Link
-                    href="/contact?from=projects"
-                    className="projects-card-cta"
-                  >
-                    Build something similar <ArrowRight size={14} />
-                  </Link>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+          <ProjectsGrid
+            projects={rest}
+            caseStudySlugs={projectCaseStudySlugs}
+          />
+        </section>
 
-      <aside className="projects-closing projects-reveal">
-        <p>{projectsPage.closing}</p>
-        <Link href="/contact?from=projects" className="projects-closing-cta">
-          Start a conversation <ArrowRight size={16} />
-        </Link>
-      </aside>
+        <Reveal as="aside" className="projects-closing">
+          <p>{projectsPage.closing}</p>
+          <Link href="/contact?from=projects" className="projects-closing-cta">
+            Start a conversation <ArrowRight size={16} />
+          </Link>
+        </Reveal>
 
-      <BackgroundTexture />
-    </main>
+        <BackgroundTexture />
+      </main>
+    </PageTransition>
   );
 }

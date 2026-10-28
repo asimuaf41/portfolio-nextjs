@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { BlogPostCard } from "@/components/blog-post-card";
+import { Stagger } from "@/components/motion/stagger";
+import { PageTransition } from "@/components/page-transition";
 import { BlogTopicNav } from "@/components/blog-topic-nav";
 import { SectionTitle } from "@/components/section-title";
 import { SeoJsonLd } from "@/components/seo-jsonld";
@@ -54,44 +56,45 @@ export default async function BlogTopicPage({
   const posts = postsInCategory(topic.category);
 
   return (
-    <main className="blog-page">
-      <SeoJsonLd
-        data={itemListJsonLd({
-          name: topic.title,
-          description: topic.description,
-          path: `/blog/topic/${topic.slug}`,
-          items: posts.map((post) => ({
-            name: post.title,
-            path: `/blog/${post.slug}`,
-          })),
-        })}
-      />
+    <PageTransition>
+      <main className="blog-page">
+        <SeoJsonLd
+          data={itemListJsonLd({
+            name: topic.title,
+            description: topic.description,
+            path: `/blog/topic/${topic.slug}`,
+            items: posts.map((post) => ({
+              name: post.title,
+              path: `/blog/${post.slug}`,
+            })),
+          })}
+        />
 
-      <SectionTitle title="Blog" />
+        <SectionTitle title="Blog" />
 
-      <header className="blog-intro">
-        <Link href="/blog" className="blog-article-back">
-          <ArrowLeft size={15} />
-          All articles
-        </Link>
-        <h2>{topic.category}</h2>
-        <p className="blog-topic-lead">{topic.intro}</p>
-      </header>
+        <header className="blog-intro">
+          <Link
+            href="/blog"
+            transitionTypes={["nav-back"]}
+            className="blog-article-back"
+          >
+            <ArrowLeft size={15} />
+            All articles
+          </Link>
+          <h2>{topic.category}</h2>
+          <p className="blog-topic-lead">{topic.intro}</p>
+        </header>
 
-      <BlogTopicNav active={topic.category} />
+        <BlogTopicNav active={topic.category} />
 
-      <section className="blog-block" aria-label={`${topic.category} articles`}>
-        <div className="blog-grid">
-          {posts.map((post, index) => (
-            <BlogPostCard
-              key={post.slug}
-              post={post}
-              index={index}
-              showPinned
-            />
-          ))}
-        </div>
-      </section>
-    </main>
+        <section className="blog-block" aria-label={`${topic.category} articles`}>
+          <Stagger className="blog-grid">
+            {posts.map((post) => (
+              <BlogPostCard key={post.slug} post={post} showPinned />
+            ))}
+          </Stagger>
+        </section>
+      </main>
+    </PageTransition>
   );
 }

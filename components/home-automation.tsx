@@ -8,6 +8,8 @@ import {
   Workflow,
   type LucideIcon,
 } from "lucide-react";
+import { MagneticHover } from "@/components/motion/magnetic-hover";
+import { Stagger } from "@/components/motion/stagger";
 import { automationOffer } from "@/data/site-content";
 
 const workflowIcons: Record<string, LucideIcon> = {
@@ -38,24 +40,25 @@ export function HomeAutomation() {
         </Link>
       </header>
 
-      <ul className="home-automation-grid">
-        {automationOffer.workflows.map((item, index) => {
+      <Stagger as="ul" className="home-automation-grid">
+        {automationOffer.workflows.map((item) => {
           const Icon = workflowIcons[item.icon] ?? UserCheck;
           return (
-            <li
+            <MagneticHover
+              as="li"
+              inStagger
               key={item.title}
               className="home-automation-card"
-              style={{ animationDelay: `${index * 90}ms` }}
             >
               <span className="home-automation-icon" aria-hidden="true">
                 <Icon size={18} strokeWidth={1.8} />
               </span>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
-            </li>
+            </MagneticHover>
           );
         })}
-      </ul>
+      </Stagger>
 
       <footer className="home-automation-foot">
         <div className="home-automation-tools" aria-label="Automation tools">

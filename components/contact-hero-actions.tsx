@@ -59,19 +59,31 @@ export function ContactHeroActions() {
         </a>
       ) : null}
       {backSource === "about" ? (
-        <Link href="/about" className="contact-btn contact-btn-ghost">
+        <Link
+          href="/about"
+          transitionTypes={["nav-back"]}
+          className="contact-btn contact-btn-ghost"
+        >
           <ArrowLeft size={15} />
           Back to about
         </Link>
       ) : null}
       {backSource === "projects" ? (
-        <Link href="/projects" className="contact-btn contact-btn-ghost">
+        <Link
+          href="/projects"
+          transitionTypes={["nav-back"]}
+          className="contact-btn contact-btn-ghost"
+        >
           <ArrowLeft size={15} />
           Back to projects
         </Link>
       ) : null}
       {backSource === "resume" ? (
-        <Link href="/resume" className="contact-btn contact-btn-ghost">
+        <Link
+          href="/resume"
+          transitionTypes={["nav-back"]}
+          className="contact-btn contact-btn-ghost"
+        >
           <ArrowLeft size={15} />
           Back to resume
         </Link>

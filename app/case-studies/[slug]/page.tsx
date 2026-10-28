@@ -12,6 +12,8 @@ import {
   Target,
   Users,
 } from "lucide-react";
+import { Reveal } from "@/components/motion/reveal";
+import { PageTransition } from "@/components/page-transition";
 import { SeoJsonLd } from "@/components/seo-jsonld";
 import { caseStudies, getCaseStudy } from "@/data/case-studies";
 import { blogIconMap } from "@/lib/blog-icons";
@@ -83,181 +85,86 @@ export default async function CaseStudyDetailPage({
       : null;
 
   return (
-    <main className={`case-article accent-${study.accent}`}>
-      <SeoJsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "Article",
-          headline: study.title,
-          description: study.summary,
-          author: {
-            "@type": "Person",
-            name: siteConfig.name,
-            url: siteConfig.url,
-          },
-          publisher: {
-            "@type": "Person",
-            name: siteConfig.name,
-            url: siteConfig.url,
-          },
-          mainEntityOfPage: `${siteConfig.url}/case-studies/${study.slug}`,
-          keywords: study.keywords.join(", "),
-          inLanguage: siteConfig.language,
-        }}
-      />
-      <SeoJsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "Case Studies", path: "/case-studies" },
-          { name: study.title, path: `/case-studies/${study.slug}` },
-        ])}
-      />
+    <PageTransition>
+      <main className={`case-article accent-${study.accent}`}>
+        <SeoJsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: study.title,
+            description: study.summary,
+            author: {
+              "@type": "Person",
+              name: siteConfig.name,
+              url: siteConfig.url,
+            },
+            publisher: {
+              "@type": "Person",
+              name: siteConfig.name,
+              url: siteConfig.url,
+            },
+            mainEntityOfPage: `${siteConfig.url}/case-studies/${study.slug}`,
+            keywords: study.keywords.join(", "),
+            inLanguage: siteConfig.language,
+          }}
+        />
+        <SeoJsonLd
+          data={breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Case Studies", path: "/case-studies" },
+            { name: study.title, path: `/case-studies/${study.slug}` },
+          ])}
+        />
 
-      <Link href="/case-studies" className="case-article-back">
-        <ArrowLeft size={15} />
-        Back to case studies
-      </Link>
+        <Link
+          href="/case-studies"
+          transitionTypes={["nav-back"]}
+          className="case-article-back"
+        >
+          <ArrowLeft size={15} />
+          Back to case studies
+        </Link>
 
-      <header className="case-article-hero">
-        <div className="case-article-hero-glow" aria-hidden="true" />
-        <span className="case-article-icon" aria-hidden="true">
-          <Icon size={36} strokeWidth={1.7} />
-        </span>
-        <span className="case-article-audience">
-          <Target size={13} />
-          {study.targetClient}
-        </span>
-        <h1>{study.title}</h1>
-        <p className="case-article-impact">{study.impact}</p>
-        <p className="case-article-summary">{study.summary}</p>
-        <div className="case-delivery-meta" aria-label="Delivery details">
-          <span>
-            <Clock3 size={14} />
-            {study.delivery}
+        <header className="case-article-hero">
+          <div className="case-article-hero-glow" aria-hidden="true" />
+          <span className="case-article-icon" aria-hidden="true">
+            <Icon size={36} strokeWidth={1.7} />
           </span>
-          <span>
-            <Users size={14} />
-            Solo full-stack delivery
+          <span className="case-article-audience">
+            <Target size={13} />
+            {study.targetClient}
           </span>
-        </div>
-        <dl className="case-metrics" aria-label="Key outcomes">
-          {study.metrics.map((metric) => (
-            <div key={metric.label} className="case-metric">
-              <dt>{metric.value}</dt>
-              <dd>{metric.label}</dd>
-            </div>
-          ))}
-        </dl>
-        <div className="case-article-actions">
-          {study.liveUrl ? (
-            <a
-              href={study.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="case-btn case-btn-primary"
-            >
-              <ExternalLink size={14} />
-              {study.liveLabel ?? "View live demo"}
-            </a>
-          ) : null}
-          {study.secondaryLiveUrl ? (
-            <a
-              href={study.secondaryLiveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="case-btn"
-            >
-              <ExternalLink size={14} />
-              {study.secondaryLiveLabel ?? "View live site"}
-            </a>
-          ) : null}
-          {study.codeUrl ? (
-            <a
-              href={study.codeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="case-btn"
-            >
-              <Github size={14} />
-              View code
-            </a>
-          ) : null}
-        </div>
-      </header>
-
-      <div className="case-article-layout">
-        <article className="case-article-body">
-          <section id="problem" className="case-article-section">
-            <h2>The Problem</h2>
-            {study.problem.map((paragraph) => (
-              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-            ))}
-          </section>
-
-          <section id="challenge" className="case-article-section">
-            <h2>The Challenge</h2>
-            {study.challenge.map((paragraph) => (
-              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-            ))}
-          </section>
-
-          <section id="built" className="case-article-section">
-            <h2>What I Built</h2>
-            <p>{study.builtIntro}</p>
-
-            <div className="case-feature-grid">
-              {study.features.map((feature) => (
-                <div key={feature.title} className="case-feature-card">
-                  <h3>{feature.title}</h3>
-                  <p>{feature.description}</p>
-                </div>
-              ))}
-            </div>
-
-            {study.additionalFeatures.length > 0 ? (
-              <>
-                <p className="case-additional-label">Additional features built:</p>
-                <ul className="case-article-bullets">
-                  {study.additionalFeatures.map((item) => (
-                    <li key={item}>
-                      <CheckCircle2 size={16} strokeWidth={2} />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            ) : null}
-
-            {study.builtOutro ? <p>{study.builtOutro}</p> : null}
-          </section>
-
-          <section id="result" className="case-article-section">
-            <h2>The Result</h2>
-            <dl className="case-metrics case-metrics-inline" aria-label="Key outcomes">
-              {study.metrics.map((metric) => (
-                <div key={metric.label} className="case-metric">
-                  <dt>{metric.value}</dt>
-                  <dd>{metric.label}</dd>
-                </div>
-              ))}
-            </dl>
-            <p className="case-delivery-note">
+          <h1>{study.title}</h1>
+          <p className="case-article-impact">{study.impact}</p>
+          <p className="case-article-summary">{study.summary}</p>
+          <div className="case-delivery-meta" aria-label="Delivery details">
+            <span>
               <Clock3 size={14} />
               {study.delivery}
-            </p>
-            {study.result.map((paragraph) => (
-              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+            </span>
+            <span>
+              <Users size={14} />
+              Solo full-stack delivery
+            </span>
+          </div>
+          <dl className="case-metrics" aria-label="Key outcomes">
+            {study.metrics.map((metric) => (
+              <div key={metric.label} className="case-metric">
+                <dt>{metric.value}</dt>
+                <dd>{metric.label}</dd>
+              </div>
             ))}
+          </dl>
+          <div className="case-article-actions">
             {study.liveUrl ? (
               <a
                 href={study.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="case-result-link"
+                className="case-btn case-btn-primary"
               >
-                {study.liveLabel ?? "Live demo"}:{" "}
-                {study.liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")}
                 <ExternalLink size={14} />
+                {study.liveLabel ?? "View live demo"}
               </a>
             ) : null}
             {study.secondaryLiveUrl ? (
@@ -265,13 +172,10 @@ export default async function CaseStudyDetailPage({
                 href={study.secondaryLiveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="case-result-link"
+                className="case-btn"
               >
-                {study.secondaryLiveLabel ?? "Live site"}:{" "}
-                {study.secondaryLiveUrl
-                  .replace(/^https?:\/\//, "")
-                  .replace(/\/$/, "")}
                 <ExternalLink size={14} />
+                {study.secondaryLiveLabel ?? "View live site"}
               </a>
             ) : null}
             {study.codeUrl ? (
@@ -279,94 +183,200 @@ export default async function CaseStudyDetailPage({
                 href={study.codeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="case-result-link"
+                className="case-btn"
               >
-                Source:{" "}
-                {study.codeUrl.replace(
-                  /^https?:\/\/(www\.)?github\.com\//,
-                  "",
-                )}
                 <Github size={14} />
+                View code
               </a>
             ) : null}
-          </section>
-
-          <section id="tech-stack" className="case-article-section">
-            <h2>Tech Stack</h2>
-            <div className="case-stack-list" aria-label="Technologies used">
-              {study.techStack.map((item) => (
-                <span key={item} className="case-tag case-tag-lg">
-                  <Layers3 size={12} />
-                  {item}
-                </span>
-              ))}
-            </div>
-          </section>
-
-          <aside className="case-article-cta">
-            <h3>Need something like this?</h3>
-            <p>
-              If you need a production system for{" "}
-              {study.targetClient.toLowerCase()} that solves a problem like
-              this — not a throwaway demo — let&apos;s talk about what to build
-              first.
-            </p>
-            <Link
-              href={`/contact?from=case-study-${study.slug}`}
-              className="case-btn case-btn-primary"
-            >
-              Start a conversation <ArrowRight size={14} />
-            </Link>
-          </aside>
-        </article>
-
-        <aside className="case-article-toc" aria-label="Table of contents">
-          <div className="case-article-toc-inner">
-            <span className="case-article-toc-title">On this page</span>
-            <ol>
-              {sectionOrder.map((section, index) => (
-                <li key={section.id}>
-                  <a href={`#${section.id}`}>
-                    <span className="case-article-toc-num">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span>{section.label}</span>
-                  </a>
-                </li>
-              ))}
-            </ol>
           </div>
-        </aside>
-      </div>
+        </header>
 
-      {(prevStudy || nextStudy) && (
-        <nav className="case-article-nav" aria-label="Other case studies">
-          {prevStudy ? (
-            <Link
-              href={`/case-studies/${prevStudy.slug}`}
-              className={`case-article-nav-card accent-${prevStudy.accent}`}
-            >
-              <span className="case-article-nav-label">
-                <ArrowLeft size={14} /> Previous
-              </span>
-              <span className="case-article-nav-title">{prevStudy.title}</span>
-            </Link>
-          ) : (
-            <span />
-          )}
-          {nextStudy ? (
-            <Link
-              href={`/case-studies/${nextStudy.slug}`}
-              className={`case-article-nav-card accent-${nextStudy.accent} is-next`}
-            >
-              <span className="case-article-nav-label">
-                Next <ArrowRight size={14} />
-              </span>
-              <span className="case-article-nav-title">{nextStudy.title}</span>
-            </Link>
-          ) : null}
-        </nav>
-      )}
-    </main>
+        <div className="case-article-layout">
+          <article className="case-article-body">
+            <Reveal as="section" id="problem" className="case-article-section" amount={0.1}>
+              <h2>The Problem</h2>
+              {study.problem.map((paragraph) => (
+                <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+              ))}
+            </Reveal>
+
+            <Reveal as="section" id="challenge" className="case-article-section" amount={0.1}>
+              <h2>The Challenge</h2>
+              {study.challenge.map((paragraph) => (
+                <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+              ))}
+            </Reveal>
+
+            <Reveal as="section" id="built" className="case-article-section" amount={0.1}>
+              <h2>What I Built</h2>
+              <p>{study.builtIntro}</p>
+
+              <div className="case-feature-grid">
+                {study.features.map((feature) => (
+                  <div key={feature.title} className="case-feature-card">
+                    <h3>{feature.title}</h3>
+                    <p>{feature.description}</p>
+                  </div>
+                ))}
+              </div>
+
+              {study.additionalFeatures.length > 0 ? (
+                <>
+                  <p className="case-additional-label">Additional features built:</p>
+                  <ul className="case-article-bullets">
+                    {study.additionalFeatures.map((item) => (
+                      <li key={item}>
+                        <CheckCircle2 size={16} strokeWidth={2} />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : null}
+
+              {study.builtOutro ? <p>{study.builtOutro}</p> : null}
+            </Reveal>
+
+            <Reveal as="section" id="result" className="case-article-section" amount={0.1}>
+              <h2>The Result</h2>
+              <dl className="case-metrics case-metrics-inline" aria-label="Key outcomes">
+                {study.metrics.map((metric) => (
+                  <div key={metric.label} className="case-metric">
+                    <dt>{metric.value}</dt>
+                    <dd>{metric.label}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="case-delivery-note">
+                <Clock3 size={14} />
+                {study.delivery}
+              </p>
+              {study.result.map((paragraph) => (
+                <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+              ))}
+              {study.liveUrl ? (
+                <a
+                  href={study.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="case-result-link"
+                >
+                  {study.liveLabel ?? "Live demo"}:{" "}
+                  {study.liveUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+                  <ExternalLink size={14} />
+                </a>
+              ) : null}
+              {study.secondaryLiveUrl ? (
+                <a
+                  href={study.secondaryLiveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="case-result-link"
+                >
+                  {study.secondaryLiveLabel ?? "Live site"}:{" "}
+                  {study.secondaryLiveUrl
+                    .replace(/^https?:\/\//, "")
+                    .replace(/\/$/, "")}
+                  <ExternalLink size={14} />
+                </a>
+              ) : null}
+              {study.codeUrl ? (
+                <a
+                  href={study.codeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="case-result-link"
+                >
+                  Source:{" "}
+                  {study.codeUrl.replace(
+                    /^https?:\/\/(www\.)?github\.com\//,
+                    "",
+                  )}
+                  <Github size={14} />
+                </a>
+              ) : null}
+            </Reveal>
+
+            <Reveal as="section" id="tech-stack" className="case-article-section" amount={0.1}>
+              <h2>Tech Stack</h2>
+              <div className="case-stack-list" aria-label="Technologies used">
+                {study.techStack.map((item) => (
+                  <span key={item} className="case-tag case-tag-lg">
+                    <Layers3 size={12} />
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </Reveal>
+
+            <Reveal as="aside" className="case-article-cta" amount={0.2}>
+              <h3>Need something like this?</h3>
+              <p>
+                If you need a production system for{" "}
+                {study.targetClient.toLowerCase()} that solves a problem like
+                this — not a throwaway demo — let&apos;s talk about what to build
+                first.
+              </p>
+              <Link
+                href={`/contact?from=case-study-${study.slug}`}
+                className="case-btn case-btn-primary"
+              >
+                Start a conversation <ArrowRight size={14} />
+              </Link>
+            </Reveal>
+          </article>
+
+          <aside className="case-article-toc" aria-label="Table of contents">
+            <div className="case-article-toc-inner">
+              <span className="case-article-toc-title">On this page</span>
+              <ol>
+                {sectionOrder.map((section, index) => (
+                  <li key={section.id}>
+                    <a href={`#${section.id}`}>
+                      <span className="case-article-toc-num">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span>{section.label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </aside>
+        </div>
+
+        {(prevStudy || nextStudy) && (
+          <nav className="case-article-nav" aria-label="Other case studies">
+            {prevStudy ? (
+              <Link
+                href={`/case-studies/${prevStudy.slug}`}
+                transitionTypes={["nav-back"]}
+                className={`case-article-nav-card accent-${prevStudy.accent}`}
+              >
+                <span className="case-article-nav-label">
+                  <ArrowLeft size={14} /> Previous
+                </span>
+                <span className="case-article-nav-title">{prevStudy.title}</span>
+              </Link>
+            ) : (
+              <span />
+            )}
+            {nextStudy ? (
+              <Link
+                href={`/case-studies/${nextStudy.slug}`}
+                transitionTypes={["nav-forward"]}
+                className={`case-article-nav-card accent-${nextStudy.accent} is-next`}
+              >
+                <span className="case-article-nav-label">
+                  Next <ArrowRight size={14} />
+                </span>
+                <span className="case-article-nav-title">{nextStudy.title}</span>
+              </Link>
+            ) : null}
+          </nav>
+        )}
+      </main>
+    </PageTransition>
   );
 }

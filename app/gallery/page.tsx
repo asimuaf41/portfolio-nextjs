@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BackgroundTexture } from "@/components/background-texture";
 import { GalleryClient } from "@/components/gallery-client";
+import { PageTransition } from "@/components/page-transition";
 import { SectionTitle } from "@/components/section-title";
 import { galleryImages } from "@/data/site-content";
 import { createPageMetadata } from "@/lib/seo";
@@ -15,10 +16,12 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function GalleryPage() {
   return (
-    <main className="relative">
-      <SectionTitle title="Gallery" />
-      <GalleryClient images={galleryImages} />
-      <BackgroundTexture />
-    </main>
+    <PageTransition>
+      <main className="relative">
+        <SectionTitle title="Gallery" />
+        <GalleryClient images={galleryImages} />
+        <BackgroundTexture />
+      </main>
+    </PageTransition>
   );
 }

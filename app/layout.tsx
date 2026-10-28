@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { DM_Sans, JetBrains_Mono, Outfit } from "next/font/google";
 import { SeoJsonLd } from "@/components/seo-jsonld";
+import { MotionProvider } from "@/components/motion/motion-provider";
 import { SiteLayout } from "@/components/site-layout";
 import { ThemeProvider } from "@/components/theme-provider";
 import { personJsonLd, siteConfig, websiteJsonLd } from "@/lib/seo";
@@ -142,7 +143,9 @@ export default function RootLayout({
         <SeoJsonLd data={websiteJsonLd()} />
         <SeoJsonLd data={personJsonLd()} />
         <ThemeProvider>
-          <SiteLayout>{children}</SiteLayout>
+          <MotionProvider>
+            <SiteLayout>{children}</SiteLayout>
+          </MotionProvider>
         </ThemeProvider>
       </body>
     </html>

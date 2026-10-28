@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, CircleHelp } from "lucide-react";
 import { faqSection } from "@/data/faq";
 import { faqJsonLd } from "@/lib/seo";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { SeoJsonLd } from "@/components/seo-jsonld";
 
 export function FaqSection({ className = "" }: { className?: string }) {
@@ -39,12 +40,12 @@ export function FaqSection({ className = "" }: { className?: string }) {
         )}
       </header>
 
-      <div className="faq-list">
+      <Stagger className="faq-list">
         {faqSection.items.map((item, index) => (
-          <details
+          <StaggerItem
+            as="details"
             key={item.id}
             className="faq-item"
-            style={{ animationDelay: `${index * 70}ms` }}
             {...(index === 0 ? { open: true } : {})}
           >
             <summary className="faq-question">
@@ -52,9 +53,9 @@ export function FaqSection({ className = "" }: { className?: string }) {
               <span className="faq-icon" aria-hidden="true" />
             </summary>
             <p className="faq-answer">{item.answer}</p>
-          </details>
+          </StaggerItem>
         ))}
-      </div>
+      </Stagger>
     </section>
   );
 }

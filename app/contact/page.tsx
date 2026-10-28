@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Suspense, type CSSProperties } from "react";
+import { Suspense } from "react";
 import {
   ArrowRight,
   Clock3,
@@ -14,7 +14,10 @@ import {
 import { BackgroundTexture } from "@/components/background-texture";
 import { ContactHeroActions } from "@/components/contact-hero-actions";
 import { FaqSection } from "@/components/faq-section";
-import { ScrollRevealEffects } from "@/components/scroll-reveal-effects";
+import { MagneticHover } from "@/components/motion/magnetic-hover";
+import { Reveal } from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
+import { PageTransition } from "@/components/page-transition";
 import { SectionTitle } from "@/components/section-title";
 import {
   contactInfo,
@@ -58,224 +61,213 @@ function ChannelIcon({ id }: { id: string }) {
 
 export default function ContactPage() {
   return (
-    <main className="contact-page">
-      <ScrollRevealEffects selector=".contact-reveal" />
-      <SectionTitle title="Contact" />
+    <PageTransition>
+      <main className="contact-page">
+        <SectionTitle title="Contact" />
 
-      <header className="contact-hero contact-reveal">
-        <span className="contact-eyebrow contact-anim-item" style={{ "--i": 0 } as CSSProperties}>
-          <Sparkles size={14} />
-          {contactInfo.eyebrow}
-        </span>
-        <h2 className="contact-anim-item" style={{ "--i": 1 } as CSSProperties}>
-          {contactInfo.headline}
-        </h2>
-        <p className="contact-anim-item" style={{ "--i": 2 } as CSSProperties}>
-          {contactInfo.intro}
-        </p>
-        <div
-          className="contact-response-note contact-anim-item"
-          style={{ "--i": 3 } as CSSProperties}
+        <header className="contact-hero">
+          <Reveal as="span" className="contact-eyebrow" delay={0.05}>
+            <Sparkles size={14} />
+            {contactInfo.eyebrow}
+          </Reveal>
+          <h2>{contactInfo.headline}</h2>
+          <p>{contactInfo.intro}</p>
+          <Reveal className="contact-response-note" delay={0.1}>
+            <Clock3 size={14} />
+            <span>{contactInfo.responseNote}</span>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <Suspense fallback={<div className="contact-hero-actions" />}>
+              <ContactHeroActions />
+            </Suspense>
+          </Reveal>
+        </header>
+
+        <FaqSection />
+
+        <section
+          className="contact-channels"
+          aria-labelledby="contact-channels-heading"
         >
-          <Clock3 size={14} />
-          <span>{contactInfo.responseNote}</span>
-        </div>
-        <div className="contact-anim-item" style={{ "--i": 4 } as CSSProperties}>
-          <Suspense fallback={<div className="contact-hero-actions" />}>
-            <ContactHeroActions />
-          </Suspense>
-        </div>
-      </header>
-
-      <FaqSection className="contact-reveal" />
-
-      <section
-        className="contact-channels contact-reveal"
-        aria-labelledby="contact-channels-heading"
-      >
-        <header className="contact-section-head">
-          <span className="contact-eyebrow">Chat channels</span>
-          <h3 id="contact-channels-heading">Reach me where you already work</h3>
-        </header>
-        <div className="contact-channels-grid">
-          {messagingChannels.map((channel, index) => (
-            <a
-              key={channel.id}
-              href={channel.href}
-              target={channel.href.startsWith("mailto:") ? undefined : "_blank"}
-              rel={
-                channel.href.startsWith("mailto:")
-                  ? undefined
-                  : "noopener noreferrer"
-              }
-              className={`contact-channel-card accent-${channel.accent} contact-stagger`}
-              style={{ "--i": index } as CSSProperties}
-            >
-              <span className="contact-channel-icon" aria-hidden="true">
-                <ChannelIcon id={channel.id} />
-              </span>
-              <span className="contact-channel-body">
-                <strong>{channel.name}</strong>
-                <span>{channel.description}</span>
-              </span>
-              <span className="contact-channel-cta">
-                {channel.cta} <ArrowRight size={14} />
-              </span>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section className="contact-details-grid contact-reveal" aria-label="Contact details">
-        <article className="contact-detail-card contact-stagger" style={{ "--i": 0 } as CSSProperties}>
-          <div className="contact-detail-icon">
-            <Phone size={22} strokeWidth={1.8} />
-          </div>
-          <h3>Phone</h3>
-          <p>Call or save my numbers for follow-ups.</p>
-          <div className="contact-detail-list">
-            {contactInfo.phones.map((phone) => (
-              <a key={phone.href} href={phone.href}>
-                <span>{phone.label}</span>
-                <strong>{phone.value}</strong>
-              </a>
-            ))}
-          </div>
-        </article>
-
-        <article className="contact-detail-card contact-stagger" style={{ "--i": 1 } as CSSProperties}>
-          <div className="contact-detail-icon">
-            <Mail size={22} strokeWidth={1.8} />
-          </div>
-          <h3>Email</h3>
-          <p>Best for longer briefs, docs, and attachments.</p>
-          <div className="contact-detail-list">
-            {contactInfo.emails.map((email) => (
-              <a key={email.href} href={email.href}>
-                <span>{email.label}</span>
-                <strong>{email.value}</strong>
-              </a>
-            ))}
-          </div>
-        </article>
-
-        <article className="contact-detail-card contact-stagger" style={{ "--i": 2 } as CSSProperties}>
-          <div className="contact-detail-icon">
-            <MapPin size={22} strokeWidth={1.8} />
-          </div>
-          <h3>Location</h3>
-          <p>{contactInfo.address.short}</p>
-          <p className="contact-address-full">{contactInfo.address.line}</p>
-          <a href="#contact-map" className="contact-map-link">
-            View on map <ArrowRight size={14} />
-          </a>
-        </article>
-      </section>
-
-      <section
-        className="contact-platforms contact-reveal"
-        aria-labelledby="contact-platforms-heading"
-      >
-        <header className="contact-section-head">
-          <span className="contact-eyebrow">Also available on</span>
-          <h3 id="contact-platforms-heading">Freelance & social profiles</h3>
-        </header>
-        <ul className="contact-platforms-grid">
-          {freelancePlatforms.map((platform, index) => (
-            <li
-              key={platform.name}
-              className="contact-stagger"
-              style={{ "--i": index } as CSSProperties}
-            >
-              <a
-                href={platform.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contact-platform-card"
+          <Reveal as="header" className="contact-section-head">
+            <span className="contact-eyebrow">Chat channels</span>
+            <h3 id="contact-channels-heading">Reach me where you already work</h3>
+          </Reveal>
+          <Stagger className="contact-channels-grid">
+            {messagingChannels.map((channel) => (
+              <MagneticHover
+                as="a"
+                inStagger
+                key={channel.id}
+                href={channel.href}
+                target={channel.href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={
+                  channel.href.startsWith("mailto:")
+                    ? undefined
+                    : "noopener noreferrer"
+                }
+                className={`contact-channel-card accent-${channel.accent}`}
               >
-                <span className="contact-platform-name">
-                  {platform.name}
-                  <ExternalLink size={13} />
+                <span className="contact-channel-icon" aria-hidden="true">
+                  <ChannelIcon id={channel.id} />
                 </span>
-                <span>{platform.blurb}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-        <div className="contact-social-row">
-          {socialLinks.map((social) => (
-            <a
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-social-chip"
-            >
-              {social.label}
-              <ExternalLink size={12} />
+                <span className="contact-channel-body">
+                  <strong>{channel.name}</strong>
+                  <span>{channel.description}</span>
+                </span>
+                <span className="contact-channel-cta">
+                  {channel.cta} <ArrowRight size={14} />
+                </span>
+              </MagneticHover>
+            ))}
+          </Stagger>
+        </section>
+
+        <Stagger
+          as="section"
+          className="contact-details-grid"
+          aria-label="Contact details"
+        >
+          <MagneticHover as="article" inStagger className="contact-detail-card">
+            <div className="contact-detail-icon">
+              <Phone size={22} strokeWidth={1.8} />
+            </div>
+            <h3>Phone</h3>
+            <p>Call or save my numbers for follow-ups.</p>
+            <div className="contact-detail-list">
+              {contactInfo.phones.map((phone) => (
+                <a key={phone.href} href={phone.href}>
+                  <span>{phone.label}</span>
+                  <strong>{phone.value}</strong>
+                </a>
+              ))}
+            </div>
+          </MagneticHover>
+
+          <MagneticHover as="article" inStagger className="contact-detail-card">
+            <div className="contact-detail-icon">
+              <Mail size={22} strokeWidth={1.8} />
+            </div>
+            <h3>Email</h3>
+            <p>Best for longer briefs, docs, and attachments.</p>
+            <div className="contact-detail-list">
+              {contactInfo.emails.map((email) => (
+                <a key={email.href} href={email.href}>
+                  <span>{email.label}</span>
+                  <strong>{email.value}</strong>
+                </a>
+              ))}
+            </div>
+          </MagneticHover>
+
+          <MagneticHover as="article" inStagger className="contact-detail-card">
+            <div className="contact-detail-icon">
+              <MapPin size={22} strokeWidth={1.8} />
+            </div>
+            <h3>Location</h3>
+            <p>{contactInfo.address.short}</p>
+            <p className="contact-address-full">{contactInfo.address.line}</p>
+            <a href="#contact-map" className="contact-map-link">
+              View on map <ArrowRight size={14} />
             </a>
-          ))}
-        </div>
-      </section>
+          </MagneticHover>
+        </Stagger>
 
-      <section
-        id="contact-map"
-        className="contact-map-section contact-reveal"
-        aria-labelledby="contact-map-heading"
-      >
-        <header className="contact-section-head">
-          <span className="contact-eyebrow">Map</span>
-          <h3 id="contact-map-heading">Where I&apos;m based</h3>
-          <p className="contact-map-lead">
-            Remote-first across time zones — locally based in Lahore, Pakistan.
-          </p>
-        </header>
-
-        <div className="contact-map-stage">
-          <span className="contact-map-glow" aria-hidden="true" />
-          <span className="contact-map-orbit" aria-hidden="true" />
-          <div className="contact-map-frame">
-            <div
-              className="contact-map-overlay contact-stagger"
-              style={{ "--i": 0 } as CSSProperties}
-            >
-              <span className="contact-map-pin">
-                <MapPin size={16} />
-              </span>
-              <div>
-                <strong>{contactInfo.address.short}</strong>
-                <p>Available for remote collaboration worldwide</p>
-              </div>
+        <section
+          className="contact-platforms"
+          aria-labelledby="contact-platforms-heading"
+        >
+          <Reveal as="header" className="contact-section-head">
+            <span className="contact-eyebrow">Also available on</span>
+            <h3 id="contact-platforms-heading">Freelance & social profiles</h3>
+          </Reveal>
+          <Stagger as="ul" className="contact-platforms-grid">
+            {freelancePlatforms.map((platform) => (
+              <StaggerItem as="li" key={platform.name}>
+                <a
+                  href={platform.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-platform-card"
+                >
+                  <span className="contact-platform-name">
+                    {platform.name}
+                    <ExternalLink size={13} />
+                  </span>
+                  <span>{platform.blurb}</span>
+                </a>
+              </StaggerItem>
+            ))}
+          </Stagger>
+          <Reveal className="contact-social-row">
+            {socialLinks.map((social) => (
               <a
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactInfo.address.line)}`}
+                key={social.label}
+                href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="contact-map-open"
+                className="contact-social-chip"
               >
-                <Navigation size={14} />
-                Open in Maps
+                {social.label}
+                <ExternalLink size={12} />
               </a>
-            </div>
-            <div
-              className="contact-map-wrap contact-stagger"
-              style={{ "--i": 1 } as CSSProperties}
-            >
-              <iframe
-                src={contactInfo.mapEmbedUrl}
-                width="100%"
-                height="420"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Map location — Lahore, Pakistan"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+            ))}
+          </Reveal>
+        </section>
 
-      <BackgroundTexture />
-    </main>
+        <section
+          id="contact-map"
+          className="contact-map-section"
+          aria-labelledby="contact-map-heading"
+        >
+          <Reveal as="header" className="contact-section-head">
+            <span className="contact-eyebrow">Map</span>
+            <h3 id="contact-map-heading">Where I&apos;m based</h3>
+            <p className="contact-map-lead">
+              Remote-first across time zones — locally based in Lahore, Pakistan.
+            </p>
+          </Reveal>
+
+          <div className="contact-map-stage">
+            <span className="contact-map-glow" aria-hidden="true" />
+            <span className="contact-map-orbit" aria-hidden="true" />
+            <Stagger className="contact-map-frame">
+              <StaggerItem className="contact-map-overlay">
+                <span className="contact-map-pin">
+                  <MapPin size={16} />
+                </span>
+                <div>
+                  <strong>{contactInfo.address.short}</strong>
+                  <p>Available for remote collaboration worldwide</p>
+                </div>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactInfo.address.line)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact-map-open"
+                >
+                  <Navigation size={14} />
+                  Open in Maps
+                </a>
+              </StaggerItem>
+              <StaggerItem className="contact-map-wrap">
+                <iframe
+                  src={contactInfo.mapEmbedUrl}
+                  width="100%"
+                  height="420"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Map location — Lahore, Pakistan"
+                />
+              </StaggerItem>
+            </Stagger>
+          </div>
+        </section>
+
+        <BackgroundTexture />
+      </main>
+    </PageTransition>
   );
 }

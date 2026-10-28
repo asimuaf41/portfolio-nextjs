@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageTransition } from "@/components/page-transition";
 import { SectionTitle } from "@/components/section-title";
 import { TestimonialsSection } from "@/components/home-testimonials";
 import { createPageMetadata } from "@/lib/seo";
@@ -19,12 +20,14 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function TestimonialsPage() {
   return (
-    <main className="testimonials-page">
-      <SectionTitle
-        title="Testimonials"
-        subtitle="Method leads this page. The reviews below it are separate Upwork contracts."
-      />
-      <TestimonialsSection />
-    </main>
+    <PageTransition>
+      <main className="testimonials-page">
+        <SectionTitle
+          title="Testimonials"
+          subtitle="Method leads this page. The reviews below it are separate Upwork contracts."
+        />
+        <TestimonialsSection />
+      </main>
+    </PageTransition>
   );
 }

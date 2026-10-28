@@ -1,95 +1,49 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim";
-import type { ISourceOptions } from "@tsparticles/engine";
-import { useTheme } from "@/components/theme-provider";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+
+// The particle engine is loaded only after first paint and never on the LCP path.
+const BackgroundParticles = dynamic(
+  () => import("@/components/background-particles"),
+  { ssr: false },
+);
 
 export function BackgroundTexture() {
-  const [isReady, setIsReady] = useState(false);
-  const { theme } = useTheme();
+  const [mode, setMode] = useState<"off" | "full" | "compact">("off");
 
   useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => {
-      setIsReady(true);
-    });
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const compact = window.matchMedia("(max-width: 768px)").matches;
+    const start = () => setMode(compact ? "compact" : "full");
+
+    // Wait for the page to finish loading, then for an idle moment.
+    let idle = 0;
+    let timer = 0;
+    const schedule = () => {
+      if (typeof window.requestIdleCallback === "function") {
+        idle = window.requestIdleCallback(start, { timeout: 2000 });
+      } else {
+        timer = window.setTimeout(start, 600);
+      }
+    };
+
+    if (document.readyState === "complete") schedule();
+    else window.addEventListener("load", schedule, { once: true });
+
+    return () => {
+      window.removeEventListener("load", schedule);
+      if (idle) window.cancelIdleCallback(idle);
+      window.clearTimeout(timer);
+    };
   }, []);
-
-  const options = useMemo<ISourceOptions>(
-    () => ({
-      fullScreen: { enable: false },
-      detectRetina: true,
-      background: {
-        color: "transparent",
-      },
-      interactivity: {
-        detectsOn: "window",
-        events: {
-          onClick: { enable: true, mode: "push" },
-          onHover: { enable: true, mode: "repulse" },
-          resize: { enable: true },
-        },
-        modes: {
-          push: { quantity: 3 },
-          repulse: { distance: 120, duration: 0.4 },
-        },
-      },
-      particles: {
-        color: {
-          value:
-            theme === "light"
-              ? ["#7fc0ff", "#2185bf", "#4da3ff", "#94a3b8", "#64748b"]
-              : [
-                  "#241379",
-                  "#2185bf",
-                  "#1fbce1",
-                  "#b62f56",
-                  "#eb7d46",
-                  "#fddc32",
-                ],
-        },
-        links: {
-          color: theme === "light" ? "#7fc0ff" : "#2185bf",
-          distance: 145,
-          enable: true,
-          opacity: theme === "light" ? 0.28 : 0.2,
-          width: 1,
-        },
-        move: {
-          direction: "none",
-          enable: true,
-          outModes: { default: "out" },
-          random: false,
-          speed: 0.8,
-          straight: false,
-        },
-        number: {
-          density: { enable: true, area: 900 },
-          value: theme === "light" ? 42 : 60,
-        },
-        opacity: { value: theme === "light" ? 0.45 : 0.6 },
-        shape: { type: "circle" },
-        size: { value: { min: 1, max: 4 } },
-      },
-    }),
-    [theme],
-  );
-
-  if (!isReady) {
-    return <div className="texture-layer" aria-hidden="true" />;
-  }
 
   return (
     <div className="texture-layer" aria-hidden="true">
-      <Particles
-        key={theme}
-        id={`background-particles-${theme}`}
-        options={options}
-        className="h-full w-full"
-      />
+      {mode !== "off" ? (
+        <BackgroundParticles compact={mode === "compact"} />
+      ) : null}
     </div>
   );
 }

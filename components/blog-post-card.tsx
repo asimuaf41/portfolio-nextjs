@@ -1,27 +1,26 @@
-import Link from "next/link";
 import { ArrowRight, Pin } from "lucide-react";
 import { BlogMeta } from "@/components/blog-meta";
+import { MagneticLink } from "@/components/motion/magnetic-hover";
 import { isNewPost } from "@/lib/blog";
 import { blogIconMap } from "@/lib/blog-icons";
 import type { BlogPost } from "@/types/content";
 
 export function BlogPostCard({
   post,
-  index = 0,
   showPinned = false,
 }: {
   post: BlogPost;
-  index?: number;
   showPinned?: boolean;
 }) {
   const Icon = blogIconMap[post.icon];
   const showNew = isNewPost(post.publishedAt);
 
   return (
-    <Link
+    <MagneticLink
+      inStagger
       href={`/blog/${post.slug}`}
-      className={`blog-card accent-${post.accent} blog-reveal`}
-      style={{ animationDelay: `${120 + index * 70}ms` }}
+      transitionTypes={["nav-forward"]}
+      className={`blog-card accent-${post.accent}`}
       aria-label={`Read article: ${post.title}`}
     >
       <div className="blog-card-top">
@@ -56,6 +55,6 @@ export function BlogPostCard({
           <ArrowRight size={16} />
         </span>
       </div>
-    </Link>
+    </MagneticLink>
   );
 }

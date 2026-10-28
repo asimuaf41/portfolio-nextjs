@@ -3,6 +3,10 @@ import Link from "next/link";
 import { ArrowRight, BookOpen, Pin, Sparkles, Tag as TagIcon } from "lucide-react";
 import { BlogMeta } from "@/components/blog-meta";
 import { BlogPostCard } from "@/components/blog-post-card";
+import { AnimatedNumber } from "@/components/motion/animated-number";
+import { Reveal } from "@/components/motion/reveal";
+import { Stagger, StaggerItem } from "@/components/motion/stagger";
+import { PageTransition } from "@/components/page-transition";
 import { BlogTopicNav } from "@/components/blog-topic-nav";
 import { SectionTitle } from "@/components/section-title";
 import { SeoJsonLd } from "@/components/seo-jsonld";
@@ -47,154 +51,163 @@ export default function BlogPage() {
   const LeadIcon = blogIconMap[lead.icon];
 
   return (
-    <main className="blog-page">
-      <SeoJsonLd
-        data={itemListJsonLd({
-          name: "Asim Ali — Blog",
-          description:
-            "Articles on AI, automation, full-stack engineering, and startups.",
-          path: "/blog",
-          items: ordered.map((post) => ({
-            name: post.title,
-            path: `/blog/${post.slug}`,
-          })),
-        })}
-      />
+    <PageTransition>
+      <main className="blog-page">
+        <SeoJsonLd
+          data={itemListJsonLd({
+            name: "Asim Ali — Blog",
+            description:
+              "Articles on AI, automation, full-stack engineering, and startups.",
+            path: "/blog",
+            items: ordered.map((post) => ({
+              name: post.title,
+              path: `/blog/${post.slug}`,
+            })),
+          })}
+        />
 
-      <SectionTitle title="Blog" />
+        <SectionTitle title="Blog" />
 
-      <header className="blog-intro">
-        <span className="blog-intro-pill">
-          <Sparkles size={14} />
-          Notes from the AI x engineering frontier
-        </span>
-        <h2>Practical writing on AI, automation, full-stack, and startups.</h2>
-        <p>
-          Real-world articles on agents, RAG, n8n workflows, streaming
-          tool-calling, Cursor, and turning an idea into a shipped MVP —
-          grouped so you can start with the pieces I would hand a new reader.
-        </p>
-
-        <dl className="blog-stats" aria-label="Blog statistics">
-          <div className="blog-stat">
-            <dt>
-              <BookOpen size={14} />
-              Articles
-            </dt>
-            <dd>{blogPosts.length}</dd>
-          </div>
-          <div className="blog-stat">
-            <dt>
-              <TagIcon size={14} />
-              Topics
-            </dt>
-            <dd>{totalCategories}</dd>
-          </div>
-          <div className="blog-stat">
-            <dt>
-              <Sparkles size={14} />
-              Tags
-            </dt>
-            <dd>{totalTags}</dd>
-          </div>
-        </dl>
-      </header>
-
-      <BlogTopicNav active="all" />
-
-      <section className="blog-block" aria-labelledby="pinned-heading">
-        <header className="blog-block-head">
-          <h2 id="pinned-heading">Pinned</h2>
-          <p>The three articles I want a new reader to open first.</p>
-        </header>
-
-        <Link
-          href={`/blog/${lead.slug}`}
-          className={`blog-featured accent-${lead.accent} blog-reveal`}
-          aria-label={`Read article: ${lead.title}`}
-        >
-          <div className="blog-featured-glow" aria-hidden="true" />
-          <div className="blog-featured-icon" aria-hidden="true">
-            <LeadIcon size={32} strokeWidth={1.7} />
-          </div>
-          <div className="blog-featured-body">
-            <div className="blog-kicker">
-              <span className="blog-flag blog-flag-pin">
-                <Pin size={12} />
-                Pinned
-              </span>
-              {isNewPost(lead.publishedAt) ? (
-                <span className="blog-flag blog-flag-new">New</span>
-              ) : null}
-              <span className="blog-card-category">{lead.category}</span>
-            </div>
-            <h3>{lead.title}</h3>
-            <p>{lead.excerpt}</p>
-            <BlogMeta post={lead} />
-            <span className="blog-featured-cta">
-              Read article <ArrowRight size={16} />
-            </span>
-          </div>
-        </Link>
-
-        {alsoPinned.length > 0 ? (
-          <div className="blog-grid">
-            {alsoPinned.map((post, index) => (
-              <BlogPostCard
-                key={post.slug}
-                post={post}
-                index={index}
-                showPinned
-              />
-            ))}
-          </div>
-        ) : null}
-      </section>
-
-      <section className="blog-block" aria-labelledby="popular-heading">
-        <header className="blog-block-head">
-          <h2 id="popular-heading">Most popular</h2>
+        <header className="blog-intro">
+          <span className="blog-intro-pill">
+            <Sparkles size={14} />
+            Notes from the AI x engineering frontier
+          </span>
+          <h2>Practical writing on AI, automation, full-stack, and startups.</h2>
           <p>
-            Ranked by the pieces that best show how I think about shipping,
-            tooling, and production systems.
+            Real-world articles on agents, RAG, n8n workflows, streaming
+            tool-calling, Cursor, and turning an idea into a shipped MVP —
+            grouped so you can start with the pieces I would hand a new reader.
           </p>
-        </header>
-        <ol className="blog-popular">
-          {popular.map((post, index) => (
-            <li key={post.slug} className={`accent-${post.accent}`}>
-              <span className="blog-popular-rank">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <div className="blog-popular-body">
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="blog-popular-title"
-                >
-                  {post.title}
-                </Link>
-                <div className="blog-popular-meta">
-                  <span className="blog-card-category">{post.category}</span>
-                  <BlogMeta post={post} showDate={false} />
-                </div>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
 
-      {archive.length > 0 ? (
-        <section className="blog-block" aria-labelledby="archive-heading">
-          <header className="blog-block-head">
-            <h2 id="archive-heading">All articles</h2>
-            <p>Archive, newest first.</p>
-          </header>
-          <div className="blog-grid">
-            {archive.map((post, index) => (
-              <BlogPostCard key={post.slug} post={post} index={index} />
-            ))}
-          </div>
+          <dl className="blog-stats" aria-label="Blog statistics">
+            <div className="blog-stat">
+              <dt>
+                <BookOpen size={14} />
+                Articles
+              </dt>
+              <dd>
+                <AnimatedNumber value={blogPosts.length} />
+              </dd>
+            </div>
+            <div className="blog-stat">
+              <dt>
+                <TagIcon size={14} />
+                Topics
+              </dt>
+              <dd>
+                <AnimatedNumber value={totalCategories} />
+              </dd>
+            </div>
+            <div className="blog-stat">
+              <dt>
+                <Sparkles size={14} />
+                Tags
+              </dt>
+              <dd>
+                <AnimatedNumber value={totalTags} />
+              </dd>
+            </div>
+          </dl>
+        </header>
+
+        <BlogTopicNav active="all" />
+
+        <section className="blog-block" aria-labelledby="pinned-heading">
+          <Reveal as="header" className="blog-block-head">
+            <h2 id="pinned-heading">Pinned</h2>
+            <p>The three articles I want a new reader to open first.</p>
+          </Reveal>
+
+          <Link
+            href={`/blog/${lead.slug}`}
+            transitionTypes={["nav-forward"]}
+            className={`blog-featured accent-${lead.accent} blog-reveal`}
+            aria-label={`Read article: ${lead.title}`}
+          >
+            <div className="blog-featured-glow" aria-hidden="true" />
+            <div className="blog-featured-icon" aria-hidden="true">
+              <LeadIcon size={32} strokeWidth={1.7} />
+            </div>
+            <div className="blog-featured-body">
+              <div className="blog-kicker">
+                <span className="blog-flag blog-flag-pin">
+                  <Pin size={12} />
+                  Pinned
+                </span>
+                {isNewPost(lead.publishedAt) ? (
+                  <span className="blog-flag blog-flag-new">New</span>
+                ) : null}
+                <span className="blog-card-category">{lead.category}</span>
+              </div>
+              <h3>{lead.title}</h3>
+              <p>{lead.excerpt}</p>
+              <BlogMeta post={lead} />
+              <span className="blog-featured-cta">
+                Read article <ArrowRight size={16} />
+              </span>
+            </div>
+          </Link>
+
+          {alsoPinned.length > 0 ? (
+            <Stagger className="blog-grid">
+              {alsoPinned.map((post) => (
+                <BlogPostCard key={post.slug} post={post} showPinned />
+              ))}
+            </Stagger>
+          ) : null}
         </section>
-      ) : null}
-    </main>
+
+        <section className="blog-block" aria-labelledby="popular-heading">
+          <Reveal as="header" className="blog-block-head">
+            <h2 id="popular-heading">Most popular</h2>
+            <p>
+              Ranked by the pieces that best show how I think about shipping,
+              tooling, and production systems.
+            </p>
+          </Reveal>
+          <Stagger as="ol" className="blog-popular">
+            {popular.map((post, index) => (
+              <StaggerItem
+                as="li"
+                key={post.slug}
+                className={`accent-${post.accent}`}
+              >
+                <span className="blog-popular-rank">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div className="blog-popular-body">
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    transitionTypes={["nav-forward"]}
+                    className="blog-popular-title"
+                  >
+                    {post.title}
+                  </Link>
+                  <div className="blog-popular-meta">
+                    <span className="blog-card-category">{post.category}</span>
+                    <BlogMeta post={post} showDate={false} />
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </section>
+
+        {archive.length > 0 ? (
+          <section className="blog-block" aria-labelledby="archive-heading">
+            <Reveal as="header" className="blog-block-head">
+              <h2 id="archive-heading">All articles</h2>
+              <p>Archive, newest first.</p>
+            </Reveal>
+            <Stagger className="blog-grid">
+              {archive.map((post) => (
+                <BlogPostCard key={post.slug} post={post} />
+              ))}
+            </Stagger>
+          </section>
+        ) : null}
+      </main>
+    </PageTransition>
   );
 }
