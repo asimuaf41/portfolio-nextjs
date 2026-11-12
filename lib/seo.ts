@@ -5,7 +5,7 @@ export const siteConfig = {
   shortName: "Asim Portfolio",
       title: "Asim Ali | AI Agent & Automation Engineer",
     description:
-        "Hire Asim Ali — Top Rated Plus AI Agent & Automation Engineer building production AI systems (Claude API, OpenAI, RAG, multi-agent orchestration) with the full-stack React/Next.js, Node.js, and Supabase product built around them.",
+        "Hire Asim Ali — Top Rated Plus AI Agent & Automation Engineer building production AI systems (Claude API, OpenAI, RAG, multi-agent orchestration) with the full-stack React/Next.js, Node.js, and Supabase product built around them, including React Native iOS and Android apps.",
   url: "https://asimportfolio-6fd1d.web.app",
   locale: "en_US",
   language: "en",
@@ -35,6 +35,9 @@ export const siteConfig = {
     "Make.com",
     "Supabase",
     "Node.js freelancer",
+    "React Native developer",
+    "Expo mobile app developer",
+    "iOS and Android app developer",
     "Upwork Top Rated Plus",
   ],
   sameAs: [
@@ -167,7 +170,7 @@ export function personJsonLd() {
     image: absoluteUrl(siteConfig.profileImage),
     email: siteConfig.email,
     telephone: siteConfig.phone,
-    jobTitle: "React / Next.js & AI Agent Developer",
+    jobTitle: "React / Next.js, React Native & AI Agent Developer",
     description: siteConfig.description,
     address: {
       "@type": "PostalAddress",
@@ -190,6 +193,9 @@ export function personJsonLd() {
       "AI automation",
       "Supabase",
       "Stripe",
+      "React Native",
+      "Expo",
+      "Mobile app development",
     ],
   };
 }

@@ -24,6 +24,27 @@ export type Project = {
   demoUrl: string;
   codeUrl: string;
   secondaryCodeUrl?: string;
+  /** Internal route of a dedicated project page; replaces the default card CTA. */
+  detailHref?: string;
+};
+
+export type ProjectPlatform = { label: string; platform: "ios" | "android" };
+
+export type ProjectDetail = {
+  slug: string;
+  title: string;
+  summary: string;
+  description: string;
+  platforms: ProjectPlatform[];
+  features: string[];
+  stack: string[];
+  screenshots: { src: string; alt: string; caption: string }[];
+  /** Optional looping iOS demo; shown as the poster only when reduced motion is on. */
+  iosDemo?: { src: string; poster: string; alt: string };
+  articleSlug: string;
+  demoUrl: string;
+  codeUrl: string;
+  keywords: string[];
 };
 
 export type BlogAccent =
@@ -58,12 +79,21 @@ export type BlogCode = {
   snippet: string;
 };
 
+export type BlogImage = {
+  src: string;
+  alt: string;
+  caption?: string;
+  width: number;
+  height: number;
+};
+
 export type BlogSection = {
   heading: string;
   paragraphs?: string[];
   bullets?: string[];
   code?: BlogCode;
   callout?: BlogCallout;
+  images?: BlogImage[];
 };
 
 export type BlogCategory = "AI" | "Automation" | "Full-Stack" | "Startups";

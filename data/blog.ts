@@ -1360,4 +1360,117 @@ export const blogPosts: BlogPost[] = [
     conclusion:
       "Guardrails are what turn AI coding from a gamble into a process. Set them up before the first AI-written line, and every agent on the team works to the same senior standard. How is your team keeping AI-written code production-safe?",
   },
+  {
+    slug: "ai-saas-to-mobile-architecture",
+    title: "Taking an AI SaaS to iOS and Android Without Building a Second Product",
+    excerpt:
+      "How I ship an AI product to web, iOS and Android with one AI backend, a typed contract, cost guardrails and a native feel. No API keys in the app.",
+    publishedAt: "2026-11-12",
+    category: "AI",
+    difficulty: "Intermediate",
+    popularity: 14,
+    tags: ["React Native", "Expo", "AI Engineering", "Next.js", "TypeScript", "Architecture"],
+    accent: "blue",
+    icon: "Rocket",
+    image: {
+      src: "/blog/ai-saas-to-mobile-architecture.png",
+      alt: "One AI backend serving a web app, an iOS app and an Android app",
+    },
+    intro:
+      "Once an AI SaaS is live on the web, the next client request is almost always the same: \"Can we have it on the phone?\" The tempting answer is a second product: a separate app, a separate backend, sometimes the AI key hidden inside the app \"just for now\". That doubles the cost of every future change, and a key inside an app can be extracted. This is how I approached it for Shipwright, an AI product that audits AI-built apps before launch. The goal: the same product on web, iOS and Android, with one AI backend and one codebase.",
+    sections: [
+      {
+        heading: "One monorepo, shared where it matters",
+        paragraphs: [
+          "The mobile app (Expo + React Native) lives in the same Turborepo as the Next.js web app. It shares:",
+        ],
+        bullets: [
+          "Types and business rules: issue types, severities and the production-score logic come from one shared TypeScript package. The score on the phone is calculated exactly like the score on the web.",
+          "Design tokens: colors are synced from the web design system by a script, with a check in CI, so the brand never drifts.",
+        ],
+        callout: {
+          variant: "note",
+          title: "Share logic, not UI",
+          text: "It doesn't share screens. Web components and native components are different on purpose. Sharing logic, not UI, is what keeps a cross-platform codebase healthy.",
+        },
+        images: [
+          {
+            src: "/blog/day-12-android-overview.png",
+            alt: "Overview screen on Android: production score, Ask Shipwright card, issues by severity",
+            caption: "Overview screen on Android: production score, Ask Shipwright card, issues by severity",
+            width: 720,
+            height: 1600,
+          },
+        ],
+      },
+      {
+        heading: "Native where users feel it",
+        paragraphs: [
+          "A React Native app can still feel like \"a website in a box\". The details that change this:",
+        ],
+        bullets: [
+          "Real platform navigation: native tab bars and native bottom sheets, so iOS feels like iOS and Android feels like Android. Same brand, platform behaviour.",
+          "Animations on the UI thread: the production score springs when you fix an issue, and swipe-to-triage cards follow your finger even when the JavaScript thread is busy (Reanimated + Gesture Handler).",
+          "Haptics with restraint: a tick when a swipe crosses the threshold, a success tap when an issue is fixed, and nothing else.",
+          "Accessibility as a requirement: every swipe action also exists as a VoiceOver/TalkBack action, and the app respects dark mode, large text and Reduce Motion.",
+        ],
+      },
+      {
+        heading: "AI on the phone, without an AI key on the phone",
+        paragraphs: [
+          "The mobile \"Ask Shipwright\" chat calls the same streaming AI endpoint as the web app. The phone sends messages; the server runs the agent loop, calls the tools and streams the answer back word by word.",
+        ],
+        bullets: [
+          "No key in the binary. Prompts, tools and models change on the server and reach every installed app instantly, with no store release.",
+          "Grounded answers. The agent lists the findings, runs a live check on each one, and shows every step as a card. When it can't prove something yet, the card says so. That honesty builds trust faster than a confident paragraph.",
+          "A typed contract. Tool inputs and outputs live in the shared package, and a compile-time check fails the build if the server and the app drift apart. Old app versions also render unknown tool steps safely, because apps stay installed for months.",
+          "Mobile realities handled: a keyboard that never covers the input, Stop that also stops the model on the server, and a clear \"Answer interrupted, retry\" when the app goes to the background mid-answer.",
+        ],
+        images: [
+          {
+            src: "/blog/day-12-android-ask.png",
+            alt: "Ask Shipwright on Android: tool cards for listing issues and live checks, including one honest failed check",
+            caption: "Ask Shipwright on Android: tool cards for listing issues and live checks, including one honest \"failed\" check",
+            width: 720,
+            height: 1600,
+          },
+        ],
+      },
+      {
+        heading: "Cost control is part of the architecture",
+        paragraphs: [
+          "A public AI endpoint without limits is an open credit card. The protection is layered:",
+        ],
+        bullets: [
+          "Burst rate limits and input-size limits before the model is ever called.",
+          "A daily free-question quota per visitor, keyed by a salted hash of the IP, so raw IPs are never stored.",
+          "A global daily AI budget. When it runs out, users get prepared answers instead of errors, and if the quota store is down, the system fails safe the same way.",
+        ],
+        callout: {
+          variant: "tip",
+          title: "What the user sees",
+          text: "The user sees a friendly \"3 of 5 free questions left today\" pill, not a red error.",
+        },
+      },
+      {
+        heading: "Release discipline from day one",
+        bullets: [
+          "App variants: development and preview builds install side by side on the same phone, so testing never overwrites anything.",
+          "Installable test builds: Android testers install from a link on day one. iPhone stakeholders get a walkthrough video until TestFlight is set up.",
+          "Server vs app updates: AI behaviour changes ship instantly from the server; screen changes ship as a new build or an over-the-air update.",
+        ],
+        images: [
+          {
+            src: "/blog/day-12-android-security-report.png",
+            alt: "Security report on Android: score trend over 8 weeks and open issues by area",
+            caption: "Security report on Android: score trend over 8 weeks and open issues by area",
+            width: 720,
+            height: 1600,
+          },
+        ],
+      },
+    ],
+    conclusion:
+      "The screens are the easy part of taking an AI product to mobile. The decisions that save money later are architectural: where the model is called, how the contract is typed, how cost is capped, and how old app versions keep working. If you're planning a mobile app for your AI product, I'm happy to review your architecture first. Stack: Expo (React Native), Expo Router, Reanimated, Gesture Handler, Next.js, AI SDK, TypeScript, Turborepo, Upstash Redis, EAS Build.",
+  },
 ];

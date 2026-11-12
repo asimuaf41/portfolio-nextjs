@@ -30,6 +30,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { Stagger, StaggerItem } from "@/components/motion/stagger";
 import { PageTransition } from "@/components/page-transition";
 import { BackgroundTexture } from "@/components/background-texture";
+import { MobileShowcase } from "@/components/mobile-showcase";
 import { SectionTitle } from "@/components/section-title";
 import {
   aboutFacts,
@@ -65,13 +66,14 @@ const serviceIcons: Record<string, LucideIcon> = {
   "React / Next.js SaaS & Rescue": BriefcaseBusiness,
   "Supabase & Stripe Integrations": CreditCard,
   "APIs, Data & Real-time Systems": ServerCog,
+  "Mobile App Development (React Native / Expo)": Smartphone,
   "Admin Dashboards & Internal Tools": LayoutDashboard,
 };
 
 export const metadata: Metadata = createPageMetadata({
   title: "About Asim Ali",
   description:
-    "Meet Asim Ali — Top Rated Plus React/Next.js & AI agent developer. 6,200+ Upwork hours, RAG systems, Claude API, n8n and Trigger.dev automation, multi-agent orchestration, and full-stack SaaS delivery.",
+    "Meet Asim Ali — Top Rated Plus React/Next.js, React Native & AI agent developer. 6,200+ Upwork hours, RAG systems, Claude API, n8n and Trigger.dev automation, multi-agent orchestration, iOS and Android apps, and full-stack SaaS delivery.",
   path: "/about",
   keywords: [
     "AI automation n8n",
@@ -80,6 +82,7 @@ export const metadata: Metadata = createPageMetadata({
     "AI agent developer bio",
     "React Next.js freelancer Pakistan",
     "Top Rated Plus Upwork",
+    "React Native mobile app developer",
   ],
 });
 
@@ -273,6 +276,8 @@ export default function AboutPage() {
             </div>
           </aside>
         </Reveal>
+
+        <MobileShowcase variant="about" />
 
         <Reveal
           as="section"

@@ -108,7 +108,15 @@ export function ProjectsGrid({
                       </span>
                     ))}
                   </div>
-                  {caseStudySlugs[project.slug] ? (
+                  {project.detailHref ? (
+                    <Link
+                      href={project.detailHref}
+                      transitionTypes={["nav-forward"]}
+                      className="projects-card-cta"
+                    >
+                      View project <ArrowRight size={14} />
+                    </Link>
+                  ) : caseStudySlugs[project.slug] ? (
                     <Link
                       href={`/case-studies/${caseStudySlugs[project.slug]}`}
                       transitionTypes={["nav-forward"]}

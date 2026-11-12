@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -216,6 +217,21 @@ export default async function BlogDetailPage({
                       </pre>
                     </figure>
                   ) : null}
+
+                  {section.images?.map((image) => (
+                    <figure key={image.src} className="blog-article-figure">
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        width={image.width}
+                        height={image.height}
+                        sizes="(max-width: 480px) 80vw, 320px"
+                      />
+                      {image.caption ? (
+                        <figcaption>{image.caption}</figcaption>
+                      ) : null}
+                    </figure>
+                  ))}
 
                   {section.callout && Callout ? (
                     <aside

@@ -38,7 +38,7 @@ const projectCaseStudySlugs: Record<string, string> = {
 export const metadata: Metadata = createPageMetadata({
   title: "Projects & Case Studies",
   description:
-    "Selected production projects by Asim Ali — OptiField AI lead agent, automation suites, real estate apps, e-signature SaaS, admin dashboards, and education products built with React, Next.js, and Node.js.",
+    "Selected production projects by Asim Ali — OptiField AI lead agent, automation suites, real estate apps, e-signature SaaS, admin dashboards, a React Native iOS and Android app, and education products built with React, Next.js, and Node.js.",
   path: "/projects",
   keywords: [
     "React projects portfolio",

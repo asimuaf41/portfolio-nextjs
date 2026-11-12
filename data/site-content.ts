@@ -55,6 +55,27 @@ export const projects: Project[] = [
     codeUrl: "https://github.com/asimuaf41/ai-engineer-2026",
   },
   {
+    slug: "shipwright-mobile",
+    title: "Shipwright Mobile: AI Security Assistant for iOS & Android",
+    summary:
+      "A native iOS and Android app for an AI SaaS: streaming AI answers with live checks, swipe-to-triage, and one shared AI backend with the web app.",
+    category: "Mobile",
+    stack: [
+      "Expo",
+      "React Native",
+      "TypeScript",
+      "Reanimated",
+      "Next.js",
+      "AI SDK",
+      "Upstash Redis",
+      "Turborepo",
+    ],
+    image: "/projects/shipwright-mobile/card.jpg",
+    demoUrl: "https://ai-engineer-2026-ten.vercel.app/",
+    codeUrl: "https://github.com/asimuaf41/ai-engineer-2026",
+    detailHref: "/projects/shipwright-mobile",
+  },
+  {
     slug: "method-atlanta",
     title: "Method Atlanta",
     summary:
@@ -405,12 +426,12 @@ export const freelancePlatforms = [
 ];
 
 export const aboutProfile = {
-    eyebrow: "AI Agent & Automation Engineer | React, Next.js, Node.js",
+    eyebrow: "AI Agent & Automation Engineer | React, Next.js, React Native",
   headline: "I ship production systems — not demos that die in staging.",
   hook: "Most clients come to me in one of two situations: their React or Next.js app is buggy, slow, or needs features a previous developer couldn't deliver — or they need a SaaS product, internal tool, or AI-powered application built from scratch, properly and fast.",
   credibility: `Over ${aboutYearsExperience}+ years of full-stack development — full-time on Upwork since 2021 — I've completed 13 long-term projects with a 100% Job Success Score, 6,200+ hours logged, and Top Rated Plus status. Every project I've taken on has been delivered.`,
   focus:
-    "I build AI-powered web applications, custom AI agent systems, and business automation workflows using React, Next.js, Node.js, the Claude API, n8n, Trigger.dev, and Make.com — delivering fast, scalable, production-ready solutions for startups and growing businesses.",
+    "I build AI-powered web applications, custom AI agent systems, and business automation workflows using React, Next.js, React Native, Node.js, the Claude API, n8n, Trigger.dev, and Make.com — delivering fast, scalable, production-ready solutions for startups and growing businesses, on web, iOS and Android.",
   featured: {
     label: "Recently launched",
     title: "AI Agent Studio",
@@ -449,11 +470,24 @@ export const aboutProfile = {
     { icon: "Activity", label: "Stripe billing & subscriptions" },
     { icon: "Radio", label: "Real-time chat & notifications" },
     { icon: "Gauge", label: "Performance & codebase rescue" },
-    { icon: "Smartphone", label: "React Native iOS / Android" },
+    { icon: "Smartphone", label: "React Native / Expo iOS & Android apps" },
+    { icon: "Zap", label: "AI chat & streaming inside mobile apps" },
     { icon: "Figma", label: "Figma → pixel-perfect Next.js" },
   ],
   closing:
     "Whether you're launching a SaaS product, automating leads and support, adding AI to an existing platform, rescuing a broken codebase, or integrating LLM features into React/Next.js — send a message with what you're building. I'll tell you honestly if I'm the right fit.",
+  mobile: {
+    eyebrow: "Mobile app development",
+    title: "One AI backend, web plus iOS and Android",
+    summary:
+      "I build mobile apps with React Native and Expo that share types, business rules and design tokens with the Next.js web app, and call the same server-side AI layer, so no API key ever ships inside the app. My latest build, Shipwright Mobile, runs on the iOS Simulator and as an Android test build (not on the app stores yet).",
+    points: [
+      "React Native + Expo Router, with native tabs, drawer and bottom sheets.",
+      "Reanimated and Gesture Handler for swipe-to-triage and a UI-thread score animation.",
+      "Streaming AI chat with visible tool steps, Stop and Retry against a shared backend.",
+      "Accessibility (VoiceOver/TalkBack, large text, Reduce Motion) and EAS Build test builds.",
+    ],
+  },
   claude: {
     eyebrow: "Claude in the workflow",
     title: "Claude is how the code gets faster without getting sloppy",
@@ -596,6 +630,11 @@ export const services = [
       "Node.js / Express / NestJS APIs, SQL design, caching, auth, and real-time features — chat, live tracking, notifications, and dashboards that hold up under load.",
   },
   {
+    title: "Mobile App Development (React Native / Expo)",
+    description:
+      "iOS and Android apps with React Native and Expo that reuse your web app's types and AI backend — native navigation, gestures, haptics, accessibility, and installable test builds through EAS, without putting API keys inside the app.",
+  },
+  {
     title: "Admin Dashboards & Internal Tools",
     description:
       "Operations panels, reporting, multi-tenant admin suites, and AI-assisted workflows your team actually uses daily — designed for clarity, speed, and maintainability.",
@@ -608,9 +647,9 @@ export const resumePage = {
   eyebrow: "Resume & skills",
   headline: "Production stack, delivery track record, and continuous learning.",
   intro:
-    "A focused view of the tools I ship with every week — AI agents, n8n and Trigger.dev automation, React/Next.js SaaS, Node APIs, and the data/billing layers that make products real.",
+    "A focused view of the tools I ship with every week — AI agents, n8n and Trigger.dev automation, React/Next.js SaaS, React Native mobile apps, Node APIs, and the data/billing layers that make products real.",
   closing:
-    "Looking for a React/Next.js or AI agent engineer who can own delivery end to end? Let's align on scope and start shipping.",
+    "Looking for a React/Next.js, React Native or AI agent engineer who can own delivery end to end? Let's align on scope and start shipping.",
 };
 
 /** Grouped technical skills — ordered by market demand & portfolio focus. */
@@ -644,7 +683,20 @@ export const skillGroups = [
       { name: "TanStack Query", level: 86 },
       { name: "Zod & React Hook Form", level: 85 },
       { name: "Responsive UI / Design Systems", level: 92 },
-      { name: "React Native", level: 58 },
+    ],
+  },
+  {
+    id: "mobile",
+    title: "Mobile (iOS & Android)",
+    blurb: "Native-feeling apps that share logic with the web product.",
+    skills: [
+      { name: "React Native & Expo", level: 80 },
+      { name: "Expo Router (native navigation)", level: 78 },
+      { name: "Reanimated & Gesture Handler", level: 72 },
+      { name: "Streaming AI chat on mobile", level: 80 },
+      { name: "Mobile accessibility (VoiceOver / TalkBack)", level: 74 },
+      { name: "EAS Build & test distribution", level: 72 },
+      { name: "Shared types & design tokens (monorepo)", level: 82 },
     ],
   },
   {

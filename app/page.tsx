@@ -16,6 +16,7 @@ import { HomeAutomation } from "@/components/home-automation";
 import { HomeHeroIntro } from "@/components/home-hero-intro";
 import { HomeTechMarquee } from "@/components/home-tech-marquee";
 import { HomeWorkflow } from "@/components/home-workflow";
+import { MobileShowcase } from "@/components/mobile-showcase";
 import { TestimonialsSection } from "@/components/home-testimonials";
 import { MagneticLink } from "@/components/motion/magnetic-hover";
 import { Reveal } from "@/components/motion/reveal";
@@ -38,6 +39,7 @@ export const metadata: Metadata = createPageMetadata({
     "AI automation n8n",
     "Trigger.dev",
     "Next.js SaaS developer",
+    "React Native mobile app developer",
     "Upwork Top Rated Plus",
     "developer case studies",
   ],
@@ -148,6 +150,8 @@ export default function HomePage() {
             Client testimonials <ArrowRight size={16} />
           </Link>
         </section>
+
+        <MobileShowcase variant="home" />
 
         <HomeWorkflow />
 

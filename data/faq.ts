@@ -46,6 +46,12 @@ export const faqSection = {
         "Tell me the date in Discovery and I'll tell you honestly what fits inside it — I'd rather cut scope than miss a launch. Automation workflows can go from Discovery to a live run the same week, and the Legal Emirates site shipped in 4 weeks solo. When the timeline is tight, we ship the smallest version that solves your actual problem first, then add the rest in weekly slices after launch.",
     },
     {
+      id: "mobile",
+      question: "Do you build mobile apps too?",
+      answer:
+        "Yes — iOS and Android apps with React Native and Expo, usually as the companion to a web product so both share types, business rules and one server-side AI layer (no API keys inside the app). My latest example is Shipwright Mobile: tested on the iOS Simulator, with an Android test build I share on request. It isn't on the App Store or Google Play yet, and I'll tell you plainly what stage any mobile build is at.",
+    },
+    {
       id: "non-technical",
       question: "Do you work with non-tech founders?",
       answer:

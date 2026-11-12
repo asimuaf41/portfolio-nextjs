@@ -3,7 +3,7 @@ export const personalInfo = {
   location: "Lahore, Pakistan",
   timezone: "GMT+5",
   detail:
-        "AI Agent & Automation Engineer | React, Next.js, Node.js. I build AI systems that do real work — agents that qualify leads, answer questions from your own data, and take actions in your database, not just chat — then build the full production system around them: backend, database, auth, integrations, and deployment. Also comfortable with React Native, Claude/OpenAI APIs, n8n, Trigger.dev, Make.com, RAG, and tool-calling. From rescuing complex codebases to launching production-ready platforms from scratch, I deliver clean, reliable solutions that scale.",
+        "AI Agent & Automation Engineer | React, Next.js, Node.js. I build AI systems that do real work — agents that qualify leads, answer questions from your own data, and take actions in your database, not just chat — then build the full production system around them: backend, database, auth, integrations, and deployment. I also build iOS and Android apps with React Native and Expo, and I am comfortable with Claude/OpenAI APIs, n8n, Trigger.dev, Make.com, RAG, and tool-calling. From rescuing complex codebases to launching production-ready platforms from scratch, I deliver clean, reliable solutions that scale.",
 };
 
 export const socialProfiles = [
@@ -62,6 +62,7 @@ export const heroRoles = [
   "AI Agent Engineer",
   "Automation Specialist",
   "React & Next.js Developer",
+  "React Native Mobile Developer",
   "RAG & Multi-Agent Builder",
 ];
 
@@ -71,6 +72,8 @@ export const heroTechStack = [
   "Next.js",
   "Node.js",
   "TypeScript",
+  "React Native",
+  "Expo",
   "Claude API",
   "OpenAI",
   "n8n",

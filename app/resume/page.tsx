@@ -32,12 +32,13 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Resume & Skills",
   description:
-    "Resume of Asim Ali — in-demand skills in React, Next.js, TypeScript, AI agents, RAG, Supabase, Node.js, and Stripe, plus work experience and education.",
+    "Resume of Asim Ali — in-demand skills in React, Next.js, React Native, Expo, TypeScript, AI agents, RAG, Supabase, Node.js, and Stripe, plus work experience and education.",
   path: "/resume",
   keywords: [
     "Asim Ali resume",
     "React developer CV",
     "Next.js skills",
+    "React Native developer skills",
     "AI engineer experience",
   ],
 });
